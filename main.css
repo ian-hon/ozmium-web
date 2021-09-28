@@ -1,0 +1,218 @@
+/* #9708fc */
+/* #66fcf1 */
+*, html {
+    margin:0;
+    padding:0;
+}
+
+body {
+    background-color:#000;
+    padding:0px;
+    margin:0px;
+}
+
+h1, h2, h3, p {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:white;
+}
+
+.stop-scrolling {
+    height:100%;
+    overflow:hidden;
+}
+
+.title-header {
+    z-index: 100;
+
+    height: 100vh;
+    width:100vw;
+
+    display:flex;
+    position:fixed;
+
+    transition-duration:0.4s;
+
+    background-color: #000;
+}
+
+.title-header p {
+    margin:auto;
+    padding:0;
+
+    font-family: Consolas,monaco,monospace;
+    font-size: 10vh;
+
+    transition-duration: 0.4s;
+
+    color:#66fcf1;
+}
+
+.title-header #title-direction div {
+    position:relative;
+}
+
+.title-header #title-direction img, button {
+    position:absolute;
+
+    width:50px;
+
+    left:50%;
+    bottom:0;
+
+    transform:translate(-50%, -50%);
+
+    transition-duration:0.4s;
+}
+
+.title-header #title-direction button {
+    background:transparent;
+    border:none !important;
+
+    cursor:pointer;
+}
+
+
+
+.bio #pfp {
+    display:block;
+    float:left;
+
+    height: 50vw;
+}
+
+.bio {
+    position:relative;
+}
+
+.bio #intro {
+    z-index: 1;
+
+    display:block;
+    margin:auto;
+    padding:20px;
+    width:20vw;
+    top:45vh;
+    left:35vw;
+
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    background-color: #000a;
+    border-radius:20px;
+    position:absolute;
+    cursor:help;
+
+    transition-duration:0.3s;
+}
+
+.bio #intro:hover {
+    transform:scale(1.05);
+}
+
+.bio #languages img {
+    height:6vw;
+    padding:20px;
+}
+
+.bio #languages td, th {
+    transition-duration:0.3s;
+}
+
+.bio #languages td:hover, th:hover {
+    transform:translate(0,-10px);
+    color:#fff8;
+    filter:drop-shadow(0 0 20px);
+}
+
+.bio #languages p {
+    font-size:30px;
+}
+
+.bio #languages {
+    position:absolute;
+
+    top:30vh;
+    left:60vw;
+
+    width:27vw;
+    height:28vh;
+}
+
+#project-title {
+    margin:auto;
+    padding:5vh 0;
+    clear:both;
+    font-size: 3vw;
+}
+
+.projects {
+    text-align: center;
+    padding:0;
+    margin:0;
+}
+
+.project-item {
+    display:inline-block;
+
+    margin:3vh 0 0 0;
+    padding:0;
+
+    height:40vh;
+    width:70vw;
+
+    overflow:hidden;
+
+    background-size:cover;
+    background-color:#000;
+
+    border-radius:4vw;
+
+    transition-duration:0.3s;
+}
+
+.project-item #description {
+    position:relative;
+    width:10vw;
+    top:45%;
+    left:75%;
+    text-align: center;
+    overflow-wrap:break-word;
+    font-size:1.2vw;
+    transform:translate(0,-50%);
+}
+
+.project-item #indev {
+    width:15vw;
+    margin:-5% 30%;
+    overflow-wrap:break-word;
+    font-size:2vw;
+    transform:translate(0,-50%);
+}
+
+.project-item a {
+    text-decoration: none;
+}
+
+.project-item:hover {
+    transform:scale(1.05);
+}
+
+
+
+.socials {
+    margin:20vh 0 10vh 0;
+    padding:0;
+}
+
+.socials a img {
+    padding:0;
+    margin:0 5vw;
+    height:64px;
+    border-radius:50px;
+
+    transition-duration:0.3s;
+}
+
+.socials a img:hover {
+    color:#888;
+    filter:drop-shadow(0 0 5px);
+}
