@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="author" content="ajian_nedo#8797">
         <link rel=stylesheet href="main.css">
+        <link rel="stylesheet" href="glitched.css">
         <link rel="shortcut icon" href="icon.ico">
         <title>
             Self.
         </title>
         <div class="title-header">
-            <p>
-                ajian_nedo
-            </p>
+            <p class="glitch-effect" data-text="ajian_nedo">ajian_nedo</p>
             <div id="title-direction">
-                <button onclick="scrollToContent()"><img src="direction.png"></button>
+                <button onclick="scrollToContent()"><img src="direction.svg"></button>
             </div>
         </div>
         <div style="padding:30vh 0;"></div>
@@ -47,34 +48,29 @@
             </h1>
         </center>
         <div class="projects" style="clear:both;">
-            <a href="https://asianerd.itch.io/monosweeper" target="_blank">
-                <div class="project-item" style="background-image:url(ProjectImages/MonoSweeper.png)">
-                    <p id="description">
-                        MonoSweeper is written using the Monogame framework. Is released on Itch.io.
-                    </p>
-                </div>
+            <a href="https://asianerd.itch.io/monosweeper" target="_blank" class="project-item" style="background-image:url(ProjectImages/MonoSweeper.png)">
+                <p id="indev"></p>
+                <p id="description">
+                    MonoSweeper is written using the Monogame framework. Is released on Itch.io.
+                </p>
             </a>
             <br style="clear:both;">
-            <a href="https://github.com/Asianerd/TextAdventure" target="_blank">
-                <div class="project-item" style="background-image:url(ProjectImages/TextAdventure.png)">
-                    <p id="description">
-                        TextAdventure is a text-based adventure game. Currently in development.
-                    </p>
-                    <p id="indev">
-                        Coming soon!
-                    </p>
-                </div>
+            <a href="https://github.com/Asianerd/TextAdventure" target="_blank" class="project-item" style="background-image:url(ProjectImages/TextAdventure.png)">
+                <p id="indev">
+                    Coming soon!
+                </p>
+                <p id="description">
+                    TextAdventure is a text-based adventure game. Currently in development.
+                </p>
             </a>
             <br style="clear:both;">
-            <a href="https://github.com/Asianerd/ConcentratedHell" target="_blank">
-                <div class="project-item" style="background-image:url(ProjectImages/ConcentratedHell.png)">
-                    <p id="description">
-                        ConcentratedHell is a top-down 2D bullet hell. It's beta build is estimated to be released mid-2022.
-                    </p>
-                    <p id="indev">
-                        Coming soon!
-                    </p>
-                </div>
+            <a href="https://github.com/Asianerd/ConcentratedHell" target="_blank" class="project-item" style="background-image:url(ProjectImages/ConcentratedHell.png)">
+                <p id="indev">
+                    Coming soon!
+                </p>
+                <p id="description">
+                    ConcentratedHell is a top-down 2D bullet hell. It's beta build is estimated to be released mid-2022.
+                </p>
             </a>
         </div>
         <center>
@@ -84,8 +80,8 @@
                 <a href="https://asianerd.itch.io" target="_blank"><img src="SocialsImages/itch-logo.png"></a>
             </div>
         </center>
-        <p style="color:#fff3; font-size:10px;">
-            Website developed entirely by ajian_nedo#8797
+        <p class="credits">
+            Website developed by ajian_nedo#8797. <span>Edited by Dン#2340</span>
         </p>
     </body>
 </html>

@@ -31,12 +31,14 @@ function updateHeader() {
         headerTitle.style.color = primaryColor;
         headerTitle.style.fontSize = "10vh";
         headerDirection.style.display = "block";
+        headerTitle.classList.add('glitch-effect');
     } else {
         header.style.height = "8vh";
         header.style.backgroundColor = primaryColor;
         headerTitle.style.color = "#000";
         headerTitle.style.fontSize = "6vh";
         headerDirection.style.display = "none";
+        headerTitle.classList.remove('glitch-effect');
     }
 }
 

@@ -25,7 +25,7 @@ h1, h2, h3, p {
     z-index: 100;
 
     height: 100vh;
-    width:100vw;
+    width: 100vw;
 
     display:flex;
     position:fixed;
@@ -71,8 +71,6 @@ h1, h2, h3, p {
     cursor:pointer;
 }
 
-
-
 .bio #pfp {
     display:block;
     float:left;
@@ -93,6 +91,8 @@ h1, h2, h3, p {
     width:20vw;
     top:45vh;
     left:35vw;
+
+    font-size:1vw;
 
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
@@ -141,7 +141,7 @@ h1, h2, h3, p {
     margin:auto;
     padding:5vh 0;
     clear:both;
-    font-size: 3vw;
+    font-size: 2vw;
 }
 
 .projects {
@@ -151,44 +151,43 @@ h1, h2, h3, p {
 }
 
 .project-item {
-    display:inline-block;
+    display:flex;
+    flex-flow: row;
+    align-items: center;
 
-    margin:3vh 0 0 0;
+    margin:3vh auto 0 auto;
     padding:0;
 
-    height:40vh;
-    width:70vw;
+    height:30vh;
+    width:60vw;
 
     overflow:hidden;
 
     background-size:cover;
     background-color:#000;
 
-    border-radius:4vw;
+    border-radius:1.5vw;
 
     transition-duration:0.3s;
 }
 
-.project-item #description {
-    position:relative;
-    width:10vw;
-    top:45%;
-    left:75%;
-    text-align: center;
-    overflow-wrap:break-word;
-    font-size:1.2vw;
-    transform:translate(0,-50%);
-}
-
 .project-item #indev {
+    flex: 5;
     width:15vw;
-    margin:-5% 30%;
     overflow-wrap:break-word;
     font-size:2vw;
-    transform:translate(0,-50%);
 }
 
-.project-item a {
+.project-item #description {
+    flex: 1;
+    width:10vw;
+    text-align: center;
+    overflow-wrap:break-word;
+    font-size:1vw;
+    margin: 0 3vw;
+}
+
+.projects a {
     text-decoration: none;
 }
 
@@ -206,13 +205,39 @@ h1, h2, h3, p {
 .socials a img {
     padding:0;
     margin:0 5vw;
-    height:64px;
+    height:3vw;
     border-radius:50px;
 
     transition-duration:0.3s;
 }
 
 .socials a img:hover {
-    color:#888;
-    filter:drop-shadow(0 0 5px);
+    transform:scale(1.15);
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 10px;
+}
+
+.credits {
+    color: white;
+    font-size:10px;
+    text-align: center;
+    width: calc(100% - 20px);
+    padding: 10px;
+}
+
+.credits span {
+    color: black;
 }
