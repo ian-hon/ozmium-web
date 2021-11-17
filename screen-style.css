@@ -1,9 +1,13 @@
+/* #9708fc */
+/* #66fcf1 */
+
 body {
     margin:0;
 }
 
-p {
+p, a {
     color:white;
+    font-family: Consolas,monaco,monospace;
 }
 
 .screen-selection {
@@ -19,7 +23,7 @@ p {
 }
 
 
-.screen-selection p {
+.screen-selection p, a {
     display:block;
 
     height : 3vh;
@@ -29,6 +33,27 @@ p {
     text-align: center;
 
     border-radius:1vw;
+    background-repeat: no-repeat;
+    background-size: cover;
 
     cursor:pointer;
+}
+
+.screen-selection a {
+    background-color: #66fcf1;
+    color:black;
+    text-decoration: none;
+
+    margin-bottom: 4vh;
+
+    transition-duration:0.3s;
+}
+
+.screen-selection a img {
+    height:1.5vh;
+    transform:rotate(90deg);
+}
+
+.screen-selection a:hover {
+    transform:translateX(-2vw);
 }

@@ -2,6 +2,7 @@ var selection_tab = document.getElementsByClassName("screen-selection")[0];
 let screen_height = screen.height;
 let screen_width = screen.width;
 var global_reference;
+var hsv_wheel = Phaser.Display.Color.HSVColorWheel();
 
 var config = {
     type: Phaser.AUTO,
@@ -21,6 +22,7 @@ function preload ()
 {
     this.load.image('raindrop','/Screens/Assets/raindrop.png');
     this.load.image('firefly','/Screens/Assets/firefly.png');
+    this.load.image('dvd','/Screens/Assets/dvd.png');
 }
 
 function create ()
@@ -51,7 +53,8 @@ function SetScreen(index) {
     collection = [];
     [
         function () {Raindrop.initialize()},
-        function () {Fireflies.initialize()}
+        function () {Fireflies.initialize()},
+        function () {DVD.initalize()}
     ][index].call();
 }
 
@@ -79,35 +82,60 @@ class ScreenObject {
     }
 }
 
-class Floaty extends ScreenObject {
-    static initialize() {
-        for (let index = 0; index < 10; index++) {
-            collection.push(new Floaty(global_reference.add.image(0,0,'raindrop')));
+class DVD extends ScreenObject {
+    static initalize() {
+        for (let i = 0; i < 1; i++) {
+            collection.push(new DVD(global_reference.add.image(0,0,'dvd')));
         }
-        global_reference.cameras.main.setBackgroundColor("#330033");
+        global_reference.cameras.main.setBackgroundColor("#000000");
     }
 
     constructor(object) {
         super();
 
         this.object = object;
-        this.object.y = 500;
-        this.object.x = 300;
-    }
+        this.object.x = Math.random() * screen_width;
+        this.object.y = Math.random() * screen_height;
 
-    reset() {
-        this.object.y = 500;
+        this.speed = 5;
+        this.movement_x = Math.random() >= 0.5 ? 1 : -1;
+        this.movement_y = Math.random() >= 0.5 ? 1 : -1;
     }
 
     update() {
-        
-        this.object.y -= 1;
-        if(this.object.y <= 0) {
-            this.reset();
+        let next_x = this.object.x + (this.movement_x * this.speed);
+        let next_y = this.object.y + (this.movement_y * this.speed);
+        let change_color = false;
+
+        if(next_x >= screen_width) {
+            this.movement_x = -1;
+            change_color = true;
+        } else if(next_x <= 0) {
+            this.movement_x = 1;
+            change_color = true;
         }
+
+        if(next_y >= screen_height) {
+            this.movement_y = -1;
+            change_color = true;
+        } else if(next_y <= 0) {
+            this.movement_y = 1;
+            change_color = true;
+        }
+
+        if(change_color) {
+            this.changeColor();
+        }
+
+        this.object.x += this.movement_x * this.speed;
+        this.object.y += this.movement_y * this.speed;
+    }
+
+    changeColor() {
+        let i = ~~(Math.random() * 359);
+        this.object.setTint(hsv_wheel[i].color);
     }
 }
-
 
 class Raindrop extends ScreenObject {
     static initialize() {
