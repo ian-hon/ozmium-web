@@ -149,19 +149,19 @@ class Raindrop extends ScreenObject {
         super();
 
         this.object = object;
-        this.object.x = Math.random()*screen_width;
-        this.object.y = -Math.random()*800;
-        this.speed = (Math.random()+1)*5;
+        this.object.x = Math.random() * screen_width;
+        this.object.y = -Math.random() * 800;
+        this.depth = (Math.random() * 16) + 8;
+        this.object.setTint(0xffffff*1);
     }
 
     reset() {
-        this.object.x = Math.random()*screen_width;
-        this.object.y = -Math.random()*800;
-        this.speed = (Math.random()+1)*5;
+        this.object.x = Math.random() * screen_width;
+        this.object.y = -Math.random() * 800;
     }
 
     update() {
-        this.object.y += this.speed;
+        this.object.y += this.depth;
         if (this.object.y >= screen_height) {
             this.reset();
         }
