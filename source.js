@@ -4,6 +4,9 @@ var headerTitle = header.children[0];
 var headerDirection = header.children[1];
 var primaryColor = "#66fcf1";
 
+var discordSelection = false;
+var discordDivs = document.getElementsByClassName("discord-select"); // Because js is stupid
+
 var activatedHeader = true;
 /* #9708fc */
 /* #66fcf1 */
@@ -42,19 +45,19 @@ function updateHeader() {
     }
 }
 
-function pauseScroll() {
-    setTimeout(function() { disableScroll(); }, 500);
-    enableScroll();
-}
-
-function disableScroll(){
-    body.classList.remove('stop-scrolling');
-}
-
-function enableScroll(){
-    body.classList.add('stop-scrolling');
-}
-
 function scrollToContent() {
     window.scrollTo(0,400);
+}
+
+function discordToggleSelection() {
+    discordSelection = !discordSelection;
+    discordUpdateSelection();
+}
+
+function discordUpdateSelection() {
+    if(discordSelection) {
+        discordDivs[0].style.height = "60vh";
+    } else {
+        discordDivs[0].style.height = "0vh";
+    }
 }

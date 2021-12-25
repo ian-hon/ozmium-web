@@ -217,6 +217,7 @@ h1, h2, h3, p {
 
     transition-duration:0.3s;
     margin:0 5vw;
+    cursor: pointer;
 }
 
 .socials a:hover {
@@ -291,4 +292,19 @@ h1, h2, h3, p {
 
 .screen-selection:hover {
     transform: translateX(1vw);
+}
+
+.discord-select {
+    height:0vh;
+    margin:0 0 5vw;
+
+    transition-duration: 0.5s;
+    overflow: hidden;
+}
+
+.discord-select iframe {
+    height:55vh;
+    width:20vw;
+    padding:1vw;
+    font-size: 3vw;
 }
