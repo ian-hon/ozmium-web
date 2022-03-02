@@ -16,86 +16,55 @@
             </div>
         </div>
         <div style="padding:30vh 0;"></div>
-        <script src="source.js"></script>
     </head>
     <body>
-        <a href="/screen.html" class="screen-selection">
-            <p>
-                Screens
-            </p>
-            <img src="direction.svg">
-        </a>
         <div class="bio">
-            <img src="rei.png" id="pfp">
-            <!-- Source : https://www.pinterest.ca/pin/621567186053384660/ -->
-            <!-- Thank you https://www.pinterest.ca/vinneart/_created/ -->
-            <p id="intro">
-                I'm ajian_nedo, a 15 year-old student who likes to write code. I've developed many things like console applications, games and discord bots.
+            <div title="yes, thats me">
+                <img id="self_image" src="blurred_me.png">
+            </div>
+            <p>
+                im ajian_nedo, a 16 year-old hobbyist programmer. ive developed many things from games to discord bots.<br>
+                <br>
+                <a href="https://adventofcode.com/2021" target="_blank">🏆 AoC 2021 completionist 🏆</a>
             </p>
-            <div id="languages">
-                <p>
-                    Languages
-                </p>
-                <table>
-                    <tr>
-                        <td><img src="LanguageImages/CSharp.png"></td>
-                        <td><img src="LanguageImages/Python.png"></td>
-                        <td><img src="LanguageImages/Java.png"></td>
-                    </tr>
-                    <tr>
-                        <td><img src="LanguageImages/HTML.png"></td>
-                        <td><img src="LanguageImages/CSS.png"></td>
-                        <td><img src="LanguageImages/JavaScript.png"></td>
-                    </tr>
-                </table>
+            <div id="horizontal_scroll">
+                <img title="C# 💖" src="LanguageImages/CSharp.png">
+                <img title="C++ fuck pointers" src="LanguageImages/CPP.png">
+                <img title="Java" src="LanguageImages/Java.png">
+                <img title="Python" src="LanguageImages/Python.png">
+                <img title="HTML" src="LanguageImages/HTML.png">
+                <img title="CSS" src="LanguageImages/CSS.png">
+                <img title="JavaScript" src="LanguageImages/JavaScript.png">
+            </div>
+        </div>
+        <div class="showcase">
+            <center>
+                <h1 style="clear:both;padding:10vh 0 10vh 0;font-size:5vh;">Showcase</h1>
+            </center>
+            <div id="buttonDecrease" onclick="progressShowcase(-1)">
+                <img src="/direction.svg">
+            </div>
+            <div class="window">
+                <a href="" target="_blank" class="showcaseHref"><img class="showcaseImage" src="/Galaxy.png"></a>
+                <div id="description">
+                    <p class="showcaseDescription"></p>
+                </div>
+            </div>
+            <div id="buttonIncrease" onclick="progressShowcase(1)">
+                <img src="/direction.svg">
             </div>
         </div>
         <center>
-            <h1 id="project-title">
-                Projects
-            </h1>
-        </center>
-        <div class="projects" style="clear:both;">
-            <a href="https://asianerd.itch.io/monosweeper" target="_blank" class="project-item" style="background-image:url(ProjectImages/MonoSweeper.png)">
-                <p id="indev"></p>
-                <p id="description">
-                    MonoSweeper is written using the Monogame framework. Is released on Itch.io.
-                </p>
-            </a>
-            <br style="clear:both;">
-            <a href="https://github.com/Asianerd/TextAdventure" target="_blank" class="project-item" style="background-image:url(ProjectImages/TextAdventure.png)">
-                <p id="indev">
-                    Coming soon!
-                </p>
-                <p id="description">
-                    TextAdventure is a text-based adventure game. Currently in development.
-                </p>
-            </a>
-            <br style="clear:both;">
-            <a href="https://github.com/Asianerd/ConcentratedHell" target="_blank" class="project-item" style="background-image:url(ProjectImages/ConcentratedHell.png)">
-                <p id="indev">
-                    Coming soon!
-                </p>
-                <p id="description">
-                    ConcentratedHell is a top-down 2D bullet hell. It's beta build is estimated to be released mid-2022.
-                </p>
-            </a>
-        </div>
-        <center>
-            <div class="socials">
-                <a onclick="discordToggleSelection()" target="_blank" style="background-image: url('SocialsImages/discord-logo.png');"></a>
+            <div style="clear:both" class="socials">
                 <a href="https://github.com/Asianerd" target="_blank" style="background-image:url('SocialsImages/github-logo.png')"></a>
+                <a onclick="discordToggleSelection()" target="_blank" style="background-image: url('SocialsImages/discord-logo.png');"></a>
                 <a href="https://asianerd.itch.io" target="_blank" style="background-image:url('SocialsImages/itch-logo.png')"></a>
             </div>
-            <div class="discord-select">
-                <iframe src="https://discord.com/widget?id=500614426051739669&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                <iframe src="https://discord.com/widget?id=750945243305869343&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                <iframe src="https://discord.com/widget?id=749619160295669852&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                <iframe src="https://discord.com/widget?id=752213283599024130&theme=dark" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            <div class="footer">
+                <p class="discord-select">ajian_nedo#8797</p>
             </div>
+            <p>website made entirely by ajian_nedo#8797</p>
         </center>
-        <p class="credits">
-            Website developed by ajian_nedo#8797. <span>Edited by Dン#0015</span>
-        </p>
+        <script src="source.js"></script>
     </body>
 </html>
