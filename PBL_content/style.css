@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&family=Anek+Malayalam:wght@200;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mingzat&family=Nunito:wght@200;300;400&family=PT+Sans:wght@400;700&display=swap');
+
+/* 
+Color palette
+    - 93B5C6
+    - C9CCD5
+    - E4D8DC
+    - FFE3E3
+
+    - 838383
+    - AD9D9D
+    - D9ADAD
+    - FCCBCB
+*/
+
+head, body, html {
+    margin:0;
+    padding:0;
+}
+
+h1 {
+    font-family: 'Anek Malayalam', sans-serif;
+    font-size:5vw;
+    color:white;
+    font-weight:100;
+}
+
+.main-header {
+    color:white;
+    font-family:'Nunito', sans-serif;
+    font-size:5vw;
+    font-weight: 300;
+}
+
+.main-content {
+    background-color:#93B5C6;
+    margin:0;
+}
+
+.header-image {
+    margin:0;
+    padding:0;
+
+    display:flex;
+    position:fixed;
+    top:0;
+    z-index: -100;
+    
+    width:100vw;
+    height:100vh;
+    background-image:url("/PBL_content/top_image.png");
+    background-size:cover;
+}
+
+.proceed-button p {
+    filter:url("made by ajian_nedo#8797");
+}
+
+.proceed-button {
+    background-color:#222222;
+    height:5vw;
+    width:5vw;
+    border-radius:1000px;
+}
+
+.pengenalan p, .isu p, .punca p, .isu li{
+    color:white;
+    font-family: 'Anek Latin', sans-serif;
+    font-size:2vw;
+}
+
+/* #region Pengenalan */
+.pengenalan p {
+    display:table-cell;
+    padding-left:2vw;
+    vertical-align: middle;
+    width:40vw;
+}
+
+.pengenalan {
+    background-color:#fff3;
+}
+
+.pengenalan tr td p {
+    font-size:2.2vw;
+}
+/* #endregion */
+
+/* #region Isu */
+.isu {
+    padding-top:1vh;
+    background-color:#0004;
+}
+
+.isu li {
+    font-size:2vw;
+    margin-top:1vw;
+}
+
+.isu ul {
+    display:inline-block;
+    width:30vw;
+    padding:3vw;
+    margin: 0 0 0 15vw;
+    background-color:#00000044;
+    border-radius:20px;
+
+    cursor:help;
+
+    transition-duration:0.5s;
+}
+
+.isu ul:hover {
+    transform:scale(1.05);
+    /* filter:drop-shadow(0 0 0.3vw #fff); */
+    filter:brightness(2);
+}
+
+.isu td img {
+    width:12vw;
+    margin:1vw 3vw 1vw 3vw;
+    filter:drop-shadow(0 0 0.3vw #000);
+
+    transition-duration:0.3s;
+}
+
+.isu td img:hover {
+    transform:translateY(-1vh);
+}
+/* #endregion */
+
+/* #region Punca */
+.punca {
+    padding-top:5vh;
+}
+/* #endregion */
+
+/* #region Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 0.5vw;
+    height:5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background:#000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 0.5vw;
+}
+/* #endregion */
+
+/* #region Donate button */
+.donate-button {
+    display:table-cell;
+    vertical-align: middle;
+
+    width:20vw;
+    height:15vh;
+
+    background-color:#f52550;
+
+    cursor:pointer;
+
+    border-radius:2vw;
+
+    transition-duration:0.3s;
+}
+
+.donate-button:hover {
+    transform:scale(1.05);
+    filter:drop-shadow(0 0 0.3vw #f52550);
+}
+
+.donate-button p {
+    color:black;
+    font-family:'Anek Malayalam', sans-serif;
+    font: weight 1000px;
+    font-size:2vw;
+
+    cursor:pointer;
+}
+/* #endregion */
