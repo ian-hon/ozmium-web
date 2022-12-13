@@ -10,17 +10,25 @@ onscroll = function () {
 }
 
 const fetchData = async () => {
-    const file = await fetch('language_data.json');
-    language_data = await file.json();
+    const file = await fetch('data.json');
+    data = await file.json();
+    language_data = data['languages'];
+    monkeytype = data['monkeytype'];
 
     for (let i = 0; i < language_text.length; i++) {
         language_text[i].innerHTML = language_data[languages[i]];
+    }
+
+    for (let i = 0; i < monkeytypeObjects.length; i++) {
+        monkeytypeObjects[i].innerHTML = monkeytype[['acc', 'max', 'tests'][i]];
     }
 }
 
 var language_data = [];
 var languages = ['C#', 'Python', 'CSS', 'HTML', 'JavaScript', 'C++']
 var language_text = document.getElementsByClassName('hours-text');
+
+var monkeytypeObjects = document.getElementsByClassName('monkeytype-data-inject');
 
 fetchData();
 

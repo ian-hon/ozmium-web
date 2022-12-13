@@ -1,29 +1,205 @@
 {
-    "C#": "288hrs 48mins",
-    "Python": "223hrs 59mins",
-    "CSS": "77hrs 4mins",
-    "Text": "71hrs 37mins",
-    "HTML": "54hrs 13mins",
-    "Other": "52hrs 28mins",
-    "JavaScript": "44hrs 2mins",
-    "JSON": "12hrs 3mins",
-    "C++": "10hrs 19mins",
-    "Java": "8hrs 13mins",
-    "PHP": "7hrs 6mins",
-    "Markdown": "2hrs 26mins",
-    "Arduino": "1hrs 1mins",
-    "XML": "0hrs 33mins",
-    "Git Config": "0hrs 33mins",
-    "Vim Script": "0hrs 32mins",
-    "Batchfile": "0hrs 22mins",
-    "YAML": "0hrs 13mins",
-    "GitIgnore file": "0hrs 10mins",
-    "INI": "0hrs 6mins",
-    "Properties": "0hrs 3mins",
-    "TypeScript": "0hrs 1mins",
-    "CSV": "0hrs 0mins",
-    "Image (png)": "0hrs 0mins",
-    "PythonStub": "0hrs 0mins",
-    "Git": "0hrs 0mins",
-    "RPMSpec": "0hrs 0mins"
+    "languages": {
+        "C#": "288hrs 52mins",
+        "Python": "224hrs 44mins",
+        "CSS": "79hrs 37mins",
+        "Text": "71hrs 38mins",
+        "HTML": "56hrs 5mins",
+        "Other": "52hrs 34mins",
+        "JavaScript": "44hrs 16mins",
+        "JSON": "12hrs 11mins",
+        "C++": "10hrs 19mins",
+        "Java": "8hrs 13mins",
+        "PHP": "7hrs 6mins",
+        "Markdown": "2hrs 26mins",
+        "Arduino": "1hrs 1mins",
+        "XML": "0hrs 33mins",
+        "Git Config": "0hrs 33mins",
+        "Vim Script": "0hrs 32mins",
+        "Batchfile": "0hrs 22mins",
+        "YAML": "0hrs 13mins",
+        "GitIgnore file": "0hrs 10mins",
+        "INI": "0hrs 6mins",
+        "Properties": "0hrs 3mins",
+        "TypeScript": "0hrs 1mins",
+        "CSV": "0hrs 0mins",
+        "Image (png)": "0hrs 0mins",
+        "PythonStub": "0hrs 0mins",
+        "Git": "0hrs 0mins",
+        "RPMSpec": "0hrs 0mins"
+    },
+    "monkeytype": {
+        "message": "Profile retrieved",
+        "data": {
+            "name": "ajian_nedo",
+            "addedAt": 1629882378628,
+            "typingStats": {
+                "completedTests": 466,
+                "startedTests": 1073,
+                "timeTyping": 7176.9299999999985
+            },
+            "personalBests": {
+                "time": {
+                    "15": [
+                        {
+                            "acc": 99.39,
+                            "consistency": 84.29,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 128,
+                            "wpm": 128,
+                            "timestamp": 1670584855283
+                        },
+                        {
+                            "acc": 97.35,
+                            "consistency": 75.35,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "code_csharp",
+                            "punctuation": false,
+                            "raw": 89.6,
+                            "wpm": 83.2,
+                            "timestamp": 1670696685731
+                        },
+                        {
+                            "acc": 91.35,
+                            "consistency": 58.4,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "code_python",
+                            "punctuation": false,
+                            "raw": 75.2,
+                            "wpm": 75.2,
+                            "timestamp": 1670739153170
+                        }
+                    ],
+                    "30": [
+                        {
+                            "acc": 97.96,
+                            "consistency": 83.05,
+                            "difficulty": "normal",
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 116.36,
+                            "wpm": 113.96,
+                            "timestamp": 1647444201957,
+                            "lazyMode": false
+                        }
+                    ],
+                    "60": [
+                        {
+                            "acc": 96.39,
+                            "consistency": 68.61,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 94.6,
+                            "wpm": 94.6,
+                            "timestamp": 1651689057584
+                        }
+                    ],
+                    "120": [
+                        {
+                            "acc": 96.96,
+                            "consistency": 75.54,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 92.3,
+                            "wpm": 92.3,
+                            "timestamp": 1651688803293
+                        }
+                    ]
+                },
+                "words": {
+                    "10": [
+                        {
+                            "acc": 100,
+                            "consistency": 68.06,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 148.57,
+                            "wpm": 148.57,
+                            "timestamp": 1670743790393
+                        },
+                        {
+                            "acc": 97.14,
+                            "consistency": 81.93,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "indonesian",
+                            "punctuation": false,
+                            "raw": 85.45,
+                            "wpm": 85.45,
+                            "timestamp": 1670689207631
+                        },
+                        {
+                            "acc": 93.94,
+                            "consistency": 74.11,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english_commonly_misspelled",
+                            "punctuation": false,
+                            "raw": 83.85,
+                            "wpm": 83.85,
+                            "timestamp": 1670689251385
+                        }
+                    ],
+                    "25": [
+                        {
+                            "acc": 97.86,
+                            "consistency": 76.97,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 105.86,
+                            "wpm": 105.86,
+                            "timestamp": 1639135938392
+                        }
+                    ],
+                    "50": [
+                        {
+                            "acc": 90.2,
+                            "consistency": 62.23,
+                            "difficulty": "normal",
+                            "lazyMode": false,
+                            "language": "english",
+                            "punctuation": false,
+                            "raw": 75.93,
+                            "wpm": 74.5,
+                            "timestamp": 1633563287257
+                        }
+                    ]
+                }
+            },
+            "discordId": "517998886141558786",
+            "discordAvatar": "cca57b54a9d8de1ab04a7568acd056fd",
+            "xp": 18224,
+            "streak": 5,
+            "maxStreak": 5,
+            "details": {
+                "bio": "",
+                "keyboard": "RK84 reds",
+                "socialProfiles": {
+                    "github": "Asianerd",
+                    "twitter": "",
+                    "website": ""
+                }
+            },
+            "allTimeLbs": {
+                "time": {
+                    "15": {},
+                    "60": {}
+                }
+            },
+            "uid": "pB4hZ2vU1udKyc20rNDJRc3cP7E3"
+        }
+    }
 }
