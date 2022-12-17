@@ -1,13 +1,13 @@
 {
     "languages": {
         "C#": "288hrs 52mins",
-        "Python": "224hrs 44mins",
-        "CSS": "79hrs 37mins",
+        "Python": "225hrs 15mins",
+        "CSS": "80hrs 33mins",
         "Text": "71hrs 38mins",
-        "HTML": "56hrs 5mins",
+        "HTML": "56hrs 24mins",
         "Other": "52hrs 34mins",
-        "JavaScript": "44hrs 16mins",
-        "JSON": "12hrs 11mins",
+        "JavaScript": "44hrs 19mins",
+        "JSON": "12hrs 14mins",
         "C++": "10hrs 19mins",
         "Java": "8hrs 13mins",
         "PHP": "7hrs 6mins",
@@ -30,7 +30,7 @@
     },
     "monkeytype": {
         "acc": "Acc: 99.39%",
-        "max": "Avg: 148.57wpm",
-        "tests": "Tests: 1073"
+        "max": "Avg: 148.81wpm",
+        "tests": "Tests: 1280"
     }
 }

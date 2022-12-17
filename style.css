@@ -320,14 +320,18 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 
 /* #region Random showcase */
 .showcase-parent {
-    display:flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: row;
+    width: 90%;
 
-    width:90%;
-    margin:auto;
-    height:fit-content;
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(auto-fit, 500px);
+
+    text-align: center;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
 }
 
 .project-showcase {
@@ -703,5 +707,13 @@ background #091f2c
 
 .footer #sns img:hover {
     transform:translateY(-10%);
+}
+/* #endregion */
+
+/* #region Screen size related */
+@media screen and (max-width:900px) {
+    .monkeytype {
+        width:500px !important;
+    }
 }
 /* #endregion */

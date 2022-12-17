@@ -14,8 +14,6 @@ while True:
     
     monkey_data = requests.get('https://api.monkeytype.com/users/ajian_nedo/profile').json()
     
-    print(monkey_data)
-    
     final = {
         'languages': {},
         'monkeytype': {}
