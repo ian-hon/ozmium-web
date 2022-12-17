@@ -80,6 +80,15 @@ h1, h2, h3, h4, h5, h6, p, a, span {
     padding:0;
 }
 
+#title-header h3 {
+    width:80%;
+    text-align: center;
+
+    margin-top:8ch;
+
+    font-size: 30px;
+}
+
 #title-header span, #title-header h2 {
     display:inline-block;
 
