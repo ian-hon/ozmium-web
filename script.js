@@ -4,9 +4,9 @@ titleHeaderDiv.style.height = '100vh';
 
 onscroll = function () {
     // might cause problems in the future, is removable
-    let final = 1 - ($(window).scrollTop() / 500.00);
-    final = final < 0.4 ? 0.4 : (final > 1 ? 1 : final);
-    titleHeaderDiv.style.height = `${parseInt(final * 100)}vh`;
+    // let final = 1 - ($(window).scrollTop() / 500.00);
+    // final = final < 0.4 ? 0.4 : (final > 1 ? 1 : final);
+    // titleHeaderDiv.style.height = `${parseInt(final * 100)}vh`;
 }
 
 const fetchData = async () => {

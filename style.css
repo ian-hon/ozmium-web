@@ -114,9 +114,20 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 }
 
 .language-container {
-    width:1040px;
+    width:90%;
+
+    display:grid;
+    grid-gap:15px;
+    grid-template-columns: repeat(auto-fit, 500px);
 
     padding:10px;
+
+    text-align: center;
+
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
 }
 
 .language-element {
@@ -396,6 +407,7 @@ h1, h2, h3, h4, h5, h6, p, a, span {
 .project-showcase #content h2 {
     font-size: 15px;
     font-weight: 200;
+    text-align: left;
 }
 /* #endregion */
 
@@ -545,7 +557,7 @@ background #091f2c
 }
 
 .book-container {
-    width: 80%;
+    width: 90%;
 
     display: grid;
     grid-gap: 30px;
@@ -652,12 +664,13 @@ background #091f2c
 /* #endregion */
 /* #endregion */
 
-
 /* #region Footer */
 .footer {
+    position: relative;
+
     background:var(--tertiary-background);
 
-    height:400px;
+    min-height:30vh;
     width:100%;
 
     display:flex;
@@ -672,7 +685,7 @@ background #091f2c
     align-items:center;
     flex-direction:row;
 
-    width:40%;
+    width:60%;
     height:fit-content;
 }
 
@@ -708,12 +721,243 @@ background #091f2c
 .footer #sns img:hover {
     transform:translateY(-10%);
 }
+
+.footer p {
+    position:absolute;
+
+    bottom:2ch;
+
+    font-size:13px;
+
+    color:#666;
+}
+
+.footer > a {
+    margin:3ch 0 1ch 0;
+
+    text-shadow: 0px 0px 5px #fff6;
+}
 /* #endregion */
 
 /* #region Screen size related */
 @media screen and (max-width:900px) {
+    /* #region MonkeyType */
     .monkeytype {
-        width:500px !important;
+        background:url('/ShowcaseImages/akko_keycaps.png');
+        background-position: center;
+        background-size: cover;
+    
+        height:225px;
+        width:400px !important;
+    }
+    
+    .monkeytype #data {
+        background:#0008;
+
+        background-size: cover;
+        background-position: center;
+    
+        width:398px;
+    }
+    
+    .monkeytype #data > img {
+        height:45px;
+        margin:22px;
+    
+        margin-bottom:7.5px;
+    }
+    
+    .monkeytype #content {
+        width:400px;
+        height:150px;
+    }
+    
+    .monkeytype #content h1, .monkeytype #content h2 {
+        font-size: 13px;
+    }
+    
+    .monkeytype #content h2 {
+        font-size: 14px;
+    }
+    
+    .monkeytype #image-holder {
+        display:none;
+    }
+    
+    .monkeytype #image-holder > a > img {
+        display:none;
+    }
+    
+    .monkeytype #image-holder p {
+        display:none;
+    }
+    /* #endregion */
+}
+
+@media screen and (max-width:600px) {
+    /* #region Languages */
+    .language-element {
+        width:400px;
+        height:130px;
+    
+        margin:0 10px 0 10px;
+    }
+    
+    .language-element #icon-holder {
+        height:75px;
+    }
+    
+    .language-element #language-name {
+        display:none;
+    }
+    
+    .language-element #icon-holder p {
+        display:none;
+    }
+    
+    /* #region data container */
+    .language-element #data-container {
+        height:fit-content;
+        width:fit-content;
+
+        padding:20px;
+    }
+    
+    /* #region proficiency */
+    .language-element #data-container #proficiency {
+        display:none;
+    }
+    
+    .language-element #data-container #proficiency p {
+        display:none;
+    }
+    
+    .language-element #proficiency #proficiency-bar {
+        display:none;
+    }
+    
+    .language-element #proficiency #fill {
+        display: none;
+    }
+    
+    .language-element #proficiency #fill-background {
+        display:none;
+    }
+    /* #endregion */
+    
+    /* #region Frameworks */
+    .language-element #frameworks {
+        padding:10px 10px 0 10px;
+    }
+    
+    .language-element #frameworks #framework-container {
+        width:calc(100% + 20px);
+    }
+    
+    .language-element #frameworks a {
+        padding:3px 7px 3px 7px;
+
+        font-size: 13px;
+    }
+    /* #endregion */
+    /* #endregion */
+    /* #endregion */
+
+    /* #region Showcase */
+    .project-showcase {
+        width: 400px;
+        height: 240px;
+    }
+    
+    /* #region Image holder */
+    .project-showcase #image-holder {
+        width: 400px;
+        height: 240px;
+    }
+    /* #endregion */
+    
+    .project-showcase #content {
+        top:-96px;
+    
+        height:80px;
+        width:240px;
+        padding:8px 16px 8px 16px;
+    }
+    
+    .project-showcase #content h1 {
+        font-size:20px;
+    }
+    
+    .project-showcase #content h2 {
+        font-size: 12px;
+    }
+    /* #endregion */
+
+    /* #region Books */
+    .book-container {
+        width: 100%;
+
+        grid-template-columns: repeat(auto-fit, 210px);
+    }
+
+    .book-element {
+        height:200px;
+        width:200px;
+
+        padding:10px;
+    }
+
+    .book-element #icon-holder {
+        height:134px;
+    }
+    
+    .book-element #rating {
+        height:110px;
+        width:30px;
+    }
+    
+    .book-element #rating img {
+        width:55%;
+    }
+    
+    .book-element > div hr {
+        height:100px;
+        width:0px;
+    }
+    
+    .book-element #icon-holder img {
+        height:100%;
+    }
+    
+    .book-element > hr {
+        width:80%;
+    }
+    
+    .book-element span {
+        height:45px;
+    }
+    
+    .book-element span h1 {
+        font-size: 15px;
+    }
+    /* #endregion */
+}
+
+@media screen and (max-width:700px) { 
+    .footer #sns {
+        width:80%;
+    }
+    
+    .footer #sns img {
+        height:50px;
+    }
+    
+    .footer span {    
+        padding:2px 0 2px 0;
+        margin-top:6px;
+        font-size:18px;
+    
+        width:16ch;
     }
 }
 /* #endregion */
