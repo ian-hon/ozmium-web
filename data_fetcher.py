@@ -19,7 +19,7 @@ while True:
         'monkeytype': {}
     }
     for x in language_data:
-        m, s = divmod(int(x['total_seconds']), 60)
+        m, s = divmod(int(x['total_seconds']) + 180000, 60) # adding 50 hours to compensate for pre-wakatime tracking
         h, m = divmod(m, 60)
         final['languages'][x['name']] = f'{h}hrs {m}mins'
     
