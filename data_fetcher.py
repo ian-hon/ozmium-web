@@ -33,6 +33,6 @@ while True:
         with open('data.json', 'w', encoding='utf-8') as file:
             json.dump(final, file, indent=4)
     except Exception as e:
-        print(f"\te")
+        print(f"\t{e}")
     
     time.sleep(300)
