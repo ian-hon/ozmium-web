@@ -99,4 +99,4 @@ function updateDiscord() {
 
 updateDiscord();
 
-fetchData();
+// fetchData();
