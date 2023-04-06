@@ -1,0 +1,14 @@
+<script>
+    console.log("existence of <script> tag");
+    const fetchData = async () => {
+        const file = await fetch('data.json');
+        data = await file.json();
+
+        document.getElementById("d").innerHTML = data;
+
+        console.log("data fetched");
+    }
+
+    fetchData();
+</script>
+<div id="d"></div>

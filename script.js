@@ -30,8 +30,6 @@ var language_text = document.getElementsByClassName('hours-text');
 
 var monkeytypeObjects = document.getElementsByClassName('monkeytype-data-inject');
 
-fetchData();
-
 // #region typing intro
 // shamelessly stolen from https://codepen.io/gschier/pen/DLmXKJ
 var TxtRotate = function(el, toRotate, period) {
@@ -111,3 +109,5 @@ function updateDiscord() {
 }
 
 updateDiscord();
+
+fetchData();
