@@ -4,7 +4,7 @@
         const file = await fetch('data.json');
         data = await file.json();
 
-        document.getElementById("d").innerHTML = data;
+        document.getElementById("d").innerHTML = "\n" + data;
 
         console.log("data fetched");
     }
