@@ -1,14 +1,3 @@
-var titleHeaderDiv = document.getElementById("title-header");
-
-titleHeaderDiv.style.height = '100vh';
-
-onscroll = function () {
-    // might cause problems in the future, is removable
-    // let final = 1 - ($(window).scrollTop() / 500.00);
-    // final = final < 0.4 ? 0.4 : (final > 1 ? 1 : final);
-    // titleHeaderDiv.style.height = `${parseInt(final * 100)}vh`;
-}
-
 const fetchData = async () => {
     const file = await fetch('data.json');
     data = await file.json();
@@ -25,7 +14,7 @@ const fetchData = async () => {
 }
 
 var language_data = [];
-var languages = ['C#', 'Python', 'CSS', 'HTML', 'JavaScript', 'C++']
+var languages = ['C#', 'Python', 'CSS', 'JavaScript', 'C++', 'Rust'];
 var language_text = document.getElementsByClassName('hours-text');
 
 var monkeytypeObjects = document.getElementsByClassName('monkeytype-data-inject');
