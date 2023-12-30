@@ -1,21 +1,22 @@
-@import url('https://fonts.googleapis.com/css?family=Courier Prime:700|Courier Prime:400');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400&family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --text: #fff;
     --background: #08030c;
     --primary: #8E0EF6;
     --secondary: #0f0618;
-    --accent: #8008E2;
+    --tertiary: #1e112b;
+    --accent: #8008e2;
     --border-color:#292929;
 }
 
 body {
-    font-family: 'Courier Prime';
+    font-family: 'Roboto Mono';
     font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6, input {
-    font-family: 'Courier Prime';
+h1, h2, h3, h4, h5, h6, input, textarea {
+    font-family: 'Roboto Mono';
     font-weight: 700;
 
     margin:0;
@@ -55,30 +56,3 @@ html, head, body {
     border-radius: 1000px;
 }
 /*#endregion */
-
-#parent {
-    height:100vh;
-    width: 100%;
-    
-    margin:0;
-    padding:0;
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-
-    flex-direction: column;
-}
-
-h1 {
-    margin:0 !important;
-    padding:0 !important;
-}
-
-h4 {
-    margin-top:1ch;
-
-    font-size: 2rem;
-    font-weight: lighter;
-    font-style:italic;
-}

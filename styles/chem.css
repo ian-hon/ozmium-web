@@ -1,0 +1,33 @@
+#container {
+    height:100vh;
+    width:100%;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#parent {
+    padding:5ch;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    width:fit-content;
+
+    background:var(--secondary);
+    border-radius:1.5rem;
+
+    filter:drop-shadow(0 1ch 3ch #0006);
+}
+
+#title {
+    text-align:center;
+}
+
+#prompt {
+    background:red;
+}
