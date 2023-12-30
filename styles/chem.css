@@ -108,3 +108,50 @@ textarea {
 #credits[aria-label="closed"] {
     height:0;
 }
+
+@media screen and (max-aspect-ratio: 1.42) {
+    #parent {
+        padding:2rem;
+    
+        width:80%;
+    
+        border-radius:1.5rem;
+    }
+
+    #title {
+        font-size:4rem;
+    }
+    
+    textarea {
+        margin-top:1em;
+    
+        padding:0.4rem 1ch;
+    
+        width:80%;
+        height:10em;
+    
+        font-size:2.5rem;
+    }
+
+    #progress {
+        margin-top:1em;
+
+        font-size:3rem;
+    
+        padding:0.6rem 0.6ch;
+    
+        border-radius:1.5rem;
+    }
+    
+    #credit-container {
+        margin-top:0.5rem;
+    }
+    
+    #credit-container h4, #credit-container pre {
+        font-size:2rem;
+    }
+    
+    #credits {
+        height:20em;
+    }
+}
