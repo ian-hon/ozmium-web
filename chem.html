@@ -15,9 +15,25 @@
                 <h2 id="title">
                     Redox reaction
                 </h2>
-                <textarea id="prompt">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. In accusantium nisi adipisci eligendi numquam, incidunt tempore neque laborum soluta, cupiditate veritatis. Aliquid nesciunt commodi voluptates magni tenetur mollitia, velit dignissimos.
-                </textarea>
+                <textarea id="prompt"></textarea>
+                <textarea readonly id="answer"></textarea>
+                <h3 id="progress" onclick="progress()">
+                    Check
+                </h3>
+            </div>
+            <div id="credit-container">
+                <h4 onclick="revealCredits()">
+                    made by ian
+                </h4>
+                <div id="credits" aria-label="closed">
+<pre>memory training for chem
+all definitions by Cg Liew
+<a href="https://www.instagram.com/han_yuji_/">dm me</a> if there are errors or typos
+
+<a href="https://github.com/Asianerd/ozmium-web">code</a>
+pure html css js
+hosted on aws with lighttpd</pre>
+                </div>
             </div>
         </div>
         <script src="scripts/chem.js"></script>
