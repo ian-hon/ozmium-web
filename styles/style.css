@@ -3,21 +3,16 @@
 
 :root {
     --text: #fff;
-    --background: #08030c;
-    --primary: #8E0EF6;
-    --secondary: #0f0618;
-    --tertiary: #1e112b;
-    --accent: #8008e2;
-    --border-color:#292929;
+    --background: #23242a;
+    --primary: #7f7cff;
+    --secondary: #323741;
+    --tertiary: #2a2d35;
+    /* --accent: #8008e2; */
+    --border-color:#424650;
 }
 
-body {
-    font-family: 'Courier Prime';
-    font-weight: 400;
-}
-
-h1, h2, h3, h4, h5, h6, input, textarea {
-    font-family: 'Courier Prime';
+body, h1, h2, h3, h4, h5, h6, input, textarea {
+    font-family: 'Roboto Mono';
     font-weight: 400;
 
     margin:0;

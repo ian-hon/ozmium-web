@@ -17,9 +17,24 @@
                 </h2>
                 <textarea id="prompt"></textarea>
                 <textarea readonly id="answer"></textarea>
-                <h3 id="progress" onclick="progress()">
-                    Check
-                </h3>
+                <div id="filter-section">
+                    <h3 id="progress" onclick="progress()">
+                        Check
+                    </h3>
+                    <div id="filter-container">
+                        <div id="filter">
+                            <h3 id="selectionButton" onclick="toggleSelection()">
+                                Chapters
+                            </h3>
+                            <!-- <label for="selection_input_1">
+                                C3: Thermochemistry<input type="checkbox" id="selection_input_1"/>
+                            </label>
+                            <label for="selection_input_2">
+                                C5: Chemistry Consumer and Industry<input type="checkbox" id="selection_input_2"/>
+                            </label> -->
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="credit-container">
                 <h4 onclick="revealCredits()">
