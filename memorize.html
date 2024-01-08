@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ozmium.xyz</title>
+        <link rel="shortcut icon" href="icon.ico">
+        <meta charset="utf-8">
+        <meta name="author" content="han_yuji_">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/memorize.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="parent">
+                <h2 id="title"></h2>
+                <textarea id="prompt"></textarea>
+                <textarea readonly id="answer"></textarea>
+                <div id="selection">
+                    <img src="./assets/book.png" onclick="toggleMenu()">
+                    <h3 id="progress" onclick="progress()"></h3>
+                </div>
+            </div>
+            <div id="credit-container">
+                <h4 onclick="revealCredits()">
+                    made by ian
+                </h4>
+                <div id="credits" aria-label="closed">
+<pre>memory training for chem
+all definitions by Cg Liew (chem) & Cg Imran (phys)
+<a href="https://www.instagram.com/han_yuji_/">my ig</a>; dm if there are errors or typos
+
+<a href="https://github.com/Asianerd/ozmium-web">code</a>
+pure html css js
+hosted on aws with lighttpd</pre>
+                </div>
+            </div>
+        </div>
+        <div id="menu" aria-label="closed">
+            <div id="header">
+                <div id="subject-selection">
+                    <h3 onclick="toggleSelection(this)" aria-label="closed">
+                        Subjects
+                    </h3>
+                    <!-- <label>
+                        Chemistry<input type="radio" name="subject-selection">
+                    </label>
+                    <label>
+                        Physics<input type="radio" name="subject-selection">
+                    </label> -->
+                </div>
+                <img src="./assets/cross.png" onclick="toggleMenu()">
+            </div>
+            <div id="browser">
+
+            </div>
+        </div>
+        <script src="scripts/memorize.js"></script>
+        <script src="/source.js"></script>
+    </body>
+</html>
