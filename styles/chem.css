@@ -27,6 +27,8 @@
     border-color:var(--border-color);
 
     filter:drop-shadow(0 1ch 3ch #0006);
+
+    transition-duration:0.3s;
 }
 
 #title {
@@ -70,6 +72,10 @@ textarea {
     justify-content:start;
     align-items:center;
 
+    flex-direction:column;
+
+    margin-top:1em;
+
     height:3.8rem;
 
     width: 100%;
@@ -99,7 +105,7 @@ textarea {
     justify-content: center;
 }
 
-#filter {
+.filter {
     position:relative;
 
     overflow-x:hidden;
@@ -111,7 +117,7 @@ textarea {
     flex-direction: column;
 
     width:80%;
-    height:30em;
+    height:15em;
 
     background:var(--tertiary);
 
@@ -120,12 +126,21 @@ textarea {
     transition-duration:0.3s;
 }
 
-#filter[aria-label="closed"] {
+.filter:has(h3[aria-label="closed"]), .filter#chapter-filter:has(h3[aria-label="closed"]) {
     height:100%;
     overflow:hidden;
 }
 
-#filter h3, #filter label {
+.filter#chapter-filter {
+    height:30em;
+}
+
+/* .filter[aria-label="closed"] {
+    height:100%;
+    overflow:hidden;
+} */
+
+.filter h3, .filter label {
     font-size: 2rem;
 
     padding:0.6rem 0.6ch;
@@ -139,21 +154,21 @@ textarea {
     cursor:pointer;
 }
 
-#filter h3 {
+.filter h3 {
     background:var(--primary);
     width:calc(100% - 1.2rem);
     /* margin:0; */
 }
 
-#filter label {
+.filter label {
     margin:0.5rem 2ch 0 2ch;
 }
 
-#filter label input {
+.filter label input {
     display:none;
 }
 
-#filter label:has(input:checked) {
+.filter label:has(input:checked) {
     background:var(--border-color);
 }
 
@@ -284,7 +299,7 @@ textarea {
         height:5rem;
     }
 
-    #filter h3 {
+    .filter h3 {
         font-size:3rem;
 
         padding:0.6rem 0.6ch;

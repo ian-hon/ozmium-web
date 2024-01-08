@@ -18,12 +18,25 @@
                 <textarea id="prompt"></textarea>
                 <textarea readonly id="answer"></textarea>
                 <div id="filter-section">
-                    <h3 id="progress" onclick="progress()">
-                        Check
-                    </h3>
+                    <div>
+                        <h3 id="progress" onclick="progress()">
+                            Check
+                        </h3>
+                    </div>
                     <div id="filter-container">
-                        <div id="filter">
-                            <h3 id="selectionButton" onclick="toggleSelection()">
+                        <div class="filter">
+                            <h3 onclick="toggleSelection(this)" aria-label="closed">
+                                Subject
+                            </h3>
+                            <label>
+                                Physics<input type="radio" name="subject-selection">
+                            </label>
+                            <label>
+                                Chemistry<input type="radio" name="subject-selection">
+                            </label>
+                        </div>
+                        <div class="filter" id="chapter-filter">
+                            <h3 id="selectionButton" onclick="toggleSelection(this)" aria-label="closed">
                                 Chapters
                             </h3>
                             <!-- <label for="selection_input_1">

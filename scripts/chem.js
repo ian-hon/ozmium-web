@@ -393,13 +393,24 @@ function revealCredits() {
 }
 
 
-var selectionContainer = document.getElementById("filter");
+var selectionContainer = document.getElementById("chapter-filter");
 selectionContainer.ariaLabel = "closed";
-selectionContainer.ariaLabel = "open";
+// selectionContainer.ariaLabel = "open";
 
-function toggleSelection() {
-    selectionContainer.ariaLabel = selectionContainer.ariaLabel == "open" ? "closed" : "open";    
+// function toggleSelection() {
+//     selectionContainer.ariaLabel = selectionContainer.ariaLabel == "open" ? "closed" : "open";    
+// }
+
+function toggleSelection(t) {
+    console.log(t.ariaLabel);
+    t.ariaLabel = t.ariaLabel == "open" ? "closed" : "open";
 }
+
+// document.querySelectorAll(".filter").forEach((e) => {
+//     window.addEventListener('click', () => {
+//         console.log(e);
+//     })
+// })
 
 function updateLibrary() {
     library = [];
@@ -407,8 +418,7 @@ function updateLibrary() {
     let flag = false;
 
     let i = 0;
-    document.querySelectorAll("#filter label input").forEach((e) => {
-        // console.log(e.checked);
+    document.querySelectorAll("#chapter-filter label input").forEach((e) => {
         if (e.checked) {
             collection[i][1].forEach((item) => {
                 library.push(item);
@@ -416,24 +426,19 @@ function updateLibrary() {
 
             flag = true;
         }
-        // if (e.checked) {
-        //     library.push(collection[i][1]);
-        // }
         i++;
     });
 
     if (!flag) {
-        document.querySelectorAll("#filter label input").forEach((e) => {
+        document.querySelectorAll("#chapter-filter label input").forEach((e) => {
             e.checked = true;
         });
         updateLibrary();
     }
-
-    console.log(library);
 }
 
 function populateSelection() {
-    let f = document.getElementById("filter");
+    let f = document.getElementById("chapter-filter");
     let i = 0;
     collection.forEach((e) => {
         f.innerHTML += `
@@ -444,7 +449,7 @@ function populateSelection() {
         i++;
     });
 
-    document.querySelectorAll("#filter label input").forEach((e) => {
+    document.querySelectorAll("#chapter-filter label input").forEach((e) => {
         addEventListener("click", updateLibrary);
     });
 }
