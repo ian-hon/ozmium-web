@@ -215,12 +215,12 @@ var collection = {
                 ["Acceleration, a", "Rate of change of velocity"],
                 ["Free fall motion", "A situation where an object falls down due to gravitational force only"],
                 ["Inertia", "Tendency of an object to remain at rest or to continue its uniform motion in a straight line at uniform velocity"],
-                ["Newton's first law of motion", "An object will remain at rest or move at uniform velocity unless acted upon by an external foce"],
+                ["Newton's first law of motion", "An object will remain at rest or move at uniform velocity unless acted upon by an external force"],
                 ["Momentum, p", "A product of mass multiplies by velocity"],
                 ["Force, F", "The action of pushing or pulling to change the size and direction of motion of an object"],
                 ["Newton's second law of motion", "Rate of change of momentum is directly proportional to the force and acts in the direction of the applied force"],
                 ["Impulse, J", "Change of momentum"],
-                ["Impulsive force, F", "Rate of change of momentum in a collison or impact in a short period of time"],
+                ["Impulsive force, F", "Rate of change of momentum in a collision or impact in a short period of time"],
                 ["Newton's third law of motion", "For every action there is a reaction of equal magnitude but in the opposite direction"],
                 ["Weight, W", "A gravitational force acting on an object"],
             ],
@@ -280,7 +280,7 @@ var collection = {
             "C6: Light and Optics", [
                 ["Refraction of light", "A phenomenon when light changes direction when it travels from one medium to another medium of different densities"],
                 ["Refractive index, n", "The ratio od speed of light in vacuum to the speed of light in medium"],
-                ["Snell's Law", "When light travels from one mediu to another medium, the incident ray, the refracted ray and the normal meet at one point and are in the same plane"],
+                ["Snell's Law", "When light travels from one medium to another medium, the incident ray, the refracted ray and the normal meet at one point and are in the same plane"],
                 ["Total internal reflection", "When light travels from a medium with high optical density to a medium of low optical density"],
                 ["Critical angle, c", "Incident angle when refracted angle equal to 90°"],
                 ["Formation of rainbow", "Caused by refraction, dispersion and total internal reflection when light passes through water droplets in air"],
@@ -288,7 +288,7 @@ var collection = {
                 ["Principle axis", "Straight line through the optical centre of a lens and the centre of curvature of both surfaces of the lens"],
                 ["Axis of lens", "Straight line through the optical centre and perpendicular to the principal axis"],
                 ["Focal point, F", "Point located at the principle axis of a lens"],
-                ["Object ditance, u", "Distance between object and optical centre of a lens"],
+                ["Object distance, u", "Distance between object and optical centre of a lens"],
                 ["Image distance, v", "Distance between image and optical centre of a lens"],
                 ["Focal length, f", "Distance between focal point, F and optical centre, O of a lens"],
                 ["Linear magnification, m", "Ratio of image height to object height = ratio of image distance to object distance"],
@@ -347,9 +347,9 @@ var collection = {
                 ["Electromagnetic induction", "Production of an induced e.m.f. in a conductor when there is relative motion between the conductor and a magnetic field or when the conductor is in a changing magnetic field"],
                 ["Induced current", "The current produced when there is the change in magnetic flux"],
                 ["Lenz's law", "The induced current always flow in a direction that opposes the change of magnetic flux that causes it"],
-                ["Faraday's law", "The magnitude of indeuced e.m.f. is directly proportional to the rate of cutting of magnetic flux"],
+                ["Faraday's law", "The magnitude of induced e.m.f. is directly proportional to the rate of cutting of magnetic flux"],
                 ["Transformer", "An electrical device which increases or decreases an alternating voltage based on the principle of electromagnetic induction"],
-                ["Step-up transformer", "Trasformer that is used to increase the voltage"],
+                ["Step-up transformer", "Transformer that is used to increase the voltage"],
                 ["Step-down transformer", "Transformer that is used to decrease the voltage"],
                 ["Ideal transformer", "Transformer that does not experience any loss of energy, that is the efficiency, n is 100%"],
             ]
@@ -366,14 +366,14 @@ var collection = {
         ],
         [
             "C6: Nuclear Physics", [
-                ["Radioactive decay", "Process in which an unstable nucleus becomes more stable by emitting radioactive readiation"],
+                ["Radioactive decay", "Process in which an unstable nucleus becomes more stable by emitting radioactive radiation"],
                 ["Alpha particle, α", "Helium nucleus which consist of two protons and two neutrons"],
                 ["Beta particle, β", "A fast-moving electron ( negative )"],
                 ["Gamma rays, γ", "High-frequency electromagnetic wave ( neutral )"],
                 ["Half-life", "The time taken for a sample of radioactive nuclei to decay to half of its initial number"],
                 ["Nuclear energy", "Atomic energy, released during nuclear reactions such as radioactive decay, nuclear fission and nuclear fusion"],
                 ["Nuclear fission", "Nuclear reaction when a heavy nucleus splits into two or more lighter nuclei while releasing a large amount of energy"],
-                ["Nuclear fusion", "Nuclear reaction in which small and light nuclei fuse to form a heaview nucleus while releasing a large amount of energy. This nuclear reaction happens under extremely high temperature and pressure"],
+                ["Nuclear fusion", "Nuclear reaction in which small and light nuclei fuse to form a heavier nucleus while releasing a large amount of energy. This nuclear reaction happens under extremely high temperature and pressure"],
                 ["Chain reaction", "A self-sustaining reaction in which the products of a reaction can initiate another similar reaction"],
             ]
         ],
@@ -384,7 +384,7 @@ var collection = {
                 ["Quantum of energy", "Discrete energy packet and not a continuous energy"],
                 ["Photoelectric effect", "When a metal surface is illuminated by a beam of light at a certain frequency, electrons can be emitted from the metal"],
                 ["Work function", "The minimum energy required for a photoelectron to be emitted from a metal surface"],
-                ["Treshold frequency", "The minimum frequency for a light photon to produce photoelectric effect"],
+                ["Threshold frequency", "The minimum frequency for a light photon to produce photoelectric effect"],
             ]
         ]
     ]
