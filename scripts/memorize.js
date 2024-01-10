@@ -300,6 +300,92 @@ var collection = {
                 ["Image distance, v", "Distance between image and the pole of spherical mirror, P"],
                 ["Focal length, f", "Distance between focal point, F and the pole of spherical mirror, P"],
             ],
+        ],
+        [
+            "C1: Force and Motion II", [
+                ["Resultant force", "The single force the represents the vector sum of two or more forces acting on an object"],
+                ["Resolution of forces", "Process of resolving a force into two components"],
+                ["Equilibrium of forces", "Forces acting on an object produce a zero resulting force"],
+                ["Elasticity", "The property of material that enables an object to return to its original shape and size after the force applied on it is removed"],
+                ["Hooke's law", "Extension of a spring is directly proportional to the force applied on the spring provided the elastic limit of the spring is not exceeded"],
+            ]
+        ],
+        [
+            "C2: Pressure", [
+                ["Pressure", "Force per unit area"],
+                ["Atmospheric pressure", "Pressure due to the weight of the layer of air acting on the surface of the earth"],
+                ["Gas pressure", "The force per unit area exerted by the gas molecules as they collide with the wall of the container"],
+                ["Pascal's Principle", "Pressure applied on an enclosed fluid is transmitted uniformly in all direction in the fluid"],
+                ["Hydraulic system", "A system that uses a liquid to transmit pressure"],
+                ["Buoyant force", "Force acting upwards on an object immersed in a liquid when there is pressure difference between the lower surface and upper surface of the object"],
+                ["Archimedes' principle", "An object which partially or fully immersed in afluid will experience a buoyant force equal to the weight of fluid displace"],
+                ["Bernoulli's principle", "When the velocity of a fluid increases, the pressure in the fluid decreases and vice versa"],
+            ]
+        ],
+        [
+            "C3: Electricity", [
+                ["Electric field", "Region around a charged particle where any electric charge in the region will experience an electric force"],
+                ["Electric field strength, E", "Electric force acting on aunit positive charge placed at a point"],
+                ["Current, I", "Rate of flow of charge, Q in a conductor"],
+                ["Potential difference, V", "The work done, W in moving one coulomb of charge, Q from one point to another"],
+                ["Ohm's law", "The electric current, I flowing through a conductor is directly proprortional to the potential difference across it if the temperature and other physical conditions are constant"],
+                ["Ohmic conductors", "Conductors that obey Ohm's law"],
+                ["Resistance, R", "Ratio of the potential difference across the conductor to the electric current flowing through it"],
+                ["Resistivity of a conductor, p", "A measure of a conductor's ability to oppose the flow of electric current"],
+                ["Superconductors", "Materials that conduct electricity without any resistance"],
+                ["Critical temperature, T", "The temperature when the resistivity of a superconductor becomes zero"],
+                ["Electromotive force", "The energy transferred or work done by an electrical source to move one coulomb of charge in a complete circuit"],
+                ["Internal resistance, r", "The resistance caused by electrolyte in the dry cell"],
+                ["Electrical energy", "The ability of the electric current to do work"],
+                ["Electric power", "The rate of electrical energy dissipated or transferred"],
+            ]
+        ],
+        [
+            "C4: Electromagnetism", [
+                ["Catapult field", "Resultant magnetic field produced by the interaction between the magnetic field from a current-carrying conductor and the magnetic field from a permanent magnet"],
+                ["Magnetic field", "A region in the surrounding of a magnet which a magnetic material experiences a detectable force"],
+                ["Electromagnetic induction", "Production of an induced e.m.f. in a conductor when there is relative motion between the conductor and a magnetic field or when the conductor is in a changing magnetic field"],
+                ["Induced current", "The current produced when there is the change in magnetic flux"],
+                ["Lenz's law", "The induced current always flow in a direction that opposes the change of magnetic flux that causes it"],
+                ["Faraday's law", "The magnitude of indeuced e.m.f. is directly proportional to the rate of cutting of magnetic flux"],
+                ["Transformer", "An electrical device which increases or decreases an alternating voltage based on the principle of electromagnetic induction"],
+                ["Step-up transformer", "Trasformer that is used to increase the voltage"],
+                ["Step-down transformer", "Transformer that is used to decrease the voltage"],
+                ["Ideal transformer", "Transformer that does not experience any loss of energy, that is the efficiency, n is 100%"],
+            ]
+        ],
+        [
+            "C5: Electronics", [
+                ["Thermionic emission", "The emission of free electrons from a heated metal surface"],
+                ["Cathode rays", "Beams of electrons moving at high speed ina vacuum"],
+                ["Semiconductor diode", "Electric component which allows electric current to flow in one direction only"],
+                ["Rectification", "The process of converting an alternating current into a direct current"],
+                ["Full-wave rectification", "Process where both halves of every cycle of an alternating current is made to flow in the same direction"],
+                ["Transistor", "An electronic component that has three terminals, namely emitter, E, base, B and collector, C"],
+            ]
+        ],
+        [
+            "C6: Nuclear Physics", [
+                ["Radioactive decay", "Process in which an unstable nucleus becomes more stable by emitting radioactive readiation"],
+                ["Alpha particle, α", "Helium nucleus which consist of two protons and two neutrons"],
+                ["Beta particle, β", "A fast-moving electron ( negative )"],
+                ["Gamma rays, γ", "High-frequency electromagnetic wave ( neutral )"],
+                ["Half-life", "The time taken for a sample of radioactive nuclei to decay to half of its initial number"],
+                ["Nuclear energy", "Atomic energy, released during nuclear reactions such as radioactive decay, nuclear fission and nuclear fusion"],
+                ["Nuclear fission", "Nuclear reaction when a heavy nucleus splits into two or more lighter nuclei while releasing a large amount of energy"],
+                ["Nuclear fusion", "Nuclear reaction in which small and light nuclei fuse to form a heaview nucleus while releasing a large amount of energy. This nuclear reaction happens under extremely high temperature and pressure"],
+                ["Chain reaction", "A self-sustaining reaction in which the products of a reaction can initiate another similar reaction"],
+            ]
+        ],
+        [
+            "C7: Quantum Physics", [
+                ["Black body", "An idealised body that is able to absorb all electromagnetic radiation that falls on it"],
+                ["Thermal radiation", "Electromagnetic radiation that includes visible light and radiation that cannot be seen by the human eye such as infrared radiation"],
+                ["Quantum of energy", "Discrete energy packet and not a continuous energy"],
+                ["Photoelectric effect", "When a metal surface is illuminated by a beam of light at a certain frequency, electrons can be emitted from the metal"],
+                ["Work function", "The minimum energy required for a photoelectron to be emitted from a metal surface"],
+                ["Treshold frequency", "The minimum frequency for a light photon to produce photoelectric effect"],
+            ]
         ]
     ]
 }

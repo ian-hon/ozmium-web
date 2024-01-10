@@ -183,28 +183,16 @@
 # for i in collection:
 #     print(f'["{i[0]}", "{i[1]}"],')
 
-raw = """Refraction of light A phenomenon when light changes direction when it travels from one medium to another medium of different densities
-Refractive index, n The ratio od speed of light in vacuum to the speed of light in medium
-Snell's Law When light travels from one mediu to another medium, the incident ray, the refracted ray and the normal meet at one point and are in the same plane
-Total internal reflection When light travels from a medium with high optical density to a medium of low optical density
-Critical angle, c Incident anglewhen refracted angle equal to 90°
-Formation of rainbow Caused by refraction, dispersion and total internal reflection when light passes through water droplets in air
-Optical centre, O Points at the centre of the lens
-Principle axis Straight line through the optical centre of a lens and the centre of curvature of both surfaces of the lens
-Axis of lens Straight line through the optical centre and perpendicular to the principal axis
-Focal point, F Point located at the principle axis of a lens
-Object ditance, u Distance between object and optical centre of a lens
-Image distance, v Distance between image and optical centre of a lens
-Focal length, f Distance between focal point, F and optical centre, O of a lens
-Linear magnification, m Ratio of image height to object height = ratio of image distance to object distance
-Principal axis Straight line passing through the centre of curvature, C and pole of the spherical mirror, P
-Centre or curvature, C Centre of sphere which produces a concave or convex mirror
-Radius of curvature of mirror, r
-Distance between the pole of spherical mirror,P and the centre of curvature, C
-Focal point, F A point on the principal axis of the spherical mirror
-Object distance, u Distance between object and the pole of spherical mirror, P
-Image distance, v Distance between image and the pole of spherical mirror, P
-Focal length, f Distance between focal point, F and the pole of spherical mirror, P"""
+raw = """
+
+Black body An idealised body that is able to absorb all electromagnetic radiation that falls on it
+Thermal radiation Electromagnetic radiation that includes visible light and radiation that cannot be seen by the human eye such as infrared radiation
+Quantum of energy Discrete energy packet and not a continuous energy
+Photoelectric effect When a metal surface is illuminated by a beam of light at a certain frequency, electrons can be emitted from the metal
+Work function The minimum energy required for a photoelectron to be emitted from a metal surface
+Treshold frequency The minimum frequency for a light photon to produce photoelectric effect
+
+"""
 
 current = ""
 # raw_collection = []
