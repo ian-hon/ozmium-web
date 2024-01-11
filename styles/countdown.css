@@ -1,0 +1,83 @@
+#parent {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height:100vh;
+    width:100vw;
+
+    overflow: hidden;
+}
+
+#timetable {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+#timetable h2 {
+    position:relative;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+
+    transition-duration:0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+#timetable h5 {
+    font-size: 2rem;
+
+    position:absolute;
+    top: 100%;
+    min-width:fit-content;
+    width: fit-content;
+
+    white-space: nowrap;
+    font-style:italic;
+    opacity: 0;
+
+    transition-duration:0.3s;
+}
+
+#timetable h2:hover {
+    margin-bottom:1em;
+}
+
+#timetable h2:hover h5 {
+    opacity: 0.5;
+}
+
+#timetable h2 h5 {
+    margin-left: 2ch;
+}
+
+#timetable #completed {
+    opacity: 0.5;
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+#credits {
+    margin-top:3ch;
+}
+
+#credits a {
+    text-decoration: none !important;
+
+    color:var(--text);
+}
+
+h4#credits {
+    opacity: 0.5;
+    font-style: italic;
+}
