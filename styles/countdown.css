@@ -69,6 +69,7 @@
 
 #credits {
     margin-top:3ch;
+    user-select:none;
 }
 
 #credits a {
