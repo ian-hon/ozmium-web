@@ -59,7 +59,7 @@ function updateText(target, title, date, obj) {
 
     if (length > 0) {
         if (d <= 0) {
-            obj.innerHTML = `<div><b>${title}</b> in ${h}h ${m}m ${s}s</div>`;
+            obj.innerHTML = `<div><b>${title}</b> in ${h}h</div>`;
         } else {
             obj.innerHTML = `<div><b>${title}</b> in ${d}d</div>`;
         }
