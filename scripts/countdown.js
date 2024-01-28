@@ -58,7 +58,11 @@ function updateText(target, title, date, obj) {
     // property of han_yuji_
 
     if (length > 0) {
-        obj.innerHTML = `<div><b>${title}</b> in ${d}d</div>`;
+        if (d <= 0) {
+            obj.innerHTML = `<div><b>${title}</b> in ${h}h ${m}m ${s}s</div>`;
+        } else {
+            obj.innerHTML = `<div><b>${title}</b> in ${d}d</div>`;
+        }
     } else {
         obj.innerHTML = `<div id='completed'><b>${title}</b> ${Math.abs(d)}d ago</div>`;
     }
