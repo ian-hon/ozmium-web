@@ -39,7 +39,7 @@ function saveData() {
             console.log("success");
         }
     }
-    req.open("GET", `http://172.67.223.184:8000/save/${key}/${d}`, true);
+    req.open("GET", `http://104.21.86.185:8000/save/${key}/${d}`, true);
     req.send(null);
 }
 
