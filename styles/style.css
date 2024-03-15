@@ -10,6 +10,8 @@
     /* --accent: #8008e2; */
     --border-color:#424650;
     --border-width:5px;
+
+    --faded-text-colour:#9997;
 }
 
 body, h1, h2, h3, h4, h5, h6, input, a, textarea {

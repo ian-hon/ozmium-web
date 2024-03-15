@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chronos</title>
+        <link rel="shortcut icon" href="icon.ico">
+        <meta charset="utf-8">
+        <meta name="author" content="han_yuji_">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/styles/style.css">
+        <link rel="stylesheet" href="./styles/main.css">
+    </head>
+    <body>
+        <div id="parent">
+            <div id="timer">
+                <div id="data">
+                    <h1>
+                        ASM basics
+                    </h1>
+                    <h2>24:01</h2>
+                </div>
+            </div>
+            <div id="menu">
+                <div id="list">
+                    <!-- <div class="item" aria-label="completed">
+                        <input id="time" type="text" value="7:00">
+                        <h5 id="title" contenteditable>Compile notes and find out what to do 🔍</h5>
+                    </div>
+                    <div class="item">
+                        <input id="time" type="text" value="13:00">
+                        <h5 id="title" contenteditable>Start memorizing the little stuff 🧠</h5>
+                    </div>
+                    <div class="item">
+                        <input id="time" type="text" value="17:00">
+                        <h5 id="title" contenteditable>Start memorizing the little stuff 🧠</h5>
+                    </div> -->
+                    <div class="item">
+                        <div id="time">
+                            <input id="start" type="text" value="7:00">
+                            <h5 id="separator">|</h5>
+                            <input id="end" type="text" value="8:00">
+                        </div>
+                        <h5 id="title">Start memorizing the little stuff 🧠</h5>
+                    </div>
+                </div>
+                <!-- add js to dynamically change the max-height based on the scrollHeight -->
+                <div id="add" aria-label="open"> 
+                    <div id="toggle" onclick="toggleFields()">
+                        <img src="/assets/add.png">
+                    </div>
+                    <!-- apply the code for the #add[aria-label="open"] #fields tag, not the #add #fields tag  -->
+                    <div id="fields" oninput="updateInputBox()">
+                        <!-- redo this; too complicated -->
+                        <div class="item">
+                            <div id="time">
+                                <input id="start" type="text" value="7:00">
+                                <h5 id="separator">|</h5>
+                                <input id="end" type="text" value="8:00">
+                            </div>
+                            <h5 id="title">Start memorizing the little stuff 🧠</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/source.js"></script>
+        <script src="./scripts/source.js"></script>
+    </body>
+</html>

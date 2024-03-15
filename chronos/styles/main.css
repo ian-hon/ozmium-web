@@ -1,0 +1,299 @@
+#parent {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: row;
+
+    height:100vh;
+    width:100vw;
+
+    margin:0;
+    padding:0;
+}
+
+/* #region Timer */
+#timer {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height:100%;
+    flex:1;
+
+    padding:0;
+    margin:0;
+}
+
+#timer #data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+/* #endregion */
+
+/* #region Menu */
+#menu {
+    display:flex;
+    justify-content: center;
+    align-items: start;
+
+    flex-direction: column;
+
+    /* height: calc(100% - calc(2 * var(--border-width)));
+    width: calc(20% - calc(2 * var(--border-width))); */
+    height: 100%;
+    width: 30%;
+
+    background:var(--tertiary);
+
+    border-left-style: solid;
+    border-width:var(--border-width);
+    border-color:var(--border-color);
+
+    padding:0 !important;
+    margin:0 !important;
+
+    filter:drop-shadow(0 0 15px #0005);
+
+    overflow:hidden;
+}
+
+/* #region List */
+#list {
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+
+    padding-left:3ch;
+
+    height:100%;
+    width: calc(100% - 3ch);
+
+    overflow-y:scroll;
+}
+/* #endregion */
+
+/* #region item */
+.item {
+    display:flex;
+    justify-content: start;
+    align-items: start;
+
+    width:95%;
+
+    margin-top:3ch;
+}
+
+/* #region Time */
+.item #time {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.item #time #separator {
+    color:var(--faded-text-colour);
+}
+
+.item #time input {
+    font-size: 1.0rem;
+
+    height:fit-content;
+    max-width:5ch;
+    min-width: 4ch;
+
+    margin:0;
+    padding:0;
+
+    text-align: end;
+    border:none;
+
+    color:var(--text);
+    background:none;
+}
+/* #endregion */
+
+.item h5#separator {
+    margin:0 0.2ch;
+}
+
+.item h5#title {
+    margin-left:1ch;
+
+    width:calc(100% - 6ch);
+    overflow-wrap:break-word;
+
+    text-decoration: none;
+
+    text-align: start;
+}
+
+/* #region Current */
+.item[aria-label="current"] #title {
+    font-weight: bold;
+}
+
+.item[aria-label="current"] input {
+    font-weight: bold;
+}
+/* #endregion */
+
+/* #region completed */
+.item[aria-label="completed"] #title {
+    text-decoration: line-through;
+    font-style:italic;
+    color:var(--faded-text-colour);
+}
+
+.item[aria-label="completed"] input {
+    /* text-decoration: line-through; */
+    font-style:italic;
+    color:var(--faded-text-colour) !important;
+}
+/* #endregion */
+/* #endregion */
+
+/* #region Duration */
+.duration {
+    color:#999;
+    font-style:italic;
+}
+
+.duration h6 {
+    margin:0;
+    padding:0;
+}
+/* #endregion */
+
+/* #region Add */
+#add {
+    /* bottom:-10ch; */
+    /* top:calc(100% - 0ch); */
+    /* top:calc(100% - 8ch); */
+    /* top:calc(100% - 8ch); */
+    /* bottom:0%; */
+    opacity: 0;
+
+    position:absolute;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width:100%;
+
+    transition-duration:0.1s;
+    transition-timing-function: ease-in-out;
+
+    /* overflow:hidden; */
+}
+
+#add {
+    /* top:calc(100% - 8ch); */
+    bottom:0%;
+}
+
+
+#menu:hover #add {
+    opacity: 1;
+}
+
+#add[aria-label="open"] {
+    /* transform:translateY(-100%); */
+    /* bottom:0; */
+    opacity: 1;
+
+    /* background:green; */
+}
+
+/* #region Toggle */
+#add #toggle {
+    background:var(--secondary);
+
+    width:fit-content;
+    height:fit-content;
+
+    margin:0;
+    padding:0;
+    margin-bottom:2ch;
+
+    border-radius:1000px;
+
+    filter:drop-shadow(0 1ch 1ch #0005);
+
+    cursor:pointer;
+}
+
+#add #toggle img {
+    height:4ch;
+    margin:1ch;
+    padding:0;
+}
+/* #endregion */
+
+/* #region Fields */
+/* #add #field-container {
+    background:purple;
+} */
+
+#add[aria-label="open"] #fields {
+    /* dynamically change this in js? */
+    max-height:15ch;
+    border-width:var(--border-width);
+    background:white;
+}
+
+#add #fields .item #title:focus  {
+    background:white !important;
+}
+
+#add #fields {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    width:100%;
+    /* height:10ch !important; */
+    /* height:fit-content; */
+    /* height:10px; */
+    max-height: 0px;
+
+    background:var(--secondary);
+
+    filter:drop-shadow(0 0 2ch #0005);
+    border-style:solid;
+    border-bottom-style: none;
+    border-color:var(--border-color);
+    border-width: 0;
+    border-top-left-radius: 2ch;
+    border-top-right-radius: 2ch;
+
+    /* transition-duration:0.3s; */
+
+    /* overflow-y:scroll; */
+    /* overflow-x:hidden; */
+    overflow:hidden;
+
+    background:red;
+}
+
+#add .item {
+    margin:2ch;
+
+    background:green;
+}
+
+/* #add .item {
+    overflow-y:scroll;
+} */
+/* #endregion */
+/* #endregion */
+/* #endregion */
