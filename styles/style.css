@@ -3,6 +3,7 @@
 
 :root {
     --text: #fff;
+    --main: #7f7cff;
     --background: #23242a;
     --primary: #7f7cff;
     --secondary: #323741;
@@ -10,6 +11,7 @@
     /* --accent: #8008e2; */
     --border-color:#424650;
     --border-width:5px;
+    --border-radius:20px;
 
     --faded-text-colour:#9997;
 }
