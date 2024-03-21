@@ -425,10 +425,20 @@ body, h1, h2, h3, h4, h5, h6, input, a, textarea {
 /* #endregion */
 
 /* #region purchase */
+#details #purchase {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+}
+
 #details #purchase #header {
     display:flex;
     justify-content: space-evenly;
     align-items: center;
+
+    width: 100%;
 }
 
 #details #purchase #header h5 {
@@ -436,60 +446,134 @@ body, h1, h2, h3, h4, h5, h6, input, a, textarea {
     font-weight: 300;
 
     border-bottom-style:solid;
-    border-bottom-color:var(--border-color);
-    border-width: 0;
+    border-bottom-color:#0000;
+    border-width: 4px;
+
+    user-select: none;
+
+    transition-duration:0.3s;
+    cursor:pointer;
 }
 
 #details #purchase #header h5[aria-label="selected"] {
-    border-width: 4px;
+    border-bottom-color:var(--border-color);
     color:#fff;
 }
 
-
-#details #header + div{
-    display:flex;
-    justify-content: center;
-    align-items: center;
+/* #region filters */
+/* div#filters {
+    min-width:80%;
 }
 
-#details #purchase #pricing {
+#filters > div {
+    display:flex;
+    justify-content: space-between;
+    width:100%;
+}
+
+#filters > * > div {
     display:flex;
     justify-content: start;
     align-items: center;
 
-    margin-top:1ch;
+    font-size: 1em;
+} */
+
+#purchase #filters {
+    /* display:flex;
+    justify-content: space-evenly;
+    align-items: center; */
+
+    font-size:1em;
+
+    width:90%;
 }
 
-#details #purchase #pricing h4 {
-    font-size: 1.5em;
+#purchase #filters td > div {
+    display:flex;
+    justify-content: start;
+    align-items: center;
 }
 
-#details #purchase #pricing input:first-child {
-    text-align: end;
+#purchase #filters h5 {
+    font-size: inherit;
 }
 
-#details #purchase #pricing input {
-    font-size: 1.5em;
-
+#purchase #filters input {
     background:none;
-    border:none;
-    /* height:1em; */
-    /* width: fit-content !important; */
-    width:10ch;
     color:var(--text);
 
+    text-align: end;
+    font-size: inherit;
+
+    width:8ch;
+
+    border:none;
     border-bottom-style:solid;
     border-color:var(--border-color);
-    border-width:2px;
 }
 
-#details #purchase #proceed {
-    background:var(--main);
-    color:var(--text) !important;
-
-    padding:0.5ch 0.5em;
-    border-radius:1ch;
+#purchase #sort {
+    display:flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
 }
+
+#purchase #sort > div {
+    display:flex;
+    justify-content: space-evenly !important;
+    align-items: center;
+
+    width:100%;
+}
+
+#purchase #sort > div h5 {
+    user-select: none;
+
+    opacity: 0.5;
+
+    transition-duration:0.1s;
+
+    cursor:pointer;
+}
+
+#purchase #sort > div img {
+    width:0.8em;
+
+    user-select: none;
+    cursor:pointer;
+}
+
+#purchase #sort > div img[aria-label="asc"] {
+    transform:rotateZ(180deg);
+}
+
+#purchase #sort > div h5[aria-label="selected"] {
+/* #purchase #sort > div h5:hover { */
+    opacity: 1;
+    font-weight:400;
+}
+
+
+
+/* #region listings */
+#purchase table#listings {
+    margin-top:3ch;
+
+    width:70%;
+}
+
+#purchase table#listings th {
+    text-align: center;
+    font-weight: 400;
+}
+
+#purchase table#listings td {
+    text-align: center;
+}
+/* #endregion */
+/* #endregion */
 /* #endregion */
 
 /* #region history */

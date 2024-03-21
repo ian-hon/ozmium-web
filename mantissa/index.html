@@ -226,6 +226,128 @@
                                 </div>
                             </div> -->
                         </div>
+                        <div id="purchase">
+                            <div id="header">
+                                <h5 aria-label="selected" onclick="togglePurchaseSection(0)">
+                                    Buy
+                                </h5>
+                                <h5 onclick="togglePurchaseSection(1)">
+                                    Sell
+                                </h5>
+                                <!-- <h5 id="proceed">
+                                    Proceed
+                                </h5> -->
+                            </div>
+                            <!-- <div id="filters">
+                                <div>
+                                    <div>
+                                        <h5>Amount</h5>
+                                        <input type="number">
+                                        <h5>to</h5>
+                                        <input type="number">
+                                    </div>
+                                    <div>
+                                        <h5>Price</h5>
+                                        <input type="number">
+                                        <h5>to</h5>
+                                        <input type="number">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <h5>Total</h5>
+                                        <input type="number">
+                                        <h5>to</h5>
+                                        <input type="number">
+                                    </div>
+                                </div>
+                            </div> -->
+                            <table id="filters">
+                                <tr>
+                                    <td>Amount</td>
+                                    <td>
+                                        <div>
+                                            <input type="number">
+                                            <h5>to</h5>
+                                            <input type="number">
+                                        </div>
+                                    </td>
+                                    <td>Price</td>
+                                    <td>
+                                        <div>
+                                            <h5>$</h5>
+                                            <input type="number">
+                                            <h5>to $</h5>
+                                            <input type="number">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>
+                                        <div>
+                                            <h5>$</h5>
+                                            <input type="number">
+                                            <h5>to $</h5>
+                                            <input type="number">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h5>Sort</h5>
+                                    </td>
+                                    <td id="sort">
+                                        <div>
+                                            <h5 onclick="togglePurchaseSortSection(0)">Amount</h5>
+                                            <h5 onclick="togglePurchaseSortSection(1)">Price</h5>
+                                            <h5 onclick="togglePurchaseSortSection(2)">Total</h5>
+                                            <img onclick="togglePurchaseSortOrder(this)" src="/assets/down_chevron.png" aria-label="asc">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table id="listings">
+                                <tr>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        Amount
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+                                        Total
+                                        <!-- <div>
+                                            <img src="/assets/up_chevron.png">
+                                            <img src="/assets/down_chevron.png">
+                                        </div> -->
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>12:34</td>
+                                    <td>100</td>
+                                    <td>$9.65</td>
+                                    <td>$965.00</td>
+                                    <td>
+                                        buy
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12:36</td>
+                                    <td>400</td>
+                                    <td>$9.70</td>
+                                    <td>$3880.00</td>
+                                    <td>
+                                        buy
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
                         <div id="news">
                             <div class="article">
                                 <h5>
@@ -253,30 +375,6 @@
                                     2y 6m - BBC
                                 </h6>
                                 <hr>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div id="purchase">
-                            <div id="header">
-                                <h5 aria-label="selected">
-                                    Buy
-                                </h5>
-                                <h5>
-                                    Sell
-                                </h5>
-                                <h5 id="proceed">
-                                    Proceed
-                                </h5>
-                            </div>
-                            <div>
-                                <div id="pricing">
-                                    <input type="number" value="100">
-                                    <h4 id="inventory-amount" style="margin-right:1ch">/250,000</h4>
-                                    <h4> x $</h4>
-                                    <input type="number" value="9.60">
-                                    <h4 id="total"> = $960.00</h4>
-                                </div>
                             </div>
                         </div>
                         <div id="history">
@@ -341,6 +439,7 @@
                 </a>
             </div>
         </div>
+        <script src="./scripts/homepage.js"></script>
         <script src="/source.js"></script>
     </body>
 </html>
