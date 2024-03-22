@@ -1,3 +1,5 @@
+var sidebar = document.getElementById("sidebar");
+
 var library = [
     [false, [1709298000000, 1709301600000], "Compile notes and find out what to do 🔍"],
     [false, [1709303400000, 1709305200000], "Start memorizing the little stuff 🧠"],
@@ -18,6 +20,8 @@ function formatTime(e) {
 }
 
 function appendItems() {
+    // adds item to the sidebar
+    
     container.innerHTML = "";
 
     library.forEach((element) => {
@@ -46,33 +50,40 @@ function appendItems() {
 
 function toggleFields() {
     additionContainer.ariaLabel = additionContainer.ariaLabel == "open" ? "closed" : "open";
-    updateInputBox();
+    // updateInputBox();
 }
 
 appendItems();
 
-requestAnimationFrame(() => console.log("test"));
-
-function updateInputBox() {
-    
-    var container = document.querySelector("#add");
-    var i = document.querySelector('#add #fields');
-    if (container.ariaLabel == "open") {
-        i.style.maxHeight = '';
-        i.style.maxHeight = i.scrollHeight + 'px';
-    } else {
-        i.style.maxHeight = 0;
-    }
-    console.log(i);
-
-    var nestedContainer = document.querySelector("#add #fields .item #title");
-    // if (nestedContainer === document.activeElement) {
-    //     i.style.transitionDuration = '0s';
-    // } else {
-    //     i.style.transitionDuration = '0.3s';
-    // }
-    console.log(i.style.transitionDuration);
-    console.log(nestedContainer === document.activeElement);
-
-    // this.style.maxHeight = '';this.style.maxHeight = this.scrollHeight + 'px';
+function toggleSidebar() {
+    sidebar.ariaLabel = sidebar.ariaLabel == "open" ? "closed" : "open";
 }
+
+function debugHeight() {
+    var i = document.getElementById("sidebar");
+    console.log(i.clientHeight);
+}
+
+// function updateInputBox() {
+    
+//     var container = document.querySelector("#add");
+//     var i = document.querySelector('#add #fields');
+//     if (container.ariaLabel == "open") {
+//         i.style.maxHeight = '';
+//         i.style.maxHeight = i.scrollHeight + 'px';
+//     } else {
+//         i.style.maxHeight = 0;
+//     }
+//     console.log(i);
+
+//     var nestedContainer = document.querySelector("#add #fields .item #title");
+//     // if (nestedContainer === document.activeElement) {
+//     //     i.style.transitionDuration = '0s';
+//     // } else {
+//     //     i.style.transitionDuration = '0.3s';
+//     // }
+//     console.log(i.style.transitionDuration);
+//     console.log(nestedContainer === document.activeElement);
+
+//     // this.style.maxHeight = '';this.style.maxHeight = this.scrollHeight + 'px';
+// }
