@@ -2,11 +2,11 @@ use std::{collections::HashMap, fmt, fs::{self, File}, io::Read};
 
 use serde::{Deserialize, Serialize};
 
-use crate::user::User;
+use crate::user;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Database {
-    pub users: HashMap<u128, User>
+    pub users: HashMap<u128, user::User>
 }
 impl Database {
     pub fn new() -> Database {
@@ -62,9 +62,10 @@ impl Database {
 
         let user_id = self.generate_user_id();
 
-        self.users.insert(user_id, User {
+        self.users.insert(user_id,user::User {
             id: user_id,
-            name: username.clone()
+            name: username.clone(),
+            library: HashMap::new()
         });
 
         Database::add_password(user_id, password);
@@ -81,21 +82,30 @@ impl Database {
     fn add_password(id: u128, password: &String) {
         let mut passwords = Database::passwords();
         passwords.insert(id, password.clone());
-        fs::write("passwords.json", serde_json::to_string_pretty(&passwords).unwrap()).unwrap();
+        fs::write("data/passwords.json", serde_json::to_string_pretty(&passwords).unwrap()).unwrap();
     }
 
     pub fn load() -> Database {
         let mut result = Database::new();
 
         let mut buffer = "".to_string();
-        File::open("users.json").unwrap().read_to_string(&mut buffer).unwrap();
+        File::open("data/users.json").unwrap().read_to_string(&mut buffer).unwrap();
         result.users = serde_json::from_str(buffer.as_str()).unwrap();
 
         result
     }
 
     pub fn save(&self) {
-        fs::write("users.json", serde_json::to_string_pretty(&self.users).unwrap()).unwrap();
+        fs::write("data/users.json", serde_json::to_string_pretty(&self.users).unwrap()).unwrap();
+    }
+
+    pub fn fetch_library(&self, user_id: u128, date: u128) -> Vec<user::Task> {
+        let result = self.users.get(&user_id).unwrap().fetch_library(date);
+        if result.is_none() {
+            vec![]
+        } else {
+            result.unwrap()
+        }
     }
 }
 impl fmt::Display for Database {
