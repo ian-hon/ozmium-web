@@ -42,6 +42,10 @@ async function confirm() {
         var response = JSON.parse(r);
 
         if (response.type == "Success") {
+            let now = new Date();
+            (now.setTime(now.getTime() + (14 * 86400000)));
+            document.cookie = `chronos_user_id=${response.user_id}; expires=${now.toUTCString()}; path=/`;
+
             window.location.href = "./index.html";
         }
 
