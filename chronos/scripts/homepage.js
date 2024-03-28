@@ -34,24 +34,60 @@ var additionContainer = document.getElementById("add");
 var additionFields = document.getElementById("fields");
 
 function isCurrent(range) {
-    return (range[0] <= getEpochUnix()) && (getEpochUnix() <= range[1]);
+    return (range[0] <= getEpochDayTime()) && (getEpochDayTime() <= range[1]);
+    // return (range[0] <= getEpochUnix()) && (getEpochUnix() <= range[1]);
 }
 
-function formatTime(e) {
-    var d = new Date(e * 1000);
-    return `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
+function formatTime(t) {
+    // t : time since day start
+
+    // var d = new Date(e * 1000);
+    // return `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
+
+    return [
+        String(Math.floor(t / 3600)).padStart(2, "0"),
+        // TODO:fix (done)
+        // not converting properly
+        // floating point error probably
+        // 80280 -> 8:18
+        // 80340 -> 8:18 (supposed to be 8:19)
+        String(
+            (
+                (
+                    (t / 3600) - Math.floor(t / 3600)
+                ) * 60
+            ).toFixed()
+            ).padStart(2, "0")
+    ];
 }
 
 function getEpochUnix() {
     return (new Date().getTime() / 1000).toFixed();
 }
 
+function getEpochDayTime(d = null) {
+    // seconds elapsed since start of day
+    let t = d ? d : new Date();
+    return (t.getHours() * 3600) +
+    (t.getMinutes() * 60) +
+    (t.getSeconds());
+}
+
+function getEpochDate(d = null) {
+    // days since 1 jan 1970
+    return Math.floor(((d ? d : new Date()).getTime() / 1000) / 86400);
+}
+
 function humanToEpochUnix(d) {
-    var temp = new Date();
+    // var temp = new Date();
     // var i = `${temp.getMonth()}/${temp.getDate()}/${temp.getFullYear()} ${d}`;
     // console.log(i);
     // damn american format
-    return (new Date(`${temp.getMonth() + 1}/${temp.getDate()}/${temp.getFullYear()} ${d}`).getTime() / 1000).toFixed();
+    //return (new Date(`${temp.getMonth() + 1}/${temp.getDate()}/${temp.getFullYear()} ${d}`).getTime() / 1000).toFixed();
+
+    return new Date(`1/1/1970 ${d} GMT+0`).getTime() / 1000;
+    // 03:30 -> (3 * 3600) + (30 * 60) + 0
+    
 }
 
 function cleanEditables(content) {
@@ -62,7 +98,7 @@ function cleanEditables(content) {
 }
 
 function refreshList() {
-    sendRequest(`http://127.0.0.1:8000/fetch_library/${user_id}/${getEpochUnix()}`, (response) => {
+    sendRequest(`http://127.0.0.1:8000/fetch_library/${user_id}/${getEpochDate()}`, (response) => {
         library = JSON.parse(response);
 
         appendItems();
@@ -85,9 +121,17 @@ function appendItems() {
         <div></div>
     </label>
     <div id="time">
-        <input id="start" type="text" value="${formatTime(element.start)}">
+        <div>
+            <input id="start" type="number" min="0" max="24" value="${formatTime(element.start)[0]}" onchange="cleanTimeInput(this); updateTask(${element.id});">
+            <h5>:</h5>
+            <input id="start" type="number" min="0" max="60" value="${formatTime(element.start)[1]}" onchange="cleanTimeInput(this, minute=true); updateTask(${element.id});">
+        </div>
         <h6 id="separator">|</h6>
-        <input id="end" type="text" value="${formatTime(element.end)}">
+        <div>
+            <input id="end" type="number" min="0" max="24" value="${formatTime(element.end)[0]}" onchange="cleanTimeInput(this); updateTask(${element.id});">
+            <h5>:</h5>
+            <input id="end" type="number" min="0" max="60" value="${formatTime(element.end)[1]}" onchange="cleanTimeInput(this, minute=true); updateTask(${element.id});">
+        </div>
     </div>
     <h5 id="title">${element.title}</h5>
     <div id="actions" onclick="deleteTask(${element.id})">
@@ -110,8 +154,10 @@ function appendItems() {
             element.setAttribute('contenteditable', false);
             // console.log("blur");
             updateTask(element.parentElement.dataset.id, element.innerHTML);
-        });
+        })
     });
+
+    // document.querySelectorAll(".item ")
 }
 
 function toggleFields() {
@@ -130,14 +176,14 @@ function addTask() {
     var end = humanToEpochUnix(document.querySelectorAll("#add .item #time #end")[0].value);
     console.log("received");
 
-    sendRequest(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${start}/${end}`, () => {
+    sendRequest(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`, () => {
         refreshList();
     });
 }
 
 function deleteTask(task_id) {
     // console.log(`delete : ${task_id}`);
-    sendRequest(`http://127.0.0.1:8000/remove_task/${user_id}/${task_id}/${getEpochUnix()}`, (_) => {
+    sendRequest(`http://127.0.0.1:8000/remove_task/${user_id}/${task_id}/${getEpochDate()}`, (_) => {
         // var response = JSON.parse(response)
         refreshList();
     });
@@ -147,16 +193,35 @@ function toggleComplete(task_id) {
     var i = document.getElementById("task_" + task_id);
     i.ariaLabel = i.ariaLabel == "completed" ? "" : "completed";
 
-    sendRequest(`http://127.0.0.1:8000/complete_task/${user_id}/${task_id}/${getEpochUnix()}/${i.ariaLabel == "completed"}`, (_) => {
+    sendRequest(`http://127.0.0.1:8000/complete_task/${user_id}/${task_id}/${getEpochDate()}/${i.ariaLabel == "completed"}`, (_) => {
         
     });
 }
 
-function updateTask(task_id, content) {
-    var updated = cleanEditables(content);
+function updateTask(task_id) {
+    var updated = cleanEditables(document.querySelectorAll(`#task_${task_id} #title`)[0].innerHTML);
+    var temp = document.querySelectorAll(`#task_${task_id} #time #start`);
+    var start = temp[0].value + temp[1].value;
+    var temp = document.querySelectorAll(`#task_${task_id} #time #end`);
+    var end = temp[0].value + temp[1].value;
 
+    console.log(start, end);
 
-    sendRequest(`http://127.0.0.1:8000/update_task/${user_id}/${task_id}/${getEpochUnix()}/${encodeURI(updated)}`, (_) => {
-
+    sendRequest(`http://127.0.0.1:8000/update_task/${user_id}/${task_id}/${getEpochDate()}/${encodeURI(updated)}`, (_) => {
+        // continue this
     });
+}
+
+function cleanTimeInput(e, minute=false) {
+    if (e.value.length > 2) {
+        e.value = e.value.slice(0, 2);
+    }
+    let i = parseInt(e.value);
+    if (i > (minute ? 59 : 24)) {
+        e.value = (minute ? 59 : 24);
+    }
+
+    if (i < 0) {
+        e.value = 0;
+    }
 }

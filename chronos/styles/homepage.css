@@ -353,7 +353,7 @@ body {
     font-size: 1.0rem;
 
     height:fit-content;
-    width:5ch;
+    width:2ch;
 
     margin:0;
     padding:0;
@@ -363,6 +363,24 @@ body {
 
     color:var(--text);
     background:none;
+}
+
+.item #time input[type=number]::-webkit-inner-spin-button,
+.item #time input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    display:none;
+    margin:0;
+}
+
+.item #time h5 {
+    font-size:1.0rem;
+    user-select: none;
+}
+
+.item #time > div {
+    display:flex;
+    justify-content: center;
+    align-content: center;
 }
 /* #endregion */
 

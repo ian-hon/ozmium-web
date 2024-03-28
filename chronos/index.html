@@ -37,6 +37,30 @@
                     <div id="list">
                         <!-- <div class="item" aria-label="">
                             <label id="completion">
+                                <input type="checkbox" onchange="">
+                                <div></div>
+                            </label>
+                            <div id="time">
+                                <div>
+                                    <input id="start" type="number" min="0" max="24" value="12" onchange="cleanTimeInput(this)">
+                                    <h5>:</h5>
+                                    <input id="start" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true)">
+                                </div>
+                                <h6 id="separator">|</h6>
+                                <div>
+                                    <input id="end" type="number" min="0" max="24" value="13" onchange="cleanTimeInput(this)">
+                                    <h5>:</h5>
+                                    <input id="end" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true)">
+                                </div>
+                            </div>
+                            <h5 id="title">${element.title}</h5>
+                            <div id="actions" onclick="">
+                                <img src="/assets/trash.png">
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="item" aria-label="">
+                            <label id="completion">
                                 <input type="checkbox">
                                 <div></div>
                             </label>
