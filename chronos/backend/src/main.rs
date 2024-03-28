@@ -8,6 +8,7 @@ use rocket::State;
 mod utils;
 mod cors;
 
+mod task;
 mod user;
 mod account_handler;
 
@@ -62,44 +63,44 @@ fn signup(db: &State<Mutex<Database>>, username: String, password: String) -> St
 }
 
 // time -> current epoch unix
-#[get("/<user_id>/<time>")]
-fn fetch_library(db: &State<Mutex<Database>>, user_id: u128, time: u128) -> String {
+#[get("/<user_id>/<epoch_date>")]
+fn fetch_library(db: &State<Mutex<Database>>, user_id: u128, epoch_date: u128) -> String {
     let db = db.lock().unwrap();
-    serde_json::to_string_pretty(&db.fetch_library(user_id, utils::get_date(time))).unwrap()
+    serde_json::to_string_pretty(&db.fetch_library(user_id, epoch_date)).unwrap()
 }
 
 // title in encoded uri
 // hello world -> hello%20world
-#[get("/<user_id>/<title>/<start>/<end>")]
-fn add_task(db: &State<Mutex<Database>>, user_id: u128, title:String, start:u128, end:u128) -> String {
+#[get("/<user_id>/<title>/<epoch_date>/<start>/<end>")]
+fn add_task(db: &State<Mutex<Database>>, user_id: u128, title:String, epoch_date:u128, start:u128, end:u128) -> String {
     let mut db = db.lock().unwrap();
-    db.users.get_mut(&user_id).unwrap().add_task(urlencoding::decode(title.as_str()).unwrap().to_string(), start, end);
+    db.users.get_mut(&user_id).unwrap().add_task(urlencoding::decode(title.as_str()).unwrap().to_string(), epoch_date, start, end);
     db.save();
     "success".to_string()
 }
 
 // time -> current epoch unix
-#[get("/<user_id>/<task_id>/<time>")]
-fn remove_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, time: u128) -> String {
+#[get("/<user_id>/<task_id>/<epoch_date>")]
+fn remove_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epoch_date: u128) -> String {
     let mut db = db.lock().unwrap();
-    db.users.get_mut(&user_id).unwrap().delete_task(task_id, utils::get_date(time));
+    db.users.get_mut(&user_id).unwrap().delete_task(task_id, epoch_date);
     db.save();
     "success".to_string()
 }
 
 // time -> current epoch unix
-#[get("/<user_id>/<task_id>/<time>/<state>")]
-fn complete_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, time: u128, state: bool) -> String {
+#[get("/<user_id>/<task_id>/<epoch_date>/<state>")]
+fn complete_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epoch_date: u128, state: bool) -> String {
     let mut db = db.lock().unwrap();
-    db.users.get_mut(&user_id).unwrap().complete_task(task_id, utils::get_date(time), state);
+    db.users.get_mut(&user_id).unwrap().complete_task(task_id, epoch_date, state);
     db.save();
     "success".to_string()
 }
 
-#[get("/<user_id>/<task_id>/<time>/<title>")]
-fn update_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, time: u128, title: String) -> String {
+#[get("/<user_id>/<task_id>/<epoch_date>/<title>")]
+fn update_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epoch_date: u128, title: String) -> String {
     let mut db = db.lock().unwrap();
-    db.users.get_mut(&user_id).unwrap().update_task(task_id, utils::get_date(time), urlencoding::decode(&title).unwrap().to_string());
+    db.users.get_mut(&user_id).unwrap().update_task(task_id, epoch_date, urlencoding::decode(&title).unwrap().to_string());
     db.save();
     "success".to_string()
 }

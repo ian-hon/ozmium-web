@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use crate::utils;
+use crate::{utils, task::Task};
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct User {
@@ -15,10 +15,10 @@ pub struct User {
     // 1 -> 2 jan 1970
 }
 impl User {
-    pub fn add_task(&mut self, title: String, start: u128, end: u128) {
-        let result = self.library.get_mut(&utils::get_date(start));
+    pub fn add_task(&mut self, title: String, epoch_date:u128, start: u128, end: u128) {
+        let result = self.library.get_mut(&epoch_date);
         if result.is_none() {
-            self.library.insert(utils::get_date(start), vec![
+            self.library.insert(epoch_date, vec![
                 Task {
                     id: 0,
                     title,
@@ -35,7 +35,7 @@ impl User {
             }
             // let len = (&result).len();
 
-            self.library.get_mut(&utils::get_date(start)).unwrap().push(
+            self.library.get_mut(&epoch_date).unwrap().push(
                 Task {
                     id: len,
                     title,
@@ -109,18 +109,4 @@ impl User {
         }
         None
     }
-}
-
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
-pub struct Task {
-    // unique for each day per user
-    // day : 0
-    //  task : 0,1,2
-    // day : 1
-    //  task : 0,1,2,3
-    pub id: usize,
-    pub title: String,
-    pub start: u128,
-    pub end: u128,
-    pub completed: bool
 }
