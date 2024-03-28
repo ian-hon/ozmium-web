@@ -2,7 +2,7 @@ use std::{collections::HashMap, fmt, fs::{self, File}, io::Read};
 
 use serde::{Deserialize, Serialize};
 
-use crate::user;
+use crate::{task::Task, user};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Database {
@@ -99,7 +99,7 @@ impl Database {
         fs::write("data/users.json", serde_json::to_string_pretty(&self.users).unwrap()).unwrap();
     }
 
-    pub fn fetch_library(&self, user_id: u128, date: u128) -> Vec<user::Task> {
+    pub fn fetch_library(&self, user_id: u128, date: u128) -> Vec<Task> {
         let result = self.users.get(&user_id).unwrap().fetch_library(date);
         if result.is_none() {
             vec![]
