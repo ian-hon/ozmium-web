@@ -130,14 +130,22 @@
                         <div>
                             <div class="item">
                                 <div id="time">
-                                    <input id="start" type="text" value="7:00">
-                                    <h5 id="separator">|</h5>
-                                    <input id="end" type="text" value="8:00">
+                                    <div>
+                                        <input id="start" type="number" min="0" max="24" value="00" onchange="cleanTimeInput(this);">
+                                        <h5>:</h5>
+                                        <input id="start" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
+                                    </div>
+                                    <h6 id="separator">|</h6>
+                                    <div>
+                                        <input id="end" type="number" min="0" max="24" value="00" onchange="cleanTimeInput(this);">
+                                        <h5>:</h5>
+                                        <input id="end" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
+                                    </div>
                                     <h5 id="confirm" onclick="addTask()">
                                         add
                                     </h5>
                                 </div>
-                                <h5 id="title">Start memorizing the little stuff 🧠</h5>
+                                <h5 id="title">asd</h5>
                             </div>
                         </div>
                     </div>

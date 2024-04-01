@@ -16,6 +16,8 @@ pub struct User {
 }
 impl User {
     pub fn add_task(&mut self, title: String, epoch_date:u128, start: u128, end: u128) {
+        let title = title.trim().to_string();
+
         let result = self.library.get_mut(&epoch_date);
         if result.is_none() {
             self.library.insert(epoch_date, vec![
@@ -97,7 +99,7 @@ impl User {
             .unwrap()
             .iter_mut()
             .filter(|x| x.id == task_id)
-            .collect::<Vec<&mut Task>>()[0].title = title;
+            .collect::<Vec<&mut Task>>()[0].title = title.trim().to_string();
     }
 
     fn get_index(task_id: usize, collection: &Vec<Task>) -> Option<usize> {

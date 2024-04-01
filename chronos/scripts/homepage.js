@@ -33,6 +33,7 @@ var container = document.getElementById("list");
 var additionContainer = document.getElementById("add");
 var additionFields = document.getElementById("fields");
 
+// #region utils
 function isCurrent(range) {
     return (range[0] <= getEpochDayTime()) && (getEpochDayTime() <= range[1]);
     // return (range[0] <= getEpochUnix()) && (getEpochUnix() <= range[1]);
@@ -97,6 +98,22 @@ function cleanEditables(content) {
     return content;
 }
 
+function cleanTimeInput(e, minute=false) {
+    if (e.value.length > 2) {
+        e.value = e.value.slice(0, 2);
+    }
+    let i = parseInt(e.value);
+    if (i > (minute ? 59 : 24)) {
+        e.value = (minute ? 59 : 24);
+    }
+
+    if (i < 0) {
+        e.value = 0;
+    }
+}
+// #endregion
+
+
 function refreshList() {
     sendRequest(`http://127.0.0.1:8000/fetch_library/${user_id}/${getEpochDate()}`, (response) => {
         library = JSON.parse(response);
@@ -112,6 +129,7 @@ function appendItems() {
     // return;
     
     container.innerHTML = "";
+    // return;
 
     library.forEach((element) => {
         container.innerHTML += `
@@ -144,22 +162,67 @@ function appendItems() {
     // TODO:worry about not "unlinking" event listeners?
     // when an element is deleted, should the event listeners be removed?
 
-    document.querySelectorAll(".item #title").forEach((element) => {
-        // console.log(element.parentElement.id);
-        element.addEventListener('mouseover', () => {
-            element.setAttribute('contenteditable', true);
-        });
-
-        element.addEventListener('blur', () => {
-            element.setAttribute('contenteditable', false);
-            // console.log("blur");
-            updateTask(element.parentElement.dataset.id, element.innerHTML);
-        })
+    document.querySelectorAll("#list .item #title").forEach((element) => {
+        addItemEvents(element);
     });
+
+    // document.querySelectorAll("")
 
     // document.querySelectorAll(".item ")
 }
 
+function addItemEvents(element, withUpdate=true) {
+    // this is here so that the .item in task addition gets the same treatment as those in the list
+
+    // console.log(element.parentElement.id);
+    element.addEventListener('mouseover', () => {
+        element.setAttribute('contenteditable', true);
+    });
+
+    element.addEventListener('blur', () => {
+        element.setAttribute('contenteditable', false);
+        // console.log("blur");
+        if (withUpdate) {
+            updateTask(element.parentElement.dataset.id, element.innerHTML);
+        }
+    })
+
+    element.addEventListener('keypress', (e) => {
+        if (e.shiftKey) {
+            return;
+        }
+        if (e.key === "Enter") {
+            e.preventDefault();
+            if (withUpdate) {
+                updateTask(element.parentElement.dataset.id, element.innerHTML);
+            }
+        }
+    })
+}
+
+// #region add task related
+addItemEvents(document.querySelector("#add .item #title"), withUpdate=false);
+document.querySelector("#add .item #title").addEventListener('keypress', (e) => {
+    if (e.shiftKey) {
+        return;
+    }
+    if (e.key === "Enter") {
+        e.preventDefault();
+        addTask();
+    }
+})
+
+document.querySelector("#add .item #title").addEventListener("blur", (_) => {
+    let e = document.querySelector("#add .item #title");
+    console.log(e);
+    // console.log(e.)
+    if (e.innerHTML.trim() == "") {
+        e.innerHTML = "some random task";
+    }
+})
+// #endregion
+
+// #region toggle-type functions
 function toggleFields() {
     additionContainer.ariaLabel = additionContainer.ariaLabel == "open" ? "closed" : "open";
 }
@@ -167,14 +230,25 @@ function toggleFields() {
 function toggleSidebar() {
     sidebar.ariaLabel = sidebar.ariaLabel == "open" ? "closed" : "open";
 }
+// #endregion
 
-
-
+// #region task-related
 function addTask() {
     var title = cleanEditables(document.querySelectorAll("#add .item #title")[0].innerHTML);
-    var start = humanToEpochUnix(document.querySelectorAll("#add .item #time #start")[0].value);
-    var end = humanToEpochUnix(document.querySelectorAll("#add .item #time #end")[0].value);
+    // var start = humanToEpochUnix(document.querySelectorAll("#add .item #time #start")[0].value);
+    // var end = humanToEpochUnix(document.querySelectorAll("#add .item #time #end")[0].value);
+
+    if (title.trim() == "") {
+        return;
+    }
+
+    var temp = document.querySelectorAll(`#add .item #time #start`);
+    var start = (temp[0].value * 3600) + (temp[1].value * 60);
+    var temp = document.querySelectorAll(`#add .item #time #end`);
+    var end = (temp[0].value * 3600) + (temp[1].value * 60);
+
     console.log("received");
+    console.log(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`);
 
     sendRequest(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`, () => {
         refreshList();
@@ -200,6 +274,11 @@ function toggleComplete(task_id) {
 
 function updateTask(task_id) {
     var updated = cleanEditables(document.querySelectorAll(`#task_${task_id} #title`)[0].innerHTML);
+    // if title is empty then delete the task
+    if (updated == "") {
+        deleteTask(task_id);
+        return;
+    }
     var temp = document.querySelectorAll(`#task_${task_id} #time #start`);
     var start = temp[0].value + temp[1].value;
     var temp = document.querySelectorAll(`#task_${task_id} #time #end`);
@@ -211,17 +290,4 @@ function updateTask(task_id) {
         // continue this
     });
 }
-
-function cleanTimeInput(e, minute=false) {
-    if (e.value.length > 2) {
-        e.value = e.value.slice(0, 2);
-    }
-    let i = parseInt(e.value);
-    if (i > (minute ? 59 : 24)) {
-        e.value = (minute ? 59 : 24);
-    }
-
-    if (i < 0) {
-        e.value = 0;
-    }
-}
+// #endregion
