@@ -1,33 +1,12 @@
-var user_id = fetchCookie('chronos_user_id');
+var userID = fetchCookie('chronos_user_id');
+var dateOffset = 0;
 
 var sidebar = document.getElementById("sidebar");
+var timer = document.querySelector("#timer #data h3");
+var taskTitle = document.querySelector("#timer #data h1");
 
-var library = [
-    // [true, [1709298000000, 1709301600000], "Compile mass defect data & calculate product 🔍"],
-    // [false, [1709303400000, 1709305200000], "Proofread & edit transcript 📖"],
-    // [false, [1709305200000, 1709307600000], "Brainstorm marketing strategies 🧠"]
-    {
-        task_id: 0,
-        completed: true,
-        title: "Compile mass defect data & calculate product 🔍",
-        start: 1709298000000,
-        end: 1709301600000
-    },
-    {
-        task_id: 1,
-        completed: false,
-        title: "Proofread & edit transcript 📖",
-        start: 1709303400000,
-        end: 1709305200000
-    },
-    {
-        task_id: 2,
-        completed: false,
-        title: "Brainstorm marketing strategies 🧠",
-        start: 1709305200000,
-        end: 1709307600000
-    },
-];
+var library = [];
+var current = null;
 
 var container = document.getElementById("list");
 var additionContainer = document.getElementById("add");
@@ -36,7 +15,6 @@ var additionFields = document.getElementById("fields");
 // #region utils
 function isCurrent(range) {
     return (range[0] <= getEpochDayTime()) && (getEpochDayTime() <= range[1]);
-    // return (range[0] <= getEpochUnix()) && (getEpochUnix() <= range[1]);
 }
 
 function formatTime(t) {
@@ -74,9 +52,11 @@ function getEpochDayTime(d = null) {
     (t.getSeconds());
 }
 
-function getEpochDate(d = null) {
+function getEpochDate(d = null, raw=false) {
     // days since 1 jan 1970
-    return Math.floor(((d ? d : new Date()).getTime() / 1000) / 86400);
+    let now = d ? d : new Date();
+    let t = Date.parse(`${now.getUTCMonth() + 1}/${now.getUTCDate()}/${now.getUTCFullYear()} ${now.getUTCHours()}:${now.getUTCMinutes()}:${now.getUTCSeconds()} GMT-9:00`) / 1000;
+    return Math.floor(t / 86400) + (raw ? 0 : dateOffset);
 }
 
 function humanToEpochUnix(d) {
@@ -115,7 +95,9 @@ function cleanTimeInput(e, minute=false) {
 
 
 function refreshList() {
-    sendRequest(`http://127.0.0.1:8000/fetch_library/${user_id}/${getEpochDate()}`, (response) => {
+    current = null;
+    
+    sendRequest(`http://127.0.0.1:8000/fetch_library/${userID}/${getEpochDate()}`, (response) => {
         library = JSON.parse(response);
 
         appendItems();
@@ -156,7 +138,7 @@ function appendItems() {
         <img src="/assets/trash.png">
     </div>
 </div>
-`
+`;
     });
 
     // TODO:worry about not "unlinking" event listeners?
@@ -165,10 +147,6 @@ function appendItems() {
     document.querySelectorAll("#list .item #title").forEach((element) => {
         addItemEvents(element);
     });
-
-    // document.querySelectorAll("")
-
-    // document.querySelectorAll(".item ")
 }
 
 function addItemEvents(element, withUpdate=true) {
@@ -214,8 +192,6 @@ document.querySelector("#add .item #title").addEventListener('keypress', (e) => 
 
 document.querySelector("#add .item #title").addEventListener("blur", (_) => {
     let e = document.querySelector("#add .item #title");
-    console.log(e);
-    // console.log(e.)
     if (e.innerHTML.trim() == "") {
         e.innerHTML = "some random task";
     }
@@ -247,18 +223,16 @@ function addTask() {
     var temp = document.querySelectorAll(`#add .item #time #end`);
     var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
-    console.log("received");
-    console.log(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`);
+    // console.log("received");
+    // console.log(`http://127.0.0.1:8000/add_task/${userID}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`);
 
-    sendRequest(`http://127.0.0.1:8000/add_task/${user_id}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`, () => {
+    sendRequest(`http://127.0.0.1:8000/add_task/${userID}/${encodeURIComponent(title)}/${getEpochDate()}/${start}/${end}`, () => {
         refreshList();
     });
 }
 
 function deleteTask(task_id) {
-    // console.log(`delete : ${task_id}`);
-    sendRequest(`http://127.0.0.1:8000/remove_task/${user_id}/${task_id}/${getEpochDate()}`, (_) => {
-        // var response = JSON.parse(response)
+    sendRequest(`http://127.0.0.1:8000/remove_task/${userID}/${task_id}/${getEpochDate()}`, (_) => {
         refreshList();
     });
 }
@@ -267,7 +241,7 @@ function toggleComplete(task_id) {
     var i = document.getElementById("task_" + task_id);
     i.ariaLabel = i.ariaLabel == "completed" ? "" : "completed";
 
-    sendRequest(`http://127.0.0.1:8000/complete_task/${user_id}/${task_id}/${getEpochDate()}/${i.ariaLabel == "completed"}`, (_) => {
+    sendRequest(`http://127.0.0.1:8000/complete_task/${userID}/${task_id}/${getEpochDate()}/${i.ariaLabel == "completed"}`, (_) => {
         
     });
 }
@@ -280,14 +254,108 @@ function updateTask(task_id) {
         return;
     }
     var temp = document.querySelectorAll(`#task_${task_id} #time #start`);
-    var start = temp[0].value + temp[1].value;
+    var start = (temp[0].value * 3600) + (temp[1].value * 60);
     var temp = document.querySelectorAll(`#task_${task_id} #time #end`);
-    var end = temp[0].value + temp[1].value;
+    var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
     console.log(start, end);
 
-    sendRequest(`http://127.0.0.1:8000/update_task/${user_id}/${task_id}/${getEpochDate()}/${encodeURI(updated)}`, (_) => {
-        // continue this
+    sendRequest(`http://127.0.0.1:8000/update_task/${userID}/${task_id}/${getEpochDate()}/${start}/${end}/${encodeURIComponent(updated)}`, (_) => {
+        refreshList();
     });
 }
+// #endregion
+
+// #region date selection
+function progressDate(n) {
+    dateOffset += n;
+    updateDateSelection();
+}
+
+function updateDateSelection() {
+    let d = new Date(getEpochDate() * 86400 * 1000);
+    document.querySelector("#date-select h5").innerHTML = dateOffset == 0 ? 'today' : (
+        `${["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][d.getDay()]} ${d.getDate()} ${
+            ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][d.getMonth()]
+        }`
+    );
+
+    refreshList();
+}
+// #endregion
+
+// #region timer
+function updateTimerTask() {
+    if (!current) {
+        library.forEach((element) => {
+            if (isCurrent([element.start, element.end])) {
+                current = element;
+            }
+        });
+    }
+
+    updateTimer();
+}
+
+function updateTimer() {
+    // called every second
+    if (!current) {
+        timer.innerHTML = "";
+        taskTitle.innerHTML = "no active tasks 🥳🥳"
+        return;
+    }
+
+    taskTitle.innerHTML = current.title;
+
+    let t = current.end - getEpochDayTime();
+    if (t < 0) {
+        current = null;
+    }
+    // let h = Math.floor(t / 3600);
+    // let m = Math.floor(t / 60) - (h * 60);
+    // let s = t - (m * 60);
+
+    console.log(t);
+
+    // let h = Math.floor((t - (Math.floor(t / 3600) * 3600)) / 3600);
+    // let m = Math.floor((t - (Math.floor(t / 60) * 60)) / 60);
+    let h = Math.floor(t / 3600);
+    t -= h * 3600;
+    let m = Math.floor(t / 60);
+    t -= m * 60;
+    let s = t;
+    // let s = t;
+
+    // let h = String(
+    //     Math.floor(t / 3600)
+    // ).padStart(2, "0");
+    // let m = 
+    // String(
+    //     (
+    //         (
+    //             (t / 3600) - Math.floor(t / 3600)
+    //         ) * 60
+    //     ).toFixed()
+    // ).padStart(2, "0");
+    // let s = String(
+    //     (
+    //         (
+    //             (t / 3600) - Math.floor(t / 3600)
+    //         ) * 60
+    //     ).toFixed()
+    // ).padStart(2, "0");
+    
+    timer.innerHTML = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")} remaining`;
+}
+
+var timerHandle = setInterval(() => {
+    updateTimerTask()
+}, 1000);
+
+// #endregion
+
+// #region account related
+sendRequest(`http://127.0.0.1:8000/fetch_username/${userID}`, (response) => {
+    document.querySelector("#navbar #account h5").innerHTML = response;
+})
 // #endregion

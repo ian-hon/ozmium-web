@@ -44,7 +44,10 @@ async function confirm() {
         if (response.type == "Success") {
             let now = new Date();
             (now.setTime(now.getTime() + (14 * 86400000)));
+            console.log(fetchCookie("chronos_user_id"));
+            console.log(response.user_id);
             document.cookie = `chronos_user_id=${response.user_id}; expires=${now.toUTCString()}; path=/`;
+            console.log(fetchCookie("chronos_user_id"));
 
             window.location.href = "./index.html";
         }
@@ -53,7 +56,9 @@ async function confirm() {
             "UsernameNoExist": "username doesnt exist",
             "PasswordWrong": "password is incorrect",
             "UserIDNoExist": "username doesnt exist",
-            "Success": ""
+            "Success": "",
+
+            "UsernameTaken": "username is already taken"
         }[response.type];
     })
 }

@@ -13,10 +13,8 @@
         <div id="parent">
             <div id="timer">
                 <div id="data">
-                    <h1>
-                        Proofread transcript 📜
-                    </h1>
-                    <h2>24:01</h2>
+                    <h1>loading...</h1>
+                    <h3>...</h3>
                 </div>
             </div>
             <div id="sidebar" aria-label="open">
@@ -26,11 +24,12 @@
                 <div id="menu" aria-label="open">
                     <div id="navbar">
                         <div id="date-select">
-                            <img src="/assets/left_chevron.png">
+                            <img src="/assets/left_chevron.png" onclick="progressDate(-1)">
                             <h5>today</h5>
-                            <img src="/assets/right_chevron.png">
+                            <img src="/assets/right_chevron.png" onclick="progressDate(1)">
                         </div>
-                        <a href="/chronos/login.html">
+                        <a href="/chronos/login.html" id="account">
+                            <h5>...</h5>
                             <img src="/assets/profile.png">
                         </a>
                     </div>
