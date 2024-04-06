@@ -16,7 +16,7 @@ impl Database {
     }
 
     fn passwords() -> HashMap<u128, String> {
-        serde_json::from_str(fs::read_to_string("passwords.json").unwrap().as_str()).unwrap()
+        serde_json::from_str(fs::read_to_string("data/passwords.json").unwrap().as_str()).unwrap()
     }
 
     pub fn username_exists(&self, username: &String) -> bool {
@@ -35,6 +35,14 @@ impl Database {
             }
         }
         None
+    }
+
+    pub fn fetch_username(&self, user_id: u128) -> String {
+        let result = self.users.get(&user_id);
+        if result.is_none() {
+            return "...".to_string();
+        }
+        result.unwrap().name.clone()
     }
 
     pub fn login(&self, username: &String, password: &String) -> AccountResult {
@@ -72,7 +80,7 @@ impl Database {
 
         self.save();
 
-        AccountResult::Success(0)
+        AccountResult::Success(user_id)
     }
 
     fn generate_user_id(&self) -> u128 {
@@ -95,7 +103,11 @@ impl Database {
         result
     }
 
-    pub fn save(&self) {
+    pub fn save(&mut self) {
+        for user in &mut self.users {
+            user.1.sort_library();
+        }
+
         fs::write("data/users.json", serde_json::to_string_pretty(&self.users).unwrap()).unwrap();
     }
 

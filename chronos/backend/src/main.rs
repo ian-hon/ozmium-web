@@ -34,9 +34,15 @@ fn load(db: &State<Mutex<Database>>) -> String {
 
 #[get("/")]
 fn save(db: &State<Mutex<Database>>) -> String {
-    let db = db.lock().unwrap();
+    let mut db = db.lock().unwrap();
     db.save();
     "success".to_string()
+}
+
+#[get("/<user_id>")]
+fn fetch_username(db: &State<Mutex<Database>>, user_id: u128) -> String {
+    let db = db.lock().unwrap();
+    db.fetch_username(user_id)
 }
 
 #[get("/<username>/<password>")]
@@ -97,10 +103,10 @@ fn complete_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epo
     "success".to_string()
 }
 
-#[get("/<user_id>/<task_id>/<epoch_date>/<title>")]
-fn update_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epoch_date: u128, title: String) -> String {
+#[get("/<user_id>/<task_id>/<epoch_date>/<start>/<end>/<title>")]
+fn update_task(db: &State<Mutex<Database>>, user_id: u128, task_id: usize, epoch_date: u128, start: u128, end: u128, title: String) -> String {
     let mut db = db.lock().unwrap();
-    db.users.get_mut(&user_id).unwrap().update_task(task_id, epoch_date, urlencoding::decode(&title).unwrap().to_string());
+    db.users.get_mut(&user_id).unwrap().update_task(task_id, epoch_date, start, end, urlencoding::decode(&title).unwrap().to_string());
     db.save();
     "success".to_string()
 }
@@ -116,6 +122,8 @@ fn rocket() -> _ {
 
         .mount("/login", routes![login])
         .mount("/sign_up", routes![signup])
+
+        .mount("/fetch_username", routes![fetch_username])
 
         .mount("/fetch_library", routes![fetch_library])
         .mount("/add_task", routes![add_task])

@@ -88,18 +88,28 @@ impl User {
         self.library.get_mut(&date).unwrap().remove(target.unwrap());
     }
 
-    pub fn update_task(&mut self, task_id: usize, date: u128, title: String) {
+    pub fn update_task(&mut self, task_id: usize, date: u128, start:u128, end:u128, title: String) {
         let result = self.library.get_mut(&date);
         if result.is_none() {
             return;
         }
 
-        self.library
+        // &mut &mut Task type is crazy
+        let mut_ref = &mut self.library
             .get_mut(&date)
             .unwrap()
             .iter_mut()
             .filter(|x| x.id == task_id)
-            .collect::<Vec<&mut Task>>()[0].title = title.trim().to_string();
+            .collect::<Vec<&mut Task>>()[0];
+        mut_ref.title = title.trim().to_string();
+        mut_ref.start = start;
+        mut_ref.end = end;
+    }
+
+    pub fn sort_library(&mut self) {
+        for day in &mut self.library {
+            day.1.sort_by(|a, b| a.start.cmp(&b.start));
+        }
     }
 
     fn get_index(task_id: usize, collection: &Vec<Task>) -> Option<usize> {
