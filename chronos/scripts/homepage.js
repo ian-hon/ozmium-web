@@ -1,4 +1,11 @@
-var userID = fetchCookie('chronos_user_id');
+var username = fetchLocalStorage("chronos_username");
+var password = fetchLocalStorage("chronos_password");
+// if null then redirect to landing page
+
+if ((username === null) || (password === null)) {
+    window.location.href = "./login.html";
+}
+
 var dateOffset = 0;
 
 var sidebar = document.getElementById("sidebar");
@@ -13,6 +20,13 @@ var additionContainer = document.getElementById("add");
 var additionFields = document.getElementById("fields");
 
 // #region utils
+function login_info() {
+    return JSON.stringify({
+        "username":username,
+        "password":password
+    });
+}
+
 function isCurrent(range) {
     return (range[0] <= getEpochDayTime()) && (getEpochDayTime() <= range[1]);
 }
@@ -40,10 +54,6 @@ function formatTime(t) {
     ];
 }
 
-function getEpochUnix() {
-    return (new Date().getTime() / 1000).toFixed();
-}
-
 function getEpochDayTime(d = null) {
     // seconds elapsed since start of day
     let t = d ? d : new Date();
@@ -57,18 +67,6 @@ function getEpochDate(d = null, raw=false) {
     let now = d ? d : new Date();
     let t = Date.parse(`${now.getUTCMonth() + 1}/${now.getUTCDate()}/${now.getUTCFullYear()} ${now.getUTCHours()}:${now.getUTCMinutes()}:${now.getUTCSeconds()} GMT-9:00`) / 1000;
     return Math.floor(t / 86400) + (raw ? 0 : dateOffset);
-}
-
-function humanToEpochUnix(d) {
-    // var temp = new Date();
-    // var i = `${temp.getMonth()}/${temp.getDate()}/${temp.getFullYear()} ${d}`;
-    // console.log(i);
-    // damn american format
-    //return (new Date(`${temp.getMonth() + 1}/${temp.getDate()}/${temp.getFullYear()} ${d}`).getTime() / 1000).toFixed();
-
-    return new Date(`1/1/1970 ${d} GMT+0`).getTime() / 1000;
-    // 03:30 -> (3 * 3600) + (30 * 60) + 0
-    
 }
 
 function cleanEditables(content) {
@@ -97,7 +95,7 @@ function cleanTimeInput(e, minute=false) {
 function refreshList() {
     current = null;
     
-    sendRequest(`http://127.0.0.1:8000/fetch_library/${userID}/${getEpochDate()}`, (response) => {
+    sendPostRequest(`http://127.0.0.1:8000/fetch_library/${getEpochDate()}`, login_info(), (response) => {
         library = JSON.parse(response);
 
         appendItems();
@@ -226,13 +224,13 @@ function addTask() {
     // console.log("received");
     // console.log(`http://127.0.0.1:8000/add_task/${userID}/${encodeURI(title)}/${getEpochDate()}/${start}/${end}`);
 
-    sendRequest(`http://127.0.0.1:8000/add_task/${userID}/${encodeURIComponent(title)}/${getEpochDate()}/${start}/${end}`, () => {
+    sendPostRequest(`http://127.0.0.1:8000/add_task/${encodeURIComponent(title)}/${getEpochDate()}/${start}/${end}`, login_info(), () => {
         refreshList();
     });
 }
 
 function deleteTask(task_id) {
-    sendRequest(`http://127.0.0.1:8000/remove_task/${userID}/${task_id}/${getEpochDate()}`, (_) => {
+    sendPostRequest(`http://127.0.0.1:8000/remove_task/${task_id}/${getEpochDate()}`, login_info(), (_) => {
         refreshList();
     });
 }
@@ -241,7 +239,7 @@ function toggleComplete(task_id) {
     var i = document.getElementById("task_" + task_id);
     i.ariaLabel = i.ariaLabel == "completed" ? "" : "completed";
 
-    sendRequest(`http://127.0.0.1:8000/complete_task/${userID}/${task_id}/${getEpochDate()}/${i.ariaLabel == "completed"}`, (_) => {
+    sendPostRequest(`http://127.0.0.1:8000/complete_task/${task_id}/${getEpochDate()}/${i.ariaLabel == "completed"}`, login_info(), (_) => {
         
     });
 }
@@ -260,7 +258,7 @@ function updateTask(task_id) {
 
     console.log(start, end);
 
-    sendRequest(`http://127.0.0.1:8000/update_task/${userID}/${task_id}/${getEpochDate()}/${start}/${end}/${encodeURIComponent(updated)}`, (_) => {
+    sendPostRequest(`http://127.0.0.1:8000/update_task/${task_id}/${getEpochDate()}/${start}/${end}/${encodeURIComponent(updated)}`, login_info(), (_) => {
         refreshList();
     });
 }
@@ -355,7 +353,8 @@ var timerHandle = setInterval(() => {
 // #endregion
 
 // #region account related
-sendRequest(`http://127.0.0.1:8000/fetch_username/${userID}`, (response) => {
-    document.querySelector("#navbar #account h5").innerHTML = response;
-})
+// sendGetRequest(`http://127.0.0.1:8000/fetch_username/${userID}`, (response) => {
+//     document.querySelector("#navbar #account h5").innerHTML = response;
+// })
+document.querySelector("#navbar #account h5").innerHTML = username;
 // #endregion

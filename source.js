@@ -1,4 +1,4 @@
-async function sendRequest(url, func) {
+async function sendGetRequest(url, func) {
     var http = new XMLHttpRequest();
     http.onreadystatechange = function() {
         if ((this.readyState == 4) && (this.status == 200)) {
@@ -11,6 +11,21 @@ async function sendRequest(url, func) {
     http.send();
 }
 
+async function sendPostRequest(url, body, func) {
+    var http = new XMLHttpRequest();
+    http.onload = function() {
+        if ((this.readyState == 4) && (this.status == 200)) {
+            func(this.responseText);
+        }
+    }
+
+    http.open("POST", url, true);
+    // http.setRequestHeader("Content-Type", "application/json");
+    http.setRequestHeader("Content-Type", "text/plain");
+    // using text/plain overcomes needing to send a OPTION request as a preflight request (preflight request sent automatically to check if actual request is safe to send)
+    http.send(body)
+}
+
 
 function fetchCookie(name) {
     var result = undefined;
@@ -21,4 +36,43 @@ function fetchCookie(name) {
         }
     });
     return result;
+}
+
+function fetchLocalStorage(key) {
+    let result = localStorage.getItem(key);
+    if (result === null) {
+        return null;
+    }
+
+    result = JSON.parse(result);
+    let d = result["expiry"];
+    let current = getEpochUnixGMT();
+
+    if (d > current) {
+        // console.log(getEpochUnixGMT());
+        localStorage.setItem(key, JSON.stringify({
+            "data": result["data"],
+            "expiry": getEpochUnixGMT() + (14 * 86400)
+        }));
+        // 14 days till expiry
+        return result["data"];
+    }
+
+    localStorage.removeItem(key);
+    return null;
+}
+
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify({
+        "data": value,
+        "expiry": getEpochUnixGMT() + (14 * 86400)
+    }));
+}
+
+function getEpochUnixGMT(millis=false) {
+    // get epoch unix at gmt
+    // 0 (GMT)  3600 (GMT+01:00)    7200 (GMT+02:00)
+
+    return Math.floor((new Date()).getTime() / (millis ? 0 : 1000));
+    // apparently thats it?
 }

@@ -2,7 +2,7 @@ use std::{collections::HashMap, fmt, fs::{self, File}, io::Read};
 
 use serde::{Deserialize, Serialize};
 
-use crate::{task::Task, user};
+use crate::{login_info::{self, LoginInformation}, task::Task, user};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Database {
@@ -45,8 +45,8 @@ impl Database {
         result.unwrap().name.clone()
     }
 
-    pub fn login(&self, username: &String, password: &String) -> AccountResult {
-        let user_id = self.fetch_user_id(username);
+    pub fn login(&self, login: &LoginInformation) -> AccountResult {
+        let user_id = self.fetch_user_id(&login.username);
         if user_id.is_none() {
             return AccountResult::UsernameNoExist;
         }
@@ -56,15 +56,34 @@ impl Database {
         if fetch_result.is_none() {
             return AccountResult::UserIDNoExist;
         }
-        if fetch_result.unwrap() == password {
+        if fetch_result.unwrap() == &login.password {
             return AccountResult::Success(user_id.unwrap());
         }
 
         AccountResult::PasswordWrong
     }
 
-    pub fn signup(&mut self, username: &String, password: &String) -> AccountResult {
-        if self.username_exists(username) {
+    // pub fn login(&self, username: &String, password: &String) -> AccountResult {
+    //     let user_id = self.fetch_user_id(username);
+    //     if user_id.is_none() {
+    //         return AccountResult::UsernameNoExist;
+    //     }
+
+    //     let passwords = Database::passwords();
+    //     let fetch_result = passwords.get(&user_id.unwrap());
+    //     if fetch_result.is_none() {
+    //         return AccountResult::UserIDNoExist;
+    //     }
+    //     if fetch_result.unwrap() == password {
+    //         return AccountResult::Success(user_id.unwrap());
+    //     }
+
+    //     AccountResult::PasswordWrong
+    // }
+
+    // pub fn signup(&mut self, username: &String, password: &String) -> AccountResult {
+    pub fn signup(&mut self, login: &LoginInformation) -> AccountResult {
+        if self.username_exists(&login.username) {
             return AccountResult::UsernameTaken;
         }
 
@@ -72,11 +91,11 @@ impl Database {
 
         self.users.insert(user_id,user::User {
             id: user_id,
-            name: username.clone(),
+            name: login.username.clone(),
             library: HashMap::new()
         });
 
-        Database::add_password(user_id, password);
+        Database::add_password(user_id, &login.password);
 
         self.save();
 

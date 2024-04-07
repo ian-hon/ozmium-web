@@ -38,16 +38,21 @@ async function confirm() {
         return;
     }
 
-    sendRequest(`http://127.0.0.1:8000/` + (container.ariaLabel == "login" ? "login" : "sign_up") + `/${username}/${password}`, (r) => {
+    sendPostRequest(`http://127.0.0.1:8000/` + (container.ariaLabel == "login" ? "login" : "sign_up"), JSON.stringify({
+        "username": username,
+        "password": password
+    }), (r) => {
         var response = JSON.parse(r);
 
+        console.log(response);
+
         if (response.type == "Success") {
-            let now = new Date();
-            (now.setTime(now.getTime() + (14 * 86400000)));
-            console.log(fetchCookie("chronos_user_id"));
-            console.log(response.user_id);
-            document.cookie = `chronos_user_id=${response.user_id}; expires=${now.toUTCString()}; path=/`;
-            console.log(fetchCookie("chronos_user_id"));
+            setLocalStorage("chronos_username", username);
+            setLocalStorage("chronos_password", password);
+
+            // let now = new Date();
+            // (now.setTime(now.getTime() + (14 * 86400000)));
+            // document.cookie = `chronos_user_id=${response.user_id}; expires=${now.toUTCString()}; path=/`;
 
             window.location.href = "./index.html";
         }
