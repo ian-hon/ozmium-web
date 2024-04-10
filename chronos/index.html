@@ -11,144 +11,176 @@
     </head>
     <body>
         <div id="parent">
-            <div id="timer">
-                <div id="data">
-                    <h1>loading...</h1>
-                    <h3>...</h3>
+            <div id="sidebar">
+                <div id="user-data">
+                    <img src="/assets/profile.png">
+                    <div>
+                        <h4>username</h4>
+                        <h4>software developer</h4>
+                    </div>
+                </div>
+                <div id="create">
+                    <img src="/assets/add.png">
+                    <h4>create</h4>
+                </div>
+                <div id="soon">
+                    <h4>Fetch laundry</h4>
+                    <h5>12:00</h5>
+                    <div id="actions">
+                        <h5>29 mins</h5>
+                        <h5>dismiss</h5>
+                    </div>
+                </div>
+                <div id="upcoming">
+                    finish later
                 </div>
             </div>
-            <div id="sidebar" aria-label="open">
-                <div id="menu_toggle" onclick="toggleSidebar()">
-                    <img src="/assets/left_chevron.png">
-                </div>
-                <div id="menu" aria-label="open">
-                    <div id="navbar">
-                        <div id="date-select">
-                            <img src="/assets/left_chevron.png" onclick="progressDate(-1)">
-                            <h5>today</h5>
-                            <img src="/assets/right_chevron.png" onclick="progressDate(1)">
-                        </div>
-                        <a href="/chronos/login.html" id="account">
-                            <h5>...</h5>
-                            <img src="/assets/profile.png">
-                        </a>
-                    </div>
-                    <div id="list">
-                        <!-- <div class="item" aria-label="">
-                            <label id="completion">
-                                <input type="checkbox" onchange="">
-                                <div></div>
-                            </label>
-                            <div id="time">
-                                <div>
-                                    <input id="start" type="number" min="0" max="24" value="12" onchange="cleanTimeInput(this)">
-                                    <h5>:</h5>
-                                    <input id="start" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true)">
+            <div id="main">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><div><h4>mon</h4><h4>14</h4></div><div></div></th>
+                            <th><div><h4>tue</h4><h4>15</h4></div><div></div></th>
+                            <th><div><h4>wed</h4><h4>16</h4></div><div></div></th>
+                            <th><div><h4>thu</h4><h4>17</h4></div><div></div></th>
+                            <th><div><h4>fri</h4><h4>18</h4></div><div></div></th>
+                            <th><div><h4>sat</h4><h4>19</h4></div><div></div></th>
+                            <th><div><h4>sun</h4><h4>20</h4></div><div></div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div><h4>1am</h4></div>
+                                <div><h4>2am</h4></div>
+                                <div><h4>3am</h4></div>
+                                <div><h4>4am</h4></div>
+                                <div><h4>5am</h4></div>
+                                <div><h4>6am</h4></div>
+                                <div><h4>7am</h4></div>
+                                <div><h4>8am</h4></div>
+                                <div><h4>9am</h4></div>
+                                <div><h4>10am</h4></div>
+                                <div><h4>11am</h4></div>
+                                <div><h4>12am</h4></div>
+                                <div><h4>1pm</h4></div>
+                                <div><h4>2pm</h4></div>
+                                <div><h4>3pm</h4></div>
+                                <div><h4>4pm</h4></div>
+                                <div><h4>5pm</h4></div>
+                                <div><h4>6pm</h4></div>
+                                <div><h4>7pm</h4></div>
+                                <div><h4>8pm</h4></div>
+                                <div><h4>9pm</h4></div>
+                                <div><h4>10pm</h4></div>
+                                <div><h4>11pm</h4></div>
+                                <div><h4>12pm</h4></div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                                 </div>
-                                <h6 id="separator">|</h6>
-                                <div>
-                                    <input id="end" type="number" min="0" max="24" value="13" onchange="cleanTimeInput(this)">
-                                    <h5>:</h5>
-                                    <input id="end" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true)">
+                                <div class="day-parent">
+                                   <div class="item" style="background:royalblue;">
+                                        <h3 id="title">do this bla bla bla bla bla bla</h3>
+                                        <h4 id="time">12:00</h4>
+                                   </div>
                                 </div>
-                            </div>
-                            <h5 id="title">${element.title}</h5>
-                            <div id="actions" onclick="">
-                                <img src="/assets/trash.png">
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="item" aria-label="">
-                            <label id="completion">
-                                <input type="checkbox">
-                                <div></div>
-                            </label>
-                            <div id="time">
-                                <input id="start" type="text" value="3:30">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="14:30">
-                            </div>
-                            <h5 id="title">Research & compile information about superradiance 💡</h5>
-                            <div id="actions">
-                                <img src="/assets/trash.png">
-                            </div>
-                        </div> -->
-                        <!-- <div class="item" aria-label="current">
-                            <div id="time">
-                                <input id="start" type="text" value="15:00">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="16:00">
-                            </div>
-                            <h5 id="title">Proofread transcript 📜</h5>
-                        </div>
-                        <div class="item" aria-label="">
-                            <div id="time">
-                                <input id="start" type="text" value="16:00">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="17:30">
-                            </div>
-                            <h5 id="title">Evening jog 🏃‍♂️🏃‍♂️</h5>
-                        </div>
-                        <div class="item" aria-label="">
-                            <div id="time">
-                                <input id="start" type="text" value="18:00">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="19:30">
-                            </div>
-                            <h5 id="title">Cooking & dinner 🍽</h5>
-                        </div>
-                        <div class="item" aria-label="">
-                            <div id="time">
-                                <input id="start" type="text" value="20:00">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="21:00">
-                            </div>
-                            <h5 id="title">Complete report 📑</h5>
-                        </div>
-                        <div class="item" aria-label="">
-                            <div id="time">
-                                <input id="start" type="text" value="21:00">
-                                <h6 id="separator">|</h6>
-                                <input id="end" type="text" value="22:00">
-                            </div>
-                            <h5 id="title">Get feedback & make necessary changes ✍</h5>
-                        </div> -->
-                        <!-- <div class="item">
-                            <div id="time">
-                                <input id="start" type="text" value="7:00">
-                                <h5 id="separator">|</h5>
-                                <input id="end" type="text" value="8:00">
-                            </div>
-                            <h5 id="title">Start memorizing the little stuff 🧠</h5>
-                        </div> -->
-                    </div>
-                    <div id="add" aria-label="closed"> 
-                        <div id="toggle" onclick="toggleFields()">
-                            <img src="/assets/add.png">
-                        </div>
-                        <div>
-                            <div class="item">
-                                <div id="time">
-                                    <div>
-                                        <input id="start" type="number" min="0" max="24" value="00" onchange="cleanTimeInput(this);">
-                                        <h5>:</h5>
-                                        <input id="start" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
-                                    </div>
-                                    <h6 id="separator">|</h6>
-                                    <div>
-                                        <input id="end" type="number" min="0" max="24" value="00" onchange="cleanTimeInput(this);">
-                                        <h5>:</h5>
-                                        <input id="end" type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
-                                    </div>
-                                    <h5 id="confirm" onclick="addTask()">
-                                        add
-                                    </h5>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                                 </div>
-                                <h5 id="title">asd</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="day-parent">
+                                    <div class="item" style="top:15em !important; background:crimson;">
+                                        <h3 id="title">do this bla bla bla bla bla bla</h3>
+                                   </div>
+                                </div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                </div>
+                                <div class="day-parent">
+                                   
+                                </div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                </div>
+                                <div class="day-parent">
+                                   
+                                </div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                </div>
+                                <div class="day-parent">
+                                   
+                                </div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                </div>
+                                <div class="day-parent">
+                                   
+                                </div>
+                            </td>
+                            <td id="content">
+                                <div class="gridline">
+                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                </div>
+                                <div class="day-parent">
+                                   
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><div><h4>mon</h4><h4>14</h4></div><div></div></th>
+                            <th><div><h4>tue</h4><h4>15</h4></div><div></div></th>
+                            <th><div><h4>wed</h4><h4>16</h4></div><div></div></th>
+                            <th><div><h4>thu</h4><h4>17</h4></div><div></div></th>
+                            <th><div><h4>fri</h4><h4>18</h4></div><div></div></th>
+                            <th><div><h4>sat</h4><h4>19</h4></div><div></div></th>
+                            <th><div><h4>sun</h4><h4>20</h4></div><div></div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th><h4>1am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>2am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>3am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>4am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>5am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>6am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>7am</h4></th>
+                        </tr>
+                        <tr>
+                            <th><h4>8am</h4></th>
+                        </tr>
+                    </tbody>
+                </table> -->
             </div>
         </div>
         <script src="/source.js"></script>
