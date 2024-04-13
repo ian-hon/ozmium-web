@@ -23,6 +23,7 @@ impl<'l> FromData<'l> for LoginInformation {
 
         // println!("{:?}", data.peek(512).await);
         let result = data.peek(512).await.to_vec();
+        // println!("{:?}", result);
         let result = result.iter().map(|x| (x.clone()) as char).collect::<String>();
 
         let result: HashMap<String, String> = serde_json::from_str(result.as_str()).unwrap();

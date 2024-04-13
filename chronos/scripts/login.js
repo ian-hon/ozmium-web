@@ -38,7 +38,7 @@ async function confirm() {
         return;
     }
 
-    sendPostRequest(`http://127.0.0.1:8000/` + (container.ariaLabel == "login" ? "login" : "sign_up"), JSON.stringify({
+    sendPostRequest(`${BACKEND_ADDRESS}/` + (container.ariaLabel == "login" ? "login" : "sign_up"), JSON.stringify({
         "username": username,
         "password": password
     }), (r) => {
@@ -46,7 +46,7 @@ async function confirm() {
 
         console.log(response);
 
-        if (response.type == "Success") {
+        if (response.type == "success") {
             setLocalStorage("chronos_username", username);
             setLocalStorage("chronos_password", password);
 
@@ -61,7 +61,7 @@ async function confirm() {
             "UsernameNoExist": "username doesnt exist",
             "PasswordWrong": "password is incorrect",
             "UserIDNoExist": "username doesnt exist",
-            "Success": "",
+            "success": "",
 
             "UsernameTaken": "username is already taken"
         }[response.type];

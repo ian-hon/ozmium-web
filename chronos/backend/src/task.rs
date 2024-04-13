@@ -1,19 +1,39 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
+use strum_macros::EnumString;
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct Task {
-    // unique for each day per user
-    // day : 0
-    //  task : 0,1,2
-    // day : 1
-    //  task : 0,1,2,3
+    // unique per user
+    // user a : 0...∞
+    // user b : 0...∞
     pub id: usize,
+    pub species: Species,
+    pub time_species: TimeSpecies,
     pub title: String,
-    // seconds elapsed since start of day
-    // 0 -> 00:00
-    // 42300 -> 12:00
-    // 86400 -> 24:00
+    pub description: String,
+    // epoch unix (at GMT ofc)
     pub start: u128,
-    pub end: u128,
-    pub completed: bool
+    pub end: Option<u128>, // if end is none, there is no end time
+}
+impl Task {
+    pub fn in_range(&self, start: u128, end: u128) -> bool {
+        if self.end.is_none() {
+            return (self.start >= start) && (end >= self.start);
+        }
+        ((self.start >= start) && (start >= self.end.unwrap())) || ((self.start >= end) && (end >= self.end.unwrap()))
+    }
+}
+
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, EnumString)]
+pub enum Species {
+    Task(bool),
+    Event
+}
+
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord, Clone, Copy, EnumString)]
+pub enum TimeSpecies {
+    Once, // occurs once only
+
+    Repeating(u8) // day of the week to repeat
+    // eg : gym every friday
 }

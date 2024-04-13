@@ -38,107 +38,78 @@
             <div id="main">
                 <table>
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th><div><h4>mon</h4><h4>14</h4></div><div></div></th>
-                            <th><div><h4>tue</h4><h4>15</h4></div><div></div></th>
-                            <th><div><h4>wed</h4><h4>16</h4></div><div></div></th>
-                            <th><div><h4>thu</h4><h4>17</h4></div><div></div></th>
-                            <th><div><h4>fri</h4><h4>18</h4></div><div></div></th>
-                            <th><div><h4>sat</h4><h4>19</h4></div><div></div></th>
-                            <th><div><h4>sun</h4><h4>20</h4></div><div></div></th>
-                        </tr>
+                        <th></th>
+                        <th>
+                            <div id="header-container">
+                                <div class="header"><div><h4>mon</h4><h4>14</h4></div><div></div></div>
+                                <div class="header"><div><h4>tue</h4><h4>15</h4></div><div></div></div>
+                                <div class="header"><div><h4>wed</h4><h4>16</h4></div><div></div></div>
+                                <div class="header"><div><h4>thu</h4><h4>17</h4></div><div></div></div>
+                                <div class="header"><div><h4>fri</h4><h4>18</h4></div><div></div></div>
+                                <div class="header"><div><h4>sat</h4><h4>19</h4></div><div></div></div>
+                                <div class="header"><div><h4>sun</h4><h4>20</h4></div><div></div></div>
+                            </div>
+                        </th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div><h4>1am</h4></div>
-                                <div><h4>2am</h4></div>
-                                <div><h4>3am</h4></div>
-                                <div><h4>4am</h4></div>
-                                <div><h4>5am</h4></div>
-                                <div><h4>6am</h4></div>
-                                <div><h4>7am</h4></div>
-                                <div><h4>8am</h4></div>
-                                <div><h4>9am</h4></div>
-                                <div><h4>10am</h4></div>
-                                <div><h4>11am</h4></div>
-                                <div><h4>12am</h4></div>
-                                <div><h4>1pm</h4></div>
-                                <div><h4>2pm</h4></div>
-                                <div><h4>3pm</h4></div>
-                                <div><h4>4pm</h4></div>
-                                <div><h4>5pm</h4></div>
-                                <div><h4>6pm</h4></div>
-                                <div><h4>7pm</h4></div>
-                                <div><h4>8pm</h4></div>
-                                <div><h4>9pm</h4></div>
-                                <div><h4>10pm</h4></div>
-                                <div><h4>11pm</h4></div>
-                                <div><h4>12pm</h4></div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   <div class="item" style="background:royalblue;">
+                        <td>
+                            <div><h4>1am</h4></div>
+                            <div><h4>2am</h4></div>
+                            <div><h4>3am</h4></div>
+                            <div><h4>4am</h4></div>
+                            <div><h4>5am</h4></div>
+                            <div><h4>6am</h4></div>
+                            <div><h4>7am</h4></div>
+                            <div><h4>8am</h4></div>
+                            <div><h4>9am</h4></div>
+                            <div><h4>10am</h4></div>
+                            <div><h4>11am</h4></div>
+                            <div><h4>12am</h4></div>
+                            <div><h4>1pm</h4></div>
+                            <div><h4>2pm</h4></div>
+                            <div><h4>3pm</h4></div>
+                            <div><h4>4pm</h4></div>
+                            <div><h4>5pm</h4></div>
+                            <div><h4>6pm</h4></div>
+                            <div><h4>7pm</h4></div>
+                            <div><h4>8pm</h4></div>
+                            <div><h4>9pm</h4></div>
+                            <div><h4>10pm</h4></div>
+                            <div><h4>11pm</h4></div>
+                            <div><h4>12pm</h4></div>
+                        </td>
+                        <td id="content">
+                            <div id="gridline">
+                                <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                            </div>
+                            <div id="day-parent">
+                                <div class="item" style="background:royalblue;">
                                         <h3 id="title">do this bla bla bla bla bla bla</h3>
                                         <h4 id="time">12:00</h4>
-                                   </div>
                                 </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
+                                <div class="item" style="top:10em; left:calc(var(--task-width) * 2); background:crimson;">
+                                    <h3 id="title">do this bla bla bla bla bla bla</h3>
+                                    <h4 id="time">1:30-2:30</h4>
                                 </div>
-                                <div class="day-parent">
-                                    <div class="item" style="top:15em !important; background:crimson;">
-                                        <h3 id="title">do this bla bla bla bla bla bla</h3>
-                                   </div>
+                                <div class="item-container" style="top:20em; left:calc(var(--task-width) * 1); height:25em;">
+                                    <h1>
+                                        2
+                                    </h1>
+                                    <div id="user-click" onclick="toggleItemContainer(this)">
+                                    </div>
+                                    <div id="children">
+                                        <div class="item" style="height:25em; left: calc(calc(var(--task-width) * 1) - 1ch); background:crimson;">
+                                            <h3 id="title">do this bla bla bla bla bla bla</h3>
+                                            <h4 id="time">1:30-2:30</h4>
+                                        </div>
+                                        <div class="item" style="height:20em; left: calc(calc(var(--task-width) * 2) - 1ch); background:crimson;">
+                                            <h3 id="title">do this bla bla bla bla bla bla</h3>
+                                            <h4 id="time">1:30-2:30</h4>
+                                        </div>
+                                    </div>
                                 </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   
-                                </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   
-                                </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   
-                                </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   
-                                </div>
-                            </td>
-                            <td id="content">
-                                <div class="gridline">
-                                    <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
-                                </div>
-                                <div class="day-parent">
-                                   
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
                     </tbody>
                 </table>
                 <!-- <table>

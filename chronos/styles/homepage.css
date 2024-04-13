@@ -62,6 +62,8 @@ body {
     display:flex;
     justify-content: start;
     align-items: center;
+
+    cursor:pointer;
 }
 
 #sidebar #user-data img {
@@ -85,6 +87,12 @@ body {
     display:flex;
     justify-content: start;
     align-items: center;
+
+    cursor:pointer;
+}
+
+#sidebar #create:hover img {
+    transform:rotateZ(360deg);
 }
 
 #sidebar #create img {
@@ -96,6 +104,8 @@ body {
     margin-right:1.5ch;
 
     border-radius:1000px;
+
+    transition-duration:0.5s;
 }
 /* #endregion */
 
@@ -103,6 +113,8 @@ body {
 #sidebar #soon {
     width:calc(100% - 4ch);
     padding:2ch;
+
+    cursor:pointer;
 }
 
 #sidebar #soon > h5 {
@@ -129,6 +141,8 @@ body {
     padding:1ch 0.8em;
     margin:0;
     border-radius:var(--border-radius);
+
+    cursor:pointer;
 }
 /* #endregion */
 /* #endregion */
@@ -156,16 +170,19 @@ body {
 
 /* #region header headache */
 /* little top left corner */
-#main table th:first-of-type {
+#main thead th:first-of-type {
     min-width: 5ch !important;
     width: 5ch !important;
     max-width: 5ch !important;
 }
 
 /* horizontal headers */
-#main table th {
-    min-width:var(--task-width);
-    max-width:var(--task-width);
+#main thead th:last-of-type {
+    /* min-width:var(--task-width);
+    max-width:var(--task-width); */
+
+    /* width:calc(var(--task-width) * 7); */
+    /* display:inline-flex; */
 
     padding:0;
     /* border-style:solid; */
@@ -174,15 +191,24 @@ body {
 
     position:sticky;
     top:0;
+
+    /* display:flex;
+    justify-content: space-evenly;
+    align-items: start; */
+}
+
+/* time + events container */
+#main #header-container {
+    display:flex;
 }
 
 /* day + date in header */
-#main thead th > div {
+#main #header-container .header {
     background:var(--tertiary);
     border-radius:var(--border-radius);
 
     /* width: fit-content; */
-    width:calc(100% - 3ch);
+    width:calc(var(--task-width) - 3ch) !important;
 
     margin:0 1.5ch;
 
@@ -196,12 +222,12 @@ body {
 }
 
 /* day + date text in header */
-#main thead th > div h4 {
+#main #header-container .header h4 {
     width: fit-content;
 }
 
 /* date text in header */
-#main thead th > div h4:last-child {
+#main #header-container .header h4:last-child {
     font-size: 2.4em;
 }
 
@@ -210,13 +236,15 @@ body {
 }
 
 /* vertical headers */
-#main table tbody td:first-child {
+#main tbody td:first-child {
     position:sticky;
     left:0;
+
+    z-index: 50;
 }
 
 /* time container in vertical header */
-#main table tbody td:first-child > div {
+#main tbody td:first-child > div {
     height:var(--task-height);
 
     /* border-style:solid; */
@@ -227,19 +255,18 @@ body {
 }
 
 /* time text in vertical header */
-#main table tbody td:first-child > div h4 {
+#main tbody td:first-child > div h4 {
     transform:translateY(50%);
 }
 /* #endregion */
 
 #main #content {
     height:calc(24 * var(--task-height));
+    display:inline-block;
 
-    /* width: calc(var(--task-width) + 5ch) !important; */
+    width:100%;
 
     align-items:start;
-
-    /* background:red; */
 }
 
 #main tbody td {
@@ -248,17 +275,17 @@ body {
 }
 
 /* #region gridlines */
-#main .gridline {
+#main #gridline {
     position:absolute;
 
     font-size:1em;
 
-    width:var(--task-width);
+    width:calc(7 * var(--task-width));
 
     z-index: 1;
 }
 
-#main .gridline hr {
+#main #gridline hr {
     border-collapse: collapse;
     padding:0;
     margin:0;
@@ -276,32 +303,32 @@ body {
 /* #endregion */
 
 /* #region item */
-#main .day-parent {
+#main #day-parent {
     position:relative;
 
     height:100%;
-    max-width:var(--task-width);
-    min-width: var(--task-width);
+    width:100%;
 
-    /* background:green; */
-    /* border-style:solid; */
-    overflow:hidden;
-
-    z-index: 50 !important;
+    z-index: 20;
 }
 
-.item {
-    position:relative;
-    top:10em;
+.item, .item-container {
+    position:absolute;
+
+    top:0;
 
     background:var(--tertiary);
     border-radius:var(--border-radius);
 
-    width:calc(100% - 2ch - 4ch);
+    width:calc(var(--task-width) - 2ch - 4ch);
     margin:0 1ch;
     padding:2ch;
 
     height:calc(20em - 4ch);
+
+    cursor:pointer;
+
+    filter:drop-shadow(0 0 10px #0009);
 }
 
 .item #title {
@@ -312,6 +339,73 @@ body {
     font-style:italic;
     color:#fffb;
 }
+
+/* #region item container */
+.item-container {
+    background:var(--primary);
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    /* fixes drop shadow being cut off when displaying above other elements */
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+
+    /* top:auto; */
+
+    /* overflow:auto; */
+}
+
+.item-container #user-click {
+    /* background:red; */
+
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+
+    border-radius: var(--border-radius);
+}
+
+/* number of grouped items */
+.item-container h1 {
+    text-align: center;
+}
+
+.item-container #children {
+    opacity: 0;
+
+    overflow:auto;
+
+    /* background:red; */
+}
+
+.item-container .item {
+    filter:none;
+    transition-duration:0.3s;
+
+    top:0 !important;
+
+    /* margin-left:-1ch; */
+}
+
+.item-container[aria-label='open'] #children {
+    opacity: 1;
+}
+
+.item-container[aria-label='open'] #children .item {
+    filter:drop-shadow(0 0 10px #0009);
+
+    /* fixes drop shadow being cut off when displaying above other elements */
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+
+    cursor:pointer;
+}
+/* #endregion */
+
 /* #endregion */
 
 

@@ -37,14 +37,6 @@ impl Database {
         None
     }
 
-    pub fn fetch_username(&self, user_id: u128) -> String {
-        let result = self.users.get(&user_id);
-        if result.is_none() {
-            return "...".to_string();
-        }
-        result.unwrap().name.clone()
-    }
-
     pub fn login(&self, login: &LoginInformation) -> AccountResult {
         let user_id = self.fetch_user_id(&login.username);
         if user_id.is_none() {
@@ -63,25 +55,6 @@ impl Database {
         AccountResult::PasswordWrong
     }
 
-    // pub fn login(&self, username: &String, password: &String) -> AccountResult {
-    //     let user_id = self.fetch_user_id(username);
-    //     if user_id.is_none() {
-    //         return AccountResult::UsernameNoExist;
-    //     }
-
-    //     let passwords = Database::passwords();
-    //     let fetch_result = passwords.get(&user_id.unwrap());
-    //     if fetch_result.is_none() {
-    //         return AccountResult::UserIDNoExist;
-    //     }
-    //     if fetch_result.unwrap() == password {
-    //         return AccountResult::Success(user_id.unwrap());
-    //     }
-
-    //     AccountResult::PasswordWrong
-    // }
-
-    // pub fn signup(&mut self, username: &String, password: &String) -> AccountResult {
     pub fn signup(&mut self, login: &LoginInformation) -> AccountResult {
         if self.username_exists(&login.username) {
             return AccountResult::UsernameTaken;
@@ -92,7 +65,9 @@ impl Database {
         self.users.insert(user_id,user::User {
             id: user_id,
             name: login.username.clone(),
-            library: HashMap::new()
+            library: HashMap::new(),
+            // repeating_tasks: vec![]
+            // library: HashMap::new()
         });
 
         Database::add_password(user_id, &login.password);
@@ -123,20 +98,7 @@ impl Database {
     }
 
     pub fn save(&mut self) {
-        for user in &mut self.users {
-            user.1.sort_library();
-        }
-
         fs::write("data/users.json", serde_json::to_string_pretty(&self.users).unwrap()).unwrap();
-    }
-
-    pub fn fetch_library(&self, user_id: u128, date: u128) -> Vec<Task> {
-        let result = self.users.get(&user_id).unwrap().fetch_library(date);
-        if result.is_none() {
-            vec![]
-        } else {
-            result.unwrap()
-        }
     }
 }
 impl fmt::Display for Database {

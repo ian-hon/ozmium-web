@@ -6,3 +6,10 @@ pub fn get_date(t: u128) -> u128 {
 
     ((t as f64) / (86400f64)).floor() as u128
 }
+
+pub fn parse_response(data: Option<String>) -> String {
+    format!(r#"{{
+    "type":"{}",
+    "data":"{}"
+}}"#, if data.is_some() { "success" } else { "fail" }, if data.is_some() { data.unwrap() } else { "".to_string() }).to_string()
+}
