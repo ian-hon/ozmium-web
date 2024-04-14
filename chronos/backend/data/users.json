@@ -3,43 +3,6 @@
     "id": 0,
     "name": "han_yuji_",
     "library": {
-      "2": {
-        "id": 2,
-        "species": {
-          "Task": false
-        },
-        "time_species": {
-          "Repeating": 5
-        },
-        "title": "loem ipsum",
-        "description": "desc",
-        "start": 12345,
-        "end": 12346
-      },
-      "1": {
-        "id": 1,
-        "species": {
-          "Task": false
-        },
-        "time_species": "Once",
-        "title": "loem ipsum",
-        "description": "desc",
-        "start": 12345,
-        "end": 12346
-      },
-      "0": {
-        "id": 0,
-        "species": {
-          "Task": false
-        },
-        "time_species": {
-          "Repeating": 0
-        },
-        "title": "loem ipsum",
-        "description": "desc",
-        "start": 12345,
-        "end": 12346
-      }
     }
   }
 }

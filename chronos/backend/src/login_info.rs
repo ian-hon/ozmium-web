@@ -17,7 +17,7 @@ pub struct LoginInformation {
 impl<'l> FromData<'l> for LoginInformation {
     type Error = Error;
 
-    async fn from_data(req: &'l Request<'_>, mut data: Data<'l>) -> data::Outcome<'l, Self> {
+    async fn from_data(_req: &'l Request<'_>, mut data: Data<'l>) -> data::Outcome<'l, Self> {
         // if data.peek_complete() {
         // }
 

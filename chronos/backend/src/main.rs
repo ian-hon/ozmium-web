@@ -81,8 +81,8 @@ fn fetch_library(db: &State<Mutex<Database>>, login: LoginInformation, start: u1
     }
 }
 
-#[post("/<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<start>/<end>", data="<login>")]
-fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>) -> String {
+#[post("/<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>", data="<login>")]
+fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> String {
     let mut db = db.lock().unwrap();
     let result = db.login(&login);
     match result {
@@ -98,7 +98,7 @@ fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: Str
                 },
                 Err(_) => return utils::parse_response(None)
             };
-            db.users.get_mut(&user_id).unwrap().add_task(species, time_species, title, description, start, end, false);
+            db.users.get_mut(&user_id).unwrap().add_task(species, time_species, title, description, start, end, colour);
             db.save();
             utils::parse_response(Some("success".to_string()))
         },
@@ -107,7 +107,7 @@ fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: Str
 }
 
 #[post("/<task_id>", data="<login>")]
-fn complete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: u128) -> String {
+fn complete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: usize) -> String {
     let mut db = db.lock().unwrap();
     let result = db.login(&login);
     match result {
@@ -117,7 +117,43 @@ fn complete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: 
         },
         _ => utils::parse_response(None)
     }
-    // utils::parse_response(Some(result.to_string()))
+}
+
+#[post("/<task_id>", data="<login>")]
+fn delete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: usize) -> String {
+    let mut db = db.lock().unwrap();
+    let result = db.login(&login);
+    match result {
+        AccountResult::Success(user_id) => {
+            let r = db.users.get_mut(&user_id).unwrap().delete_task(task_id as usize);
+            utils::parse_response(Some(r.to_string()))
+        },
+        _ => utils::parse_response(None)
+    }
+}
+
+#[post("/<task_id>/<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>", data="<login>")]
+fn update_task(db: &State<Mutex<Database>>, login: LoginInformation,task_id: usize, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> String {
+    let mut db = db.lock().unwrap();
+    let result = db.login(&login);
+    match result {
+        AccountResult::Success(user_id) => {
+            let species = match task::Species::from_str(&r_species) {
+                Ok(i) => i,
+                Err(_) => return utils::parse_response(None)
+            };
+            let time_species = match task::TimeSpecies::from_str(&r_time_species) {
+                Ok(i) => match i {
+                    task::TimeSpecies::Repeating(_) => task::TimeSpecies::Repeating(repeating_day as u8),
+                    _ => i
+                },
+                Err(_) => return utils::parse_response(None)
+            };
+            db.users.get_mut(&user_id).unwrap().update_task(task_id, species, time_species, title, description, start, end, colour);
+            utils::parse_response(Some("success".to_string()))
+        },
+        _ => utils::parse_response(None)
+    }
 }
 // #endregion
 
@@ -139,6 +175,8 @@ fn rocket() -> _ {
         .mount("/add_task", routes![add_task])
         .mount("/complete_task", routes![complete_task])
         .mount("/fetch_library", routes![fetch_library])
+        .mount("/delete_task", routes![delete_task])
+        .mount("/update_task", routes![update_task])
 
         .mount("/", routes![index])
 

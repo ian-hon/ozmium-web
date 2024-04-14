@@ -12,7 +12,7 @@ pub struct User {
     // pub repeating_tasks: Vec<task::Task>
 }
 impl User {
-    pub fn add_task(&mut self, species: task::Species, time_species: task::TimeSpecies, title: String, description: String, start: u128, end: Option<u128>, completed: bool) {
+    pub fn add_task(&mut self, species: task::Species, time_species: task::TimeSpecies, title: String, description: String, start: u128, end: Option<u128>, colour: u128) {
         let id = self.generate_task_id();
         self.library.insert(id, task::Task {
             id,
@@ -21,7 +21,8 @@ impl User {
             title,
             description,
             start,
-            end
+            end,
+            colour
         });
     }
 
@@ -62,14 +63,17 @@ impl User {
         TaskError::Success
     }
 
-    pub fn update_task(&mut self, id:usize, title: String, description: String, start: u128, end: Option<u128>) -> TaskError {
+    pub fn update_task(&mut self, id:usize, species: task::Species, time_species: task::TimeSpecies, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> TaskError {
         let result = self.library.get_mut(&id);
         if result.is_none() {
             return TaskError::TaskNoExist;
         }
         let mut_ref = result.unwrap();
+        mut_ref.species = species;
+        mut_ref.time_species = time_species;
         mut_ref.title = title;
         mut_ref.description = description;
+        mut_ref.colour = colour;
         mut_ref.start = start;
         mut_ref.end = end;
 

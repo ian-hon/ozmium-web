@@ -6,6 +6,15 @@ if ((username === null) || (password === null)) {
     window.location.href = "./login.html";
 }
 
+var dates = [];
+var dateRange = {
+    "start": 0, // number of days since 1/1/1970
+    "length": 7, // select the 7 days after this
+    "offset": 0
+}
+// year, month, day offset
+// var dateOffset = [0, 0, 0];
+
 var container = document.querySelector("#main #content #day-parent");
 var library = [
     {
@@ -43,6 +52,8 @@ var library = [
 
 var taskHeight = window.getComputedStyle(container).getPropertyValue('--task-height');
 var taskWidth = window.getComputedStyle(container).getPropertyValue('--task-width');
+
+var creationContainer = document.querySelector("#task-creation");
 
 // #region utils
 function login_info() {
@@ -97,11 +108,20 @@ function parseResponse(r) {
 //     (t.getSeconds());
 // }
 
-function getEpochDate(d = null) {
+function getEpochDate(gmt=true, d = null) {
     // days since 1 jan 1970
     let now = d ? d : new Date();
-    let t = Date.parse(`${now.getUTCMonth() + 1}/${now.getUTCDate()}/${now.getUTCFullYear()} ${now.getUTCHours()}:${now.getUTCMinutes()}:${now.getUTCSeconds()} GMT`) / 1000;
-    return Math.floor(t / 86400);
+
+    // let t = Date.parse(`${now.getUTCMonth() + 1}/${now.getUTCDate()}/${now.getUTCFullYear()} ${now.getUTCHours()}:${now.getUTCMinutes()}:${now.getUTCSeconds()} GMT`) / 1000;
+    return Math.floor((now.getTime() - (gmt ? 0 : now.getTimezoneOffset() * 60_000)) / 86400_000);
+}
+
+function roundToWeekStart(i) {
+    // takes days since 1/1/1970
+    // returns the date of the monday on that week
+
+    // 1/1/1970 is Thursday; offsetting to monday
+    return (Math.floor((i + 3) / 7) * 7) - 3;
 }
 
 // function cleanEditables(content) {
@@ -169,10 +189,49 @@ function fetchLibrary() {
 
 fetchLibrary();
 
+// #region date related
+function fetchDateRange() {
+    // var start = getEpochDate();
+    dates = [];
+    dateRange['start'] = roundToWeekStart(getEpochDate(false) + dateRange['offset']) * 86400;
+    for(i = 0; i < dateRange['length']; i++) {
+        dates.push(dateRange['start'] + (i * 86400));
+    }
+}
+
+function fetchCurrentDayIndex() {
+    // current day of the week
+    // monday = 0
+    // tuesday = 1
+    // using own utils (for consistency purposes)
+    return getEpochDate(false) - roundToWeekStart(getEpochDate(false));
+}
+
+function fetchCurrentTime() {
+    // 0:00 -> 0
+    // 1:00 -> 1
+    // 1:30 -> 1.5
+    // used for task top values
+
+    let d = new Date();
+    return d.getHours() + (d.getMinutes() / 60);
+}
+// #endregion
+
+// #region toggles
 function toggleItemContainer(i) {
     let e = i.parentElement;
     e.ariaLabel = e.ariaLabel == "open" ? "closed" : "open";
 }
+
+function toggleTaskCreation() {
+
+}
+
+function toggleColourPicker(e) {
+    e.parentElement.ariaLabel = e.parentElement.ariaLabel == "open" ? "closed" : "open";
+}
+// #endregion
 
 // #region account related
 document.querySelector("#sidebar #user-data > div h4:first-of-type").innerHTML = username;

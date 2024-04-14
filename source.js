@@ -71,6 +71,13 @@ function setLocalStorage(key, value) {
     }));
 }
 
+function getEpochUnixLocal(millis=false) {
+    // get epoch unix at local
+    let t = new Date();
+    let f = t.getTime() - t.getTimezoneOffset();
+    return Math.floor(f / (millis ? 0 : 1000));
+}
+
 function getEpochUnixGMT(millis=false) {
     // get epoch unix at gmt
     // 0 (GMT)  3600 (GMT+01:00)    7200 (GMT+02:00)

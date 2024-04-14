@@ -82,6 +82,72 @@
                             <div id="gridline">
                                 <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                             </div>
+                            <div id="task-creation">
+                                <div>
+                                    <input type="text" id="title" placeholder="title">
+                                    <div id="colour-picker" aria-label="closed">
+                                        <hr onclick="toggleColourPicker(this)">
+                                        <div>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="text" id="description" placeholder="description">
+                                <div id="time">
+                                    <h4>
+                                        time
+                                    </h4>
+                                    <div>
+                                        <div id="start">
+                                            <h4>
+                                                12:00
+                                            </h4>
+                                            <h5>
+                                                1 Jan 1970
+                                            </h5>
+                                        </div>
+                                        <h4>
+                                            to
+                                        </h4>
+                                        <div id="end">
+                                            <h4>
+                                                13:00
+                                            </h4>
+                                            <h5>
+                                                1 Jan 1970
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div id="repeat">
+                                        <h5>
+                                            repeat :
+                                        </h5>
+                                        <div>
+                                            <label><h5>m</h5><input type="checkbox"></label>
+                                            <label><h5>t</h5><input type="checkbox"></label>
+                                            <label><h5>w</h5><input type="checkbox"></label>
+                                            <label><h5>t</h5><input type="checkbox"></label>
+                                            <label><h5>f</h5><input type="checkbox"></label>
+                                            <label><h5>s</h5><input type="checkbox"></label>
+                                            <label><h5>s</h5><input type="checkbox"></label>
+                                        </div>
+                                    </div>
+                                    <h4 id="create">
+                                        create
+                                    </h4>
+                                </div>
+                            </div>
                             <div id="day-parent">
                                 <div class="item" style="background:royalblue;">
                                         <h3 id="title">do this bla bla bla bla bla bla</h3>
@@ -152,6 +218,14 @@
                         </tr>
                     </tbody>
                 </table> -->
+            </div>
+            <div id="overlay" aria-label="closed">
+                <!-- used for task selection, etc etc -->
+                <div id="task-selection">
+                    <div>
+
+                    </div>
+                </div>
             </div>
         </div>
         <script src="/source.js"></script>

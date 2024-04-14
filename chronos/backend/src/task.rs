@@ -14,6 +14,7 @@ pub struct Task {
     // epoch unix (at GMT ofc)
     pub start: u128,
     pub end: Option<u128>, // if end is none, there is no end time
+    pub colour: u128,
 }
 impl Task {
     pub fn in_range(&self, start: u128, end: u128) -> bool {

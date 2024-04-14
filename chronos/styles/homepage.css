@@ -408,5 +408,237 @@ body {
 
 /* #endregion */
 
+/* #region task creation */
+#content #task-creation { 
+    /* background:red; */
+    /* background:var(--primary); */
+    background:crimson;
 
+    position:absolute;
+    padding:3ch;
+
+    border-radius:var(--border-radius);
+
+    z-index: 1000;
+
+    filter:drop-shadow(0 0 20px #0009);
+}
+
+#content #task-creation > div:first-of-type {
+    /* background:red; */
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* background: blue; */
+
+}
+
+#content #task-creation #title, #content #task-creation #description {
+    border:none;
+    background:none;
+    color:white;
+
+    width:20ch;
+
+    margin-right:2ch;
+
+    font-size: 2em;
+}
+
+#content #task-creation #description {
+    font-size: 1.5em;
+
+    /* height:3em; */
+}
+
+/* #region colour picker */
+#content #task-creation #colour-picker hr:first-of-type {
+    filter:drop-shadow(0 2px 5px #0007);
+
+    transform:translateZ(0);
+}
+
+#content #task-creation #colour-picker hr {
+    border:none;
+    padding:0;
+    margin:0;
+
+    height:4ch;
+    aspect-ratio: 1;
+    /* width:5ch; */
+
+    background:crimson;
+
+    border-radius: 1000px;
+    cursor:pointer;
+}
+
+#content #task-creation #colour-picker[aria-label="closed"] > div{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#content #task-creation #colour-picker > div {
+    position:absolute;
+    background:var(--tertiary);
+
+    display:grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap:1ch;
+
+    padding:1ch;
+
+    width: fit-content;
+
+    border-radius:var(--border-radius);
+
+    filter:drop-shadow(0 0 5px #0005);
+
+    transform:translateZ(0);
+}
+/* #endregion */
+
+/* #region time */
+#content #task-creation #time > h4:first-of-type {
+    margin-top:1em;
+}
+
+#content #task-creation #time > div {
+    display:flex;
+    justify-content: start;
+}
+
+#content #task-creation #time > div h4 {
+    margin:0 1ch;
+}
+
+#content #task-creation #time #start, #content #task-creation #time #end {
+    /* background:red; */
+    display:flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#content #task-creation #time #start * + *, #content #task-creation #time #end * + * {
+    font-size: 1em;
+    color:#fffa;
+    font-style:italic;
+}
+/* #endregion */
+
+#content #task-creation > div:last-of-type {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top:1em;
+}
+
+#content #task-creation #create {
+    width:fit-content;
+
+    border-radius:var(--border-radius);
+
+    /* background:red; */
+    background:var(--primary);
+
+    padding:0.8ch 0.8em;
+
+    cursor:pointer;
+}
+
+/* #region repeat */
+#content #task-creation #repeat {
+    display:flex;
+    justify-content: start;
+    align-items: center;
+}
+
+#content #task-creation #repeat > div {
+    display:flex;
+    justify-content: start;
+
+    margin-left:1ch;
+}
+
+#content #task-creation #repeat > div input {
+    display:none;
+}
+
+#content #task-creation #repeat > div label h5 {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    padding:1ch;
+
+    font-size: 1.2em;
+
+    color:#fff5;
+
+    /* aspect-ratio: 1; */
+    width:0.5em !important;
+    height:0.5em !important;
+
+    text-align: center;
+
+    user-select: none;
+}
+
+#content #task-creation #repeat > div label {
+    border-radius: 1000px;
+
+    /* margin:ch; */
+
+    user-select: none;
+
+    /* font-size:0.2em; */
+
+    cursor:pointer;
+}
+
+#content #task-creation #repeat > div label:has(input:checked) {
+    /* color:#fff; */
+    text-decoration: underline;
+}
+
+#content #task-creation #repeat > div label:has(input:checked) h5 {
+    color:#fff;
+}
+/* #endregion */
+
+/*  */
+
+/* #endregion */
+
+/* #endregion */
+
+/* #region overlay */
+#overlay {
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:#0009;
+
+    z-index: 10000;
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#overlay[aria-label='closed'] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#overlay #task-selection {
+
+}
 /* #endregion */
