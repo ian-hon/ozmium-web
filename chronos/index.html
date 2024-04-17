@@ -82,11 +82,12 @@
                             <div id="gridline">
                                 <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                             </div>
-                            <div id="task-creation">
+                            <div id="task-creation" data-colour_theme="0">
                                 <div>
                                     <input type="text" id="title" placeholder="title">
                                     <div id="colour-picker" aria-label="closed">
-                                        <hr onclick="toggleColourPicker(this)">
+                                        <img src="/assets/colour_wheel.png" onclick="toggleColourPicker(this)">
+                                        <!-- <hr onclick="toggleColourPicker(this)"> -->
                                         <div>
                                             <hr>
                                             <hr>
@@ -101,49 +102,57 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" id="description" placeholder="description">
+                                <textarea id="description" placeholder="description"></textarea>
                                 <div id="time">
                                     <h4>
-                                        time
+                                        time :
                                     </h4>
                                     <div>
                                         <div id="start">
-                                            <h4>
-                                                12:00
-                                            </h4>
-                                            <h5>
-                                                1 Jan 1970
-                                            </h5>
+                                            <div>
+                                                <input type="number" min="0" max="23" value="00" onchange="matchEndTime(); cleanTimeInputAll(this);" data-time_previous_hour="00">
+                                                <h5>:</h5>
+                                                <input type="number" min="0" max="60" value="00" onchange="matchEndTime(); cleanTimeInputAll(this, minute=true);" data-time_previous_minute="00">
+                                            </div>
+                                            <input type="date" min="1970-01-01" max="2038-1-18">
                                         </div>
                                         <h4>
                                             to
                                         </h4>
-                                        <div id="end">
-                                            <h4>
-                                                13:00
-                                            </h4>
-                                            <h5>
-                                                1 Jan 1970
-                                            </h5>
+                                        <div id="end" data-matched="true">
+                                            <div>
+                                                <input type="number" min="0" max="23" value="00" onchange="matchEndTime(false); cleanTimeInput(this);"  data-time_previous_hour="00">
+                                                <h5>:</h5>
+                                                <input type="number" min="0" max="60" value="00" onchange="matchEndTime(false); cleanTimeInput(this, minute=true);" data-time_previous_minute="00">
+                                            </div>
+                                            <input type="date" min="1970-01-01" max="2038-1-18">
+                                            <h5>(no end date)</h5>
                                         </div>
                                     </div>
                                 </div>
+                                <div id="repeat">
+                                    <h5>
+                                        repeat :
+                                    </h5>
+                                    <div>
+                                        <label><h5>m</h5><input type="checkbox"></label>
+                                        <label><h5>t</h5><input type="checkbox"></label>
+                                        <label><h5>w</h5><input type="checkbox"></label>
+                                        <label><h5>t</h5><input type="checkbox"></label>
+                                        <label><h5>f</h5><input type="checkbox"></label>
+                                        <label><h5>s</h5><input type="checkbox"></label>
+                                        <label><h5>s</h5><input type="checkbox"></label>
+                                    </div>
+                                </div>
                                 <div>
-                                    <div id="repeat">
-                                        <h5>
-                                            repeat :
-                                        </h5>
+                                    <div id="type-selection">
+                                        <h4>type : </h4>
                                         <div>
-                                            <label><h5>m</h5><input type="checkbox"></label>
-                                            <label><h5>t</h5><input type="checkbox"></label>
-                                            <label><h5>w</h5><input type="checkbox"></label>
-                                            <label><h5>t</h5><input type="checkbox"></label>
-                                            <label><h5>f</h5><input type="checkbox"></label>
-                                            <label><h5>s</h5><input type="checkbox"></label>
-                                            <label><h5>s</h5><input type="checkbox"></label>
+                                            <label><h4>task</h4><input type="radio" name="type-select" checked></label>
+                                            <label><h4>event</h4><input type="radio" name="type-select"></label>
                                         </div>
                                     </div>
-                                    <h4 id="create">
+                                    <h4 id="create" onclick="addTask()">
                                         create
                                     </h4>
                                 </div>

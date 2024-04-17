@@ -131,19 +131,25 @@ function roundToWeekStart(i) {
 //     return content;
 // }
 
-// function cleanTimeInput(e, minute=false) {
-//     if (e.value.length > 2) {
-//         e.value = e.value.slice(0, 2);
-//     }
-//     let i = parseInt(e.value);
-//     if (i > (minute ? 59 : 24)) {
-//         e.value = (minute ? 59 : 24);
-//     }
+function cleanTimeInput(e, minute=false) {
+    if (e.value.length > 2) {
+        e.value = e.value.slice(0, 2);
+    }
+    let i = parseInt(e.value);
+    if (i > (minute ? 59 : 23)) {
+        e.value = (minute ? 59 : 23);
+    }
 
-//     if (i < 0) {
-//         e.value = 0;
-//     }
-// }
+    if (i < 0) {
+        e.value = 0;
+    }
+
+    if (minute) {
+        e.dataset.time_previous_minute = e.value;
+    } else {
+        e.dataset.time_previous_hour = e.value;
+    }
+}
 // #endregion
 
 function populateCalendar() {
@@ -235,4 +241,57 @@ function toggleColourPicker(e) {
 
 // #region account related
 document.querySelector("#sidebar #user-data > div h4:first-of-type").innerHTML = username;
+// #endregion
+
+// #region task creation
+function cleanTimeInputAll() {
+    let l = document.querySelectorAll('#task-creation #time input[type="number"]');
+    cleanTimeInput(l[0]);
+    cleanTimeInput(l[1], true);
+    cleanTimeInput(l[2]);
+    cleanTimeInput(l[3], true);
+    // making a loop checking odd/even would only make the code harder to understand
+    // keep it stupid simple
+}
+
+function matchEndTime(mutable=true) {
+    var start_obj = document.querySelectorAll(`#task-creation #time #start input[type="number"]`);
+    var end_obj = document.querySelectorAll(`#task-creation #time #end input[type="number"]`);
+
+    var start = (parseInt(start_obj[0].dataset.time_previous_hour) * 3600) + (parseInt(start_obj[1].dataset.time_previous_minute) * 60);
+    var end = (parseInt(end_obj[0].dataset.time_previous_hour) * 3600) + (parseInt(end_obj[1].dataset.time_previous_minute) * 60);
+
+    if (mutable && (start == end)) {
+        end_obj[0].value = start_obj[0].value;
+        end_obj[1].value = start_obj[1].value;
+
+        cleanTimeInput(end_obj[0]);
+        cleanTimeInput(end_obj[1], true);
+    }
+    document.querySelector("#task-creation #time #end").dataset.matched = start == end;
+}
+
+function addTask() {
+    cleanTimeInputAll(); // in case changed through inspector
+    // /<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>
+    let r_species = document.querySelector("#task-creation #type-selection > div > label").checked ? "Task" : "Event";
+    let repeating_day = 0;
+    document.querySelectorAll("#task-creation #repeat > div input").forEach((e, index) => {
+        repeating_day += (e.checked ? 1 : 0) * (Math.pow(2, (index - 8))); // invert to become big endian
+    })
+    let r_time_species = repeating_day == 0 ? "Once" : "Repeating";
+    let title = document.querySelector("#task-creation #title").value;
+    let description = document.querySelector("#task-creation #description").value;
+    description = description ? description : ' ';
+    let colour = document.querySelector("#task-creation").dataset.colour_theme;
+    // let start = document.querySelector("#task-creation")
+    var temp = document.querySelectorAll(`#task-creation #time #start input[type="number"]`);
+    var start = (temp[0].value * 3600) + (temp[1].value * 60);
+    var temp = document.querySelectorAll(`#task-creation #time #end input[type="number"]`);
+    var end = (temp[0].value * 3600) + (temp[1].value * 60);
+
+
+    // URI ENCODING BEFORE SENDING
+    console.log(`/<${r_species}>/<${r_time_species}>/<${repeating_day}>/<${title}>/<${description}>/<${colour}>/<${start}>/<${end}>`);
+}
 // #endregion

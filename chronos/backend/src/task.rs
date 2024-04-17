@@ -35,6 +35,7 @@ pub enum Species {
 pub enum TimeSpecies {
     Once, // occurs once only
 
-    Repeating(u8) // day of the week to repeat
-    // eg : gym every friday
+    Repeating(u8) // days of the week to repeat
+    // eg : 10010000 gym every monday and thursday
+    // ignore first bit
 }
