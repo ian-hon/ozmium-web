@@ -19,9 +19,17 @@
                         <h4>software developer</h4>
                     </div>
                 </div>
-                <div id="create">
+                <div id="create" aria-label="closed">
                     <img src="/assets/add.png">
-                    <h4>create</h4>
+                    <div>
+                        <h4 onclick="toggleTaskSelection()">
+                            create
+                        </h4>
+                        <div>
+                            <h5 onclick="toggleTaskCreation('Once')">→ one-time</h5>
+                            <h5 onclick="toggleTaskCreation('Repeating')">→ repeating</h5>
+                        </div>
+                    </div>
                 </div>
                 <div id="soon">
                     <h4>Fetch laundry</h4>
@@ -82,12 +90,11 @@
                             <div id="gridline">
                                 <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                             </div>
-                            <div id="task-creation" data-colour_theme="0">
+                            <div id="task-creation" data-colour_theme="0" aria-label="closed" data-species="repeating">
                                 <div>
                                     <input type="text" id="title" placeholder="title">
                                     <div id="colour-picker" aria-label="closed">
                                         <img src="/assets/colour_wheel.png" onclick="toggleColourPicker(this)">
-                                        <!-- <hr onclick="toggleColourPicker(this)"> -->
                                         <div>
                                             <hr>
                                             <hr>
@@ -110,24 +117,29 @@
                                     <div>
                                         <div id="start">
                                             <div>
-                                                <input type="number" min="0" max="23" value="00" onchange="matchEndTime(); cleanTimeInputAll(this);" data-time_previous_hour="00">
+                                                <input type="number" min="0" max="23" value="00" onchange="cleanTimeInput(this);">
                                                 <h5>:</h5>
-                                                <input type="number" min="0" max="60" value="00" onchange="matchEndTime(); cleanTimeInputAll(this, minute=true);" data-time_previous_minute="00">
+                                                <input type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
                                             </div>
                                             <input type="date" min="1970-01-01" max="2038-1-18">
                                         </div>
                                         <h4>
                                             to
                                         </h4>
-                                        <div id="end" data-matched="true">
+                                        <div id="end">
                                             <div>
-                                                <input type="number" min="0" max="23" value="00" onchange="matchEndTime(false); cleanTimeInput(this);"  data-time_previous_hour="00">
+                                                <input type="number" min="0" max="23" value="00" onchange="cleanTimeInput(this);" >
                                                 <h5>:</h5>
-                                                <input type="number" min="0" max="60" value="00" onchange="matchEndTime(false); cleanTimeInput(this, minute=true);" data-time_previous_minute="00">
+                                                <input type="number" min="0" max="60" value="00" onchange="cleanTimeInput(this, minute=true);">
                                             </div>
                                             <input type="date" min="1970-01-01" max="2038-1-18">
-                                            <h5>(no end date)</h5>
                                         </div>
+                                        <label id="all-day">
+                                            <h4>
+                                                all day
+                                            </h4>
+                                            <input type="checkbox">
+                                        </label>
                                     </div>
                                 </div>
                                 <div id="repeat">
@@ -157,7 +169,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div id="day-parent">
+                            <div id="field">
                                 <div class="item" style="background:royalblue;">
                                         <h3 id="title">do this bla bla bla bla bla bla</h3>
                                         <h4 id="time">12:00</h4>

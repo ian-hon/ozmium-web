@@ -22,8 +22,6 @@ body {
     padding:1ch;
 
     overflow:hidden;
-
-    /* background:blue; */
 }
 
 /* #region sidebar */
@@ -34,14 +32,12 @@ body {
 
     flex-direction: column;
 
-    /* background:var(--secondary); */
-
-    /* background:red; */
-
-    width:20%;
+    min-width:30ch;
+    width:max-content;
     height:100%;
 
-    /* border-radius:var(--border-radius); */
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 #sidebar > div {
@@ -86,7 +82,7 @@ body {
 #sidebar #create {
     display:flex;
     justify-content: start;
-    align-items: center;
+    align-items: start;
 
     cursor:pointer;
 }
@@ -106,6 +102,38 @@ body {
     border-radius:1000px;
 
     transition-duration:0.5s;
+}
+
+#sidebar #create h5 {
+    user-select: none;
+    -webkit-user-select: none;
+
+    font-size:1.5em;
+}
+
+#sidebar #create[aria-label='open'] > div > div {
+    height:4.5em;
+}
+
+#sidebar #create > div > div {
+    display:flex;
+    justify-content: start;
+    align-items:start;
+
+    flex-direction: column;
+
+    overflow:hidden;
+
+    height:0;
+
+    background:var(--tertiary);
+
+    transform:translateZ(0);
+    transition-duration: 0.3s;
+}
+
+#sidebar #create > div > div h5:hover {
+    text-decoration: underline;
 }
 /* #endregion */
 
@@ -303,7 +331,7 @@ body {
 /* #endregion */
 
 /* #region item */
-#main #day-parent {
+#main #field {
     position:relative;
 
     height:100%;
@@ -409,6 +437,10 @@ body {
 /* #endregion */
 
 /* #region task creation */
+#content #task-creation[aria-label='closed'] {
+    display:none;
+}
+
 #content #task-creation { 
     /* background:red; */
     /* background:var(--primary); */
@@ -596,6 +628,10 @@ body {
     justify-content: start;
     align-items: center;
     flex-direction: row;
+
+    height:2em;
+    overflow: hidden;
+    transition-duration:0.3s;
 }
 
 #content #task-creation #time #start div + *,
@@ -635,20 +671,51 @@ body {
     margin:0;
 }
 
-#content #task-creation #time #end > h5:last-of-type {
-    font-size: 0.7em;
-    font-style:italic;
-    color:#fff5;
+#content #task-creation[data-species="Repeating"] #time input[type="date"] {
+    display:none;
 }
 
-#content #task-creation #time #end[data-matched="false"] > h5:last-of-type {
+#content #task-creation[data-species="Repeating"] #time:has(label#all-day input:checked) > div > * {
+    display:none;
+}
+
+#content #task-creation[data-species="Repeating"] #time:has(label#all-day input:checked) #all-day {
+    display:block;
+}
+
+#content #task-creation[data-species="Repeating"] #time:has(label#all-day input:checked) #all-day h4 {
+    margin-left:0;
+}
+
+/* #region all-day */
+#content #task-creation #time #all-day {
+    user-select: none;
+    -webkit-user-select: none;
+
+    height:2em;
+}
+
+#content #task-creation #time #all-day h4 {
+    color:#fff5;
+
+    cursor:pointer;
+}
+
+#content #task-creation #time #all-day input {
+    display:none;
+}
+
+#content #task-creation #time label#all-day:has(input:checked) h4 {
+    color:#fff;
+    text-decoration: underline;
+}
+
+#content #task-creation #time:has(label#all-day input:checked) #start > div:first-of-type,
+#content #task-creation #time:has(label#all-day input:checked) #end > div:first-of-type {
+    /* display:none; */
     height:0;
-    display:none !important;
 }
-
-#content #task-creation #time #end[data-matched="true"] input {
-    color:#fff5;
-}
+/* #endregion */
 /* #endregion */
 
 #content #task-creation > div:last-of-type {
@@ -672,9 +739,13 @@ body {
     cursor:pointer;
 }
 
-
-
 /* #region repeat */
+#content #task-creation[data-species="Once"] #repeat {
+    display:none;
+
+    pointer-events: none;
+}
+
 #content #task-creation #repeat {
     display:flex;
     justify-content: start;

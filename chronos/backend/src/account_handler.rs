@@ -2,7 +2,7 @@ use std::{collections::HashMap, fmt, fs::{self, File}, io::Read};
 
 use serde::{Deserialize, Serialize};
 
-use crate::{login_info::{self, LoginInformation}, task::Task, user};
+use crate::{login_info::LoginInformation, user};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct Database {

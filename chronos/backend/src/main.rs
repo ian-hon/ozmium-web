@@ -6,9 +6,7 @@ use std::{
 // use data_instance::DataInstance;
 // use std::time::Instant;
 #[macro_use] extern crate rocket;
-use rocket::{
-    State
-};
+use rocket::State;
 
 mod utils;
 mod cors;
@@ -81,8 +79,18 @@ fn fetch_library(db: &State<Mutex<Database>>, login: LoginInformation, start: u1
     }
 }
 
-#[post("/<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>", data="<login>")]
-fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> String {
+#[post("/<r_species>/<r_time_species>/<start>/<end>/<r_occurance_species>/<repeating_day>/<title>/<description>/<colour>", data="<login>")]
+fn add_task(
+    db: &State<Mutex<Database>>,
+    login: LoginInformation,
+    r_species: String,
+    r_time_species: String, start: u128, end: u128,
+    r_occurance_species: String, repeating_day: u128,
+    title: String,
+    description: String,
+    colour: u128
+) -> String {
+// fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> String {
     let mut db = db.lock().unwrap();
     let result = db.login(&login);
     match result {
@@ -91,14 +99,23 @@ fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: Str
                 Ok(i) => i,
                 Err(_) => return utils::parse_response(None)
             };
-            let time_species = match task::TimeSpecies::from_str(&r_time_species) {
+            let occurance_species = match task::OccuranceSpecies::from_str(&r_occurance_species) {
                 Ok(i) => match i {
-                    task::TimeSpecies::Repeating(_) => task::TimeSpecies::Repeating(repeating_day as u8),
+                    task::OccuranceSpecies::Repeating(_) => task::OccuranceSpecies::Repeating(repeating_day as u8),
                     _ => i
                 },
                 Err(_) => return utils::parse_response(None)
             };
-            db.users.get_mut(&user_id).unwrap().add_task(species, time_species, title, description, start, end, colour);
+            let time_species = match task::TimeSpecies::from_str(&r_time_species) {
+                Ok(i) => match i {
+                    task::TimeSpecies::Start(_) => task::TimeSpecies::Start(start),
+                    task::TimeSpecies::Range(_, _) => task::TimeSpecies::Range(start, end),
+                    task::TimeSpecies::AllDay(_) => task::TimeSpecies::AllDay(start),
+                    task::TimeSpecies::DayRange(_, _) => task::TimeSpecies::DayRange(start, end)
+                },
+                Err(_) => return utils::parse_response(None)
+            };
+            db.users.get_mut(&user_id).unwrap().add_task(species, occurance_species, time_species, title, description, colour);
             db.save();
             utils::parse_response(Some("success".to_string()))
         },
@@ -106,14 +123,18 @@ fn add_task(db: &State<Mutex<Database>>, login: LoginInformation, r_species: Str
     }
 }
 
-#[post("/<task_id>", data="<login>")]
-fn complete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: usize) -> String {
+#[post("/<task_id>/<week_start>/<current_day>", data="<login>")]
+fn complete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: usize, week_start: u128, current_day: u8) -> String {
     let mut db = db.lock().unwrap();
     let result = db.login(&login);
     match result {
         AccountResult::Success(user_id) => {
             db.save();
-            utils::parse_response(Some(db.users.get_mut(&user_id).unwrap().complete_task(task_id as usize).to_string()))
+            utils::parse_response(Some(db.users.get_mut(&user_id).unwrap().complete_task(
+                task_id as usize,
+                week_start,
+                current_day
+            ).to_string()))
         },
         _ => utils::parse_response(None)
     }
@@ -132,8 +153,18 @@ fn delete_task(db: &State<Mutex<Database>>, login: LoginInformation, task_id: us
     }
 }
 
-#[post("/<task_id>/<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>", data="<login>")]
-fn update_task(db: &State<Mutex<Database>>, login: LoginInformation,task_id: usize, r_species: String, r_time_species: String, repeating_day: u128, title: String, description: String, start: u128, end: Option<u128>, colour: u128) -> String {
+#[post("/<task_id>/<r_species>/<r_time_species>/<start>/<end>/<r_occurance_species>/<repeating_day>/<title>/<description>/<colour>", data="<login>")]
+fn update_task(
+    db: &State<Mutex<Database>>,
+    login: LoginInformation,
+    task_id: usize,
+    r_species: String,
+    r_time_species: String, start: u128, end: u128,
+    r_occurance_species: String, repeating_day: u128,
+    title: String,
+    description: String,
+    colour: u128
+) -> String {
     let mut db = db.lock().unwrap();
     let result = db.login(&login);
     match result {
@@ -142,14 +173,23 @@ fn update_task(db: &State<Mutex<Database>>, login: LoginInformation,task_id: usi
                 Ok(i) => i,
                 Err(_) => return utils::parse_response(None)
             };
-            let time_species = match task::TimeSpecies::from_str(&r_time_species) {
+            let occurance_species = match task::OccuranceSpecies::from_str(&r_occurance_species) {
                 Ok(i) => match i {
-                    task::TimeSpecies::Repeating(_) => task::TimeSpecies::Repeating(repeating_day as u8),
+                    task::OccuranceSpecies::Repeating(_) => task::OccuranceSpecies::Repeating(repeating_day as u8),
                     _ => i
                 },
                 Err(_) => return utils::parse_response(None)
             };
-            db.users.get_mut(&user_id).unwrap().update_task(task_id, species, time_species, title, description, start, end, colour);
+            let time_species = match task::TimeSpecies::from_str(&r_time_species) {
+                Ok(i) => match i {
+                    task::TimeSpecies::Start(_) => task::TimeSpecies::Start(start),
+                    task::TimeSpecies::Range(_, _) => task::TimeSpecies::Range(start, end),
+                    task::TimeSpecies::AllDay(_) => task::TimeSpecies::AllDay(start),
+                    task::TimeSpecies::DayRange(_, _) => task::TimeSpecies::DayRange(start, end)
+                },
+                Err(_) => return utils::parse_response(None)
+            };
+            db.users.get_mut(&user_id).unwrap().update_task(task_id, species, occurance_species, time_species, title, description, colour);
             utils::parse_response(Some("success".to_string()))
         },
         _ => utils::parse_response(None)
@@ -159,7 +199,7 @@ fn update_task(db: &State<Mutex<Database>>, login: LoginInformation,task_id: usi
 
 #[launch]
 fn rocket() -> _ {
-    println!("{:?}", task::TimeSpecies::from_str("Repeating(1)"));
+    println!("{:?}", task::OccuranceSpecies::from_str("Repeating(1)"));
 
     // rocket::build()
     rocket::custom(rocket::config::Config::figment().merge(("port", 7999)))

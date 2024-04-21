@@ -15,7 +15,7 @@ var dateRange = {
 // year, month, day offset
 // var dateOffset = [0, 0, 0];
 
-var container = document.querySelector("#main #content #day-parent");
+var container = document.querySelector("#main #content #field");
 var library = [
     {
         "type":"item",
@@ -54,6 +54,18 @@ var taskHeight = window.getComputedStyle(container).getPropertyValue('--task-hei
 var taskWidth = window.getComputedStyle(container).getPropertyValue('--task-width');
 
 var creationContainer = document.querySelector("#task-creation");
+
+document.querySelectorAll("#main table tbody td div h4")[clampValue(Math.floor(fetchCurrentTime()) + 2, 0, 23)].scrollIntoView({
+    'behavior':'auto',
+    'block':'center',
+    'inline':'center'
+});
+document.querySelectorAll("#main #header-container .header")[clampValue(fetchCurrentDayIndex(), 0, 6)].scrollIntoView({
+    'behavior':'auto',
+    'block':'center',
+    'inline':'center'
+});
+// console.log(document.querySelectorAll("#main table tbody td div h4"));
 
 // #region utils
 function login_info() {
@@ -230,12 +242,38 @@ function toggleItemContainer(i) {
     e.ariaLabel = e.ariaLabel == "open" ? "closed" : "open";
 }
 
-function toggleTaskCreation() {
+function toggleTaskSelection() {
+    let r = document.querySelector("#create");
+    r.ariaLabel = r.ariaLabel == 'open' ? 'closed' : 'open';
+}
 
+toggleTaskCreation();
+toggleTaskCreation();
+
+function toggleTaskCreation(s) {
+    let e = document.querySelector("#task-creation");
+    // e.ariaLabel = e.ariaLabel == "open" ? "closed" : "open";
+    e.ariaLabel = 'open';
+
+    e.style.top = `calc(var(--task-height) * ${fetchCurrentTime()})`;
+    e.style.left = `calc(5ch + calc(var(--task-width) * ${fetchCurrentDayIndex()}))`;
+
+    e.scrollIntoView({
+        'behavior':'auto',
+        'block':'center',
+        'inline':'center'
+    });
+
+    e.dataset.species = s;
+    document.querySelector("#create").ariaLabel = 'closed';
 }
 
 function toggleColourPicker(e) {
     e.parentElement.ariaLabel = e.parentElement.ariaLabel == "open" ? "closed" : "open";
+}
+
+function toggleEndContainer(b) {
+    document.querySelector("#main #task-creation #end-container").ariaLabel = b ? 'open' : 'closed';
 }
 // #endregion
 
@@ -254,44 +292,53 @@ function cleanTimeInputAll() {
     // keep it stupid simple
 }
 
-function matchEndTime(mutable=true) {
-    var start_obj = document.querySelectorAll(`#task-creation #time #start input[type="number"]`);
-    var end_obj = document.querySelectorAll(`#task-creation #time #end input[type="number"]`);
-
-    var start = (parseInt(start_obj[0].dataset.time_previous_hour) * 3600) + (parseInt(start_obj[1].dataset.time_previous_minute) * 60);
-    var end = (parseInt(end_obj[0].dataset.time_previous_hour) * 3600) + (parseInt(end_obj[1].dataset.time_previous_minute) * 60);
-
-    if (mutable && (start == end)) {
-        end_obj[0].value = start_obj[0].value;
-        end_obj[1].value = start_obj[1].value;
-
-        cleanTimeInput(end_obj[0]);
-        cleanTimeInput(end_obj[1], true);
-    }
-    document.querySelector("#task-creation #time #end").dataset.matched = start == end;
-}
-
 function addTask() {
     cleanTimeInputAll(); // in case changed through inspector
     // /<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>
-    let r_species = document.querySelector("#task-creation #type-selection > div > label").checked ? "Task" : "Event";
+    let r_species = document.querySelector("#task-creation #type-selection > div > label > input").checked ? "Task" : "Event";
+
     let repeating_day = 0;
     document.querySelectorAll("#task-creation #repeat > div input").forEach((e, index) => {
-        repeating_day += (e.checked ? 1 : 0) * (Math.pow(2, (index - 8))); // invert to become big endian
+        repeating_day += (e.checked ? 1 : 0) * (Math.pow(2, (8 - index))); // invert to become big endian
     })
-    let r_time_species = repeating_day == 0 ? "Once" : "Repeating";
+    let r_occurance_species = creationContainer.dataset.species;
+
     let title = document.querySelector("#task-creation #title").value;
     let description = document.querySelector("#task-creation #description").value;
     description = description ? description : ' ';
-    let colour = document.querySelector("#task-creation").dataset.colour_theme;
+    let colour = creationContainer.dataset.colour_theme;
     // let start = document.querySelector("#task-creation")
     var temp = document.querySelectorAll(`#task-creation #time #start input[type="number"]`);
     var start = (temp[0].value * 3600) + (temp[1].value * 60);
     var temp = document.querySelectorAll(`#task-creation #time #end input[type="number"]`);
     var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
+    let r_time_species = document.querySelector("#time #all-day input").checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
+    if (r_occurance_species == "Repeating") {
+        if (r_time_species == 'DayRange') {
+            r_time_species = 'AllDay';
+        }
+    } else {
+        // let offset = roundToWeekStart(getEpochDate(false)) * 86400;
+        // let offset = getEpochDate(false) * 86400;
+        // end += offset;
+        // start += offset;
 
-    // URI ENCODING BEFORE SENDING
-    console.log(`/<${r_species}>/<${r_time_species}>/<${repeating_day}>/<${title}>/<${description}>/<${colour}>/<${start}>/<${end}>`);
+        let offset = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
+        start += offset ? offset : (getEpochDate(false) * 86400);
+        offset = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
+        end += offset ? offset : (getEpochDate(false) * 86400);
+
+        // console.log(document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber);
+    }
+
+    [end, start] = end > start ? [end, start] : [start, end];
+    // swap if the task ends before it starts
+
+    let params = `${r_species}/${r_time_species}/${r_occurance_species}/${repeating_day}/${encodeURIComponent(title)}/${encodeURIComponent(description)}/${colour}/${start}/${end}`;
+    console.log(params);
+    sendPostRequest(`${BACKEND_ADDRESS}/add_task/${params}`, login_info(), (r) => {
+        parseResponse(r);
+    })
 }
 // #endregion

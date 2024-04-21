@@ -85,3 +85,7 @@ function getEpochUnixGMT(millis=false) {
     return Math.floor((new Date()).getTime() / (millis ? 0 : 1000));
     // apparently thats it?
 }
+
+function clampValue(i, min, max) {
+    return Math.max(Math.min(i, max), min);
+}
