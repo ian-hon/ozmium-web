@@ -202,7 +202,7 @@ fn rocket() -> _ {
     println!("{:?}", task::OccuranceSpecies::from_str("Repeating(1)"));
 
     // rocket::build()
-    rocket::custom(rocket::config::Config::figment().merge(("port", 7999)))
+    rocket::custom(rocket::config::Config::figment().merge(("port", 8000)))
         // .manage(Mutex::new(data_instance::DataInstance::new()))
         .manage(Mutex::new(Database::load()))
         .mount("/save", routes![save])

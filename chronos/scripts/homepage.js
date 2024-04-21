@@ -65,7 +65,6 @@ document.querySelectorAll("#main #header-container .header")[clampValue(fetchCur
     'block':'center',
     'inline':'center'
 });
-// console.log(document.querySelectorAll("#main table tbody td div h4"));
 
 // #region utils
 function login_info() {
@@ -76,51 +75,19 @@ function login_info() {
 }
 
 function parseResponse(r) {
+    // console.log(r);
+
     let result = JSON.parse(r);
     if (result['type'] != "success") {
-        window.location.href = "./login.html";
+        console.log(result);
+        // window.location.href = "./login.html";
         // or some kind of proper error handling
     }
 
-    return result['data'];
+    return decodeURIComponent(result['data']);
 }
 
-// function isCurrent(range) {
-//     return (range[0] <= getEpochDayTime()) && (getEpochDayTime() <= range[1]);
-// }
-
-// function formatTime(t) {
-//     // t : time since day start
-
-//     // var d = new Date(e * 1000);
-//     // return `${d.getHours()}:${String(d.getMinutes()).padStart(2, "0")}`;
-
-//     return [
-//         String(Math.floor(t / 3600)).padStart(2, "0"),
-//         // TODO:fix (done)
-//         // not converting properly
-//         // floating point error probably
-//         // 80280 -> 8:18
-//         // 80340 -> 8:18 (supposed to be 8:19)
-//         String(
-//             (
-//                 (
-//                     (t / 3600) - Math.floor(t / 3600)
-//                 ) * 60
-//             ).toFixed()
-//             ).padStart(2, "0")
-//     ];
-// }
-
-// function getEpochDayTime(d = null) {
-//     // seconds elapsed since start of day
-//     let t = d ? d : new Date();
-//     return (t.getHours() * 3600) +
-//     (t.getMinutes() * 60) +
-//     (t.getSeconds());
-// }
-
-function getEpochDate(gmt=true, d = null) {
+function getEpochDate(gmt=true, d=null) {
     // days since 1 jan 1970
     let now = d ? d : new Date();
 
@@ -136,12 +103,11 @@ function roundToWeekStart(i) {
     return (Math.floor((i + 3) / 7) * 7) - 3;
 }
 
-// function cleanEditables(content) {
-//     content = content.replace(new RegExp("<br>", 'g'), '');
-//     content = content.replace(new RegExp("<div>", 'g'), '\n');
-//     content = content.replace(new RegExp("</div>", 'g'), '');
-//     return content;
-// }
+function roundToDayStart(gmt=true, d=null) {
+    let now = d ? d : new Date();
+
+    return Math.floor(((now.getTime() / 1000) - (gmt ? 0 : now.getTimezoneOffset() * 60)) % 86400);
+}
 
 function cleanTimeInput(e, minute=false) {
     if (e.value.length > 2) {
@@ -189,7 +155,8 @@ function populateCalendar() {
 }
 
 function addItem(e, i=null) {
-    return `<div class="item" style="top:calc(${e['time'][0]} * ${taskHeight}); height:calc(${(e['time'][1] - e['time'][0])} * ${taskHeight} - 4ch); left:${(i === null ? `calc(var(--task-width) * ${e['day']})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:crimson;">
+    let pos = convertEpochToUnitPosition(e);
+    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(${(e['time'][1] - e['time'][0])} * ${taskHeight} - 4ch); left:${(i === null ? `calc(var(--task-width) * ${e['day']})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:crimson;">
     <h3 id="title">${e['title']}</h3>
     <h4 id="time">${e['time'][0]}-${e['time'][1]}</h4>
 </div>`
@@ -200,6 +167,8 @@ function fetchLibrary() {
         let response = parseResponse(r);
 
         console.log(response);
+
+        library = JSON.parse(response);
 
         populateCalendar();
     })
@@ -225,13 +194,24 @@ function fetchCurrentDayIndex() {
     return getEpochDate(false) - roundToWeekStart(getEpochDate(false));
 }
 
-function fetchCurrentTime() {
+function convertEpochToUnitPosition(e) {
+    // takes epoch unix and changes position data
+    // [x, y, w, h]
+    // TODO : COMPLETE WIDTH AND HEIGHT CALCULATIONS
+    let d = e - new Date().getTimezoneOffset();
+    return [
+        result[0] = roundToWeekStart(Math.floor(d / 86400)),
+        Math.floor(d % 86400) / 3600
+    ];
+}
+
+function fetchCurrentTime(date=null) {
     // 0:00 -> 0
     // 1:00 -> 1
     // 1:30 -> 1.5
     // used for task top values
 
-    let d = new Date();
+    let d = date ? date : new Date();
     return d.getHours() + (d.getMinutes() / 60);
 }
 // #endregion
@@ -247,24 +227,23 @@ function toggleTaskSelection() {
     r.ariaLabel = r.ariaLabel == 'open' ? 'closed' : 'open';
 }
 
-toggleTaskCreation();
-toggleTaskCreation();
-
 function toggleTaskCreation(s) {
-    let e = document.querySelector("#task-creation");
-    // e.ariaLabel = e.ariaLabel == "open" ? "closed" : "open";
-    e.ariaLabel = 'open';
+    if (s === false) {
+        creationContainer.ariaLabel = "closed";
+        return;
+    }
+    creationContainer.ariaLabel = 'open';
 
-    e.style.top = `calc(var(--task-height) * ${fetchCurrentTime()})`;
-    e.style.left = `calc(5ch + calc(var(--task-width) * ${fetchCurrentDayIndex()}))`;
+    creationContainer.style.top = `calc(var(--task-height) * ${fetchCurrentTime()})`;
+    creationContainer.style.left = `calc(5ch + calc(var(--task-width) * ${fetchCurrentDayIndex()}))`;
 
-    e.scrollIntoView({
+    creationContainer.scrollIntoView({
         'behavior':'auto',
         'block':'center',
         'inline':'center'
     });
 
-    e.dataset.species = s;
+    creationContainer.dataset.species = s;
     document.querySelector("#create").ariaLabel = 'closed';
 }
 
@@ -282,6 +261,12 @@ document.querySelector("#sidebar #user-data > div h4:first-of-type").innerHTML =
 // #endregion
 
 // #region task creation
+function verifyValidity() {
+    let t = document.querySelector("#task-creation #title").value;
+    let b = document.querySelector("#task-creation #create");
+    b.ariaLabel = t ? 'enabled' : 'disabled';
+}
+
 function cleanTimeInputAll() {
     let l = document.querySelectorAll('#task-creation #time input[type="number"]');
     cleanTimeInput(l[0]);
@@ -292,7 +277,12 @@ function cleanTimeInputAll() {
     // keep it stupid simple
 }
 
-function addTask() {
+function addTask(e) {
+    if (e.ariaLabel == "disabled") {
+        return;
+    }
+
+    toggleTaskCreation(false);
     cleanTimeInputAll(); // in case changed through inspector
     // /<r_species>/<r_time_species>/<repeating_day>/<title>/<description>/<colour>/<start>/<end>
     let r_species = document.querySelector("#task-creation #type-selection > div > label > input").checked ? "Task" : "Event";
@@ -313,7 +303,8 @@ function addTask() {
     var temp = document.querySelectorAll(`#task-creation #time #end input[type="number"]`);
     var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
-    let r_time_species = document.querySelector("#time #all-day input").checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
+    let all_day_checked = document.querySelector("#time #all-day input").checked;
+    let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
     if (r_occurance_species == "Repeating") {
         if (r_time_species == 'DayRange') {
             r_time_species = 'AllDay';
@@ -324,18 +315,20 @@ function addTask() {
         // end += offset;
         // start += offset;
 
-        let offset = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
-        start += offset ? offset : (getEpochDate(false) * 86400);
-        offset = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
-        end += offset ? offset : (getEpochDate(false) * 86400);
+        if (!all_day_checked) {
+            let offset = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
+            start += offset ? offset : (getEpochDate(false) * 86400);
+            offset = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
+            end += offset ? offset : (getEpochDate(false) * 86400);
+        }
 
         // console.log(document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber);
     }
 
     [end, start] = end > start ? [end, start] : [start, end];
     // swap if the task ends before it starts
-
-    let params = `${r_species}/${r_time_species}/${r_occurance_species}/${repeating_day}/${encodeURIComponent(title)}/${encodeURIComponent(description)}/${colour}/${start}/${end}`;
+    //             <r_species>/<r_time_species>/<start>/<end>/<r_occurance_species>/<repeating_day>/<title>/<description>/<colour>"
+    let params = `${r_species}/${r_time_species}/${start}/${end}/${r_occurance_species}/${repeating_day}/${encodeURIComponent(title)}/${encodeURIComponent(description)}/${colour}`;
     console.log(params);
     sendPostRequest(`${BACKEND_ADDRESS}/add_task/${params}`, login_info(), (r) => {
         parseResponse(r);

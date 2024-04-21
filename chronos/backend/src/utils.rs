@@ -11,5 +11,11 @@ pub fn parse_response(data: Option<String>) -> String {
     format!(r#"{{
     "type":"{}",
     "data":"{}"
-}}"#, if data.is_some() { "success" } else { "fail" }, if data.is_some() { data.unwrap() } else { "".to_string() }).to_string()
+}}"#, if data.is_some() { "success" } else { "fail" }, if data.is_some() { 
+        urlencoding::encode(
+            data.unwrap()
+                // .replace("\"", "\\\"")
+                .as_str()
+        ).to_string()
+    } else { "".to_string() }).to_string()
 }

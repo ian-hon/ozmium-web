@@ -79,5 +79,5 @@ pub enum OccuranceSpecies {
     // start and end in time_species must be in the same day
     Repeating(u8) // days of the week to repeat
     // eg : 10010000 gym every monday and thursday
-    // ignore first bit
+    // ignore first bit 
 }

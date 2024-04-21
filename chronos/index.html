@@ -90,24 +90,10 @@
                             <div id="gridline">
                                 <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                             </div>
-                            <div id="task-creation" data-colour_theme="0" aria-label="closed" data-species="repeating">
+                            <div id="task-creation" data-colour_theme="0" aria-label="closed" data-species="Once">
                                 <div>
-                                    <input type="text" id="title" placeholder="title">
-                                    <div id="colour-picker" aria-label="closed">
-                                        <img src="/assets/colour_wheel.png" onclick="toggleColourPicker(this)">
-                                        <div>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                            <hr>
-                                        </div>
-                                    </div>
+                                    <input type="text" id="title" placeholder="title" oninput="verifyValidity()">
+                                    <img id="exit-button" src="/assets/cross.png" onclick="toggleTaskCreation(false)">
                                 </div>
                                 <textarea id="description" placeholder="description"></textarea>
                                 <div id="time">
@@ -164,9 +150,26 @@
                                             <label><h4>event</h4><input type="radio" name="type-select"></label>
                                         </div>
                                     </div>
-                                    <h4 id="create" onclick="addTask()">
-                                        create
-                                    </h4>
+                                    <div>
+                                        <div id="colour-picker" aria-label="closed">
+                                            <img src="/assets/colour_wheel.png" onclick="toggleColourPicker(this)">
+                                            <div>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                                <hr>
+                                            </div>
+                                        </div>
+                                        <h4 id="create" onclick="addTask(this)" aria-label="disabled">
+                                            create
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                             <div id="field">
@@ -199,46 +202,6 @@
                         </td>
                     </tbody>
                 </table>
-                <!-- <table>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th><div><h4>mon</h4><h4>14</h4></div><div></div></th>
-                            <th><div><h4>tue</h4><h4>15</h4></div><div></div></th>
-                            <th><div><h4>wed</h4><h4>16</h4></div><div></div></th>
-                            <th><div><h4>thu</h4><h4>17</h4></div><div></div></th>
-                            <th><div><h4>fri</h4><h4>18</h4></div><div></div></th>
-                            <th><div><h4>sat</h4><h4>19</h4></div><div></div></th>
-                            <th><div><h4>sun</h4><h4>20</h4></div><div></div></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><h4>1am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>2am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>3am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>4am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>5am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>6am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>7am</h4></th>
-                        </tr>
-                        <tr>
-                            <th><h4>8am</h4></th>
-                        </tr>
-                    </tbody>
-                </table> -->
             </div>
             <div id="overlay" aria-label="closed">
                 <!-- used for task selection, etc etc -->
