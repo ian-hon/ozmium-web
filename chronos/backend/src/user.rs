@@ -114,11 +114,13 @@ impl User {
     // from when to when
     // usually 7 days (maybe)
     pub fn fetch_library(&self, start: u128, end: u128) -> Vec<task::Task> {
-        self.library
+        let mut r = self.library
             .iter()
             .filter(|x| x.1.in_range(start, end))
             .map(|x| x.1.clone())
-            .collect::<Vec<task::Task>>()
+            .collect::<Vec<task::Task>>();
+        r.sort_by_key(|i| i.start_time());
+        r
     }
 }
 

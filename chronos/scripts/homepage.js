@@ -60,7 +60,7 @@ document.querySelectorAll("#main table tbody td div h4")[clampValue(Math.floor(f
     'block':'center',
     'inline':'center'
 });
-document.querySelectorAll("#main #header-container .header")[clampValue(fetchCurrentDayIndex(), 0, 6)].scrollIntoView({
+document.querySelectorAll("#main #header-container .header")[clampValue(fetchDayIndex(), 0, 6)].scrollIntoView({
     'behavior':'auto',
     'block':'center',
     'inline':'center'
@@ -104,6 +104,9 @@ function roundToWeekStart(i) {
 }
 
 function roundToDayStart(gmt=true, d=null) {
+    // 86399 -> 86399
+    // 86400 -> 86400
+    // 86401 -> 1
     let now = d ? d : new Date();
 
     return Math.floor(((now.getTime() / 1000) - (gmt ? 0 : now.getTimezoneOffset() * 60)) % 86400);
@@ -156,14 +159,17 @@ function populateCalendar() {
 
 function addItem(e, i=null) {
     let pos = convertEpochToUnitPosition(e);
-    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(${(e['time'][1] - e['time'][0])} * ${taskHeight} - 4ch); left:${(i === null ? `calc(var(--task-width) * ${e['day']})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:crimson;">
+    if (pos === null) { return ""; }
+    console.log(pos);
+    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(${pos[2]} * ${taskHeight} - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:crimson;">
     <h3 id="title">${e['title']}</h3>
-    <h4 id="time">${e['time'][0]}-${e['time'][1]}</h4>
 </div>`
+
+    // <h4 id="time">${e['time'][0]}-${e['time'][1]}</h4>
 }
 
 function fetchLibrary() {
-    sendPostRequest(`${BACKEND_ADDRESS}/fetch_library/${getEpochDate() * 86400}/${(getEpochDate() + 7) * 86400}`, login_info(), (r) => {
+    sendPostRequest(`${BACKEND_ADDRESS}/fetch_library/0/1813657600`, login_info(), (r) => {
         let response = parseResponse(r);
 
         console.log(response);
@@ -186,22 +192,42 @@ function fetchDateRange() {
     }
 }
 
-function fetchCurrentDayIndex() {
+function fetchDayIndex(d=null) {
     // current day of the week
     // monday = 0
     // tuesday = 1
     // using own utils (for consistency purposes)
-    return getEpochDate(false) - roundToWeekStart(getEpochDate(false));
+    return getEpochDate(false, d) - roundToWeekStart(getEpochDate(false, d));
 }
 
 function convertEpochToUnitPosition(e) {
+    if (e['occurance_species'] != 'Once') { return null; }
+
     // takes epoch unix and changes position data
-    // [x, y, w, h]
-    // TODO : COMPLETE WIDTH AND HEIGHT CALCULATIONS
-    let d = e - new Date().getTimezoneOffset();
+    // [x, y, h]
+    // TODO : COMPLETE HEIGHT CALCULATIONS
+    let height = 1;
+    let start = 0;
+    switch (Object.keys(e['time_species'])[0]) {
+        case "Start":
+            start = e['time_species']['Start'];
+            break;
+        case "Range":
+            start = e['time_species']['Range'][0];
+            height = (e['time_species']['Range'][1] - e['time_species']['Range'][0]) / 3600;
+            break;
+        case "AllDay":
+            return null;
+        case "DayRange":
+            return null;
+        default:
+            // console.log(Object.keys(e['time_species']));
+            break;
+    }
     return [
-        result[0] = roundToWeekStart(Math.floor(d / 86400)),
-        Math.floor(d % 86400) / 3600
+        fetchDayIndex(new Date(start * 1000)),
+        Math.floor(start % 86400) / 3600,
+        height
     ];
 }
 
@@ -235,7 +261,7 @@ function toggleTaskCreation(s) {
     creationContainer.ariaLabel = 'open';
 
     creationContainer.style.top = `calc(var(--task-height) * ${fetchCurrentTime()})`;
-    creationContainer.style.left = `calc(5ch + calc(var(--task-width) * ${fetchCurrentDayIndex()}))`;
+    creationContainer.style.left = `calc(5ch + calc(var(--task-width) * ${fetchDayIndex()}))`;
 
     creationContainer.scrollIntoView({
         'behavior':'auto',
@@ -304,25 +330,39 @@ function addTask(e) {
     var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
     let all_day_checked = document.querySelector("#time #all-day input").checked;
-    let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
-    if (r_occurance_species == "Repeating") {
-        if (r_time_species == 'DayRange') {
-            r_time_species = 'AllDay';
-        }
-    } else {
+    // TODO: FIX MISTAKE HERE
+    // this check needs to be after the date epochs are added to start and end
+    // let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
+
+    if (r_occurance_species != "Repeating") {
         // let offset = roundToWeekStart(getEpochDate(false)) * 86400;
         // let offset = getEpochDate(false) * 86400;
         // end += offset;
         // start += offset;
 
         if (!all_day_checked) {
-            let offset = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
-            start += offset ? offset : (getEpochDate(false) * 86400);
-            offset = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
-            end += offset ? offset : (getEpochDate(false) * 86400);
+            // add date epochs to start and end
+            let date_epoch = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
+            start += date_epoch ? date_epoch : (getEpochDate(true) * 86400);
+            date_epoch = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
+            end += date_epoch ? date_epoch : (getEpochDate(true) * 86400);
+        } else {
+            // only take the epoch dates
+            let date_epoch = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
+            start = date_epoch ? date_epoch : (getEpochDate(false) * 86400);
+            date_epoch = document.querySelector("#task-creation #time #end input[type='date']").valueAsNumber / 1000;
+            end = date_epoch ? date_epoch : (getEpochDate(false) * 86400);
         }
+        // convoluted but thats for a future refactor to worry about 😊
+    }
 
-        // console.log(document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber);
+    // console.log(start, end);
+    let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
+
+    if (r_occurance_species == "Repeating") {
+        if (r_time_species == 'DayRange') {
+            r_time_species = 'AllDay';
+        }
     }
 
     [end, start] = end > start ? [end, start] : [start, end];
@@ -332,6 +372,7 @@ function addTask(e) {
     console.log(params);
     sendPostRequest(`${BACKEND_ADDRESS}/add_task/${params}`, login_info(), (r) => {
         parseResponse(r);
+        fetchLibrary();
     })
 }
 // #endregion

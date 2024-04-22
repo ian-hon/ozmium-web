@@ -12,37 +12,36 @@ pub struct Task {
     pub time_species: TimeSpecies,
     pub title: String,
     pub description: String,
-    // // epoch unix (at GMT ofc)
-    // pub start: u128,
-    // pub end: Option<u128>, // if end is none, there is no end time (TODO:implement in frontend)
     pub colour: u128,
 }
 impl Task {
     pub fn in_range(&self, start: u128, end: u128) -> bool {
-        let near: u128;
-        let mut far: Option<u128> = None;
+        let near: u128 = self.start_time();
 
+        match self.end_time() {
+            Some(far) => (start <= far) && (near <= end),
+            None => (near >= start) && (end >= near)
+        }
+    }
+
+    pub fn start_time(&self) -> u128 {
+        // for qol
         match self.time_species {
-            TimeSpecies::Start(s) => {
-                near = s;
-            },
-            TimeSpecies::Range(s, e) => {
-                near = s;
-                far = Some(e);
-            },
-            TimeSpecies::AllDay(s) => {
-                near = s;
-            },
-            TimeSpecies::DayRange(s, e) => {
-                near = s;
-                far = Some(e);
-            }
+            TimeSpecies::Start(s) => s,
+            TimeSpecies::Range(s, _) => s,
+            TimeSpecies::AllDay(s) => s,
+            TimeSpecies::DayRange(s, _) => s
         }
+    }
 
-        if far.is_none() {
-            return (near >= start) && (end >= near);
+    pub fn end_time(&self) -> Option<u128> {
+        // for qol
+        match self.time_species {
+            TimeSpecies::Start(_) => None,
+            TimeSpecies::Range(_, e) => Some(e),
+            TimeSpecies::AllDay(_) => None,
+            TimeSpecies::DayRange(_, e) => Some(e)
         }
-        ((near >= start) && (start >= far.unwrap())) || ((near >= end) && (end >= far.unwrap()))
     }
 }
 
@@ -67,7 +66,7 @@ pub enum TimeSpecies {
     // stored in epoch unix
     // 0 -> 1 Jan 1970
     // 86400 -> 2 Jan 1970
-    AllDay(u128),
+    AllDay(u128), // ignore u128 if occurance is repeating
     DayRange(u128, u128) // <- cant have day range if occurance is repeating
 }
 
