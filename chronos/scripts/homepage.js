@@ -10,50 +10,45 @@ var dates = [];
 var dateRange = {
     "start": 0, // number of days since 1/1/1970
     "length": 7, // select the 7 days after this
-    "offset": 0
+    "offset": 0,
+    "current": 0
 }
 // year, month, day offset
 // var dateOffset = [0, 0, 0];
 
 var container = document.querySelector("#main #content #field");
-var library = [
-    {
-        "type":"item",
-        "title":"bla bla bla",
-        "time":[1, 3],
-        "day":1
-    },
-    {
-        "type":"item",
-        "title":"lorem ipsum",
-        "time":[1.5, 2.5],
-        "day":2
-    },
-    {
-        "type":"container",
-        "height":1,
-        "position":[1, 2],
-        "children":[
-            {
-                "type":"item",
-                "title":"child 1",
-                "time":[3, 4],
-                "day":0
-            },
-            {
-                "type":"item",
-                "title":"child 2",
-                "time":[3, 4],
-                "day":0
-            }
-        ]
-    }
-]
+var library = [];
 
 var taskHeight = window.getComputedStyle(container).getPropertyValue('--task-height');
 var taskWidth = window.getComputedStyle(container).getPropertyValue('--task-width');
 
 var creationContainer = document.querySelector("#task-creation");
+
+// #region colour themees
+var colour_themes = [
+    "crimson",
+    "#ec5d2a",
+    "forestgreen",
+    "dodgerblue",
+    "blueviolet"
+    // "coral",
+    // "lightsalmon",
+    // "orange",
+    // "sandybrown",
+    // "tomato",
+    // "dodgerblue",
+    // "blueviolet",
+    // "teal",
+    // // "navy",
+    // "chocolate",
+    // // "darkviolet",
+    // // "hotpink",
+    // "lightslategrey",
+    // // "orangered",
+    // // "tomato"
+    // "forestgreen"
+];
+// #endregion
 
 document.querySelectorAll("#main table tbody td div h4")[clampValue(Math.floor(fetchCurrentTime()) + 2, 0, 23)].scrollIntoView({
     'behavior':'auto',
@@ -79,7 +74,7 @@ function parseResponse(r) {
 
     let result = JSON.parse(r);
     if (result['type'] != "success") {
-        console.log(result);
+        // console.log(result);
         // window.location.href = "./login.html";
         // or some kind of proper error handling
     }
@@ -136,11 +131,13 @@ function cleanTimeInput(e, minute=false) {
 function populateCalendar() {
     container.innerHTML = '';
     library.forEach((e) => {
+        console.log(e['type']);
         if (e["type"] == "container") {
             let batch = '';
             e['children'].forEach((i, index) => {
                 batch += addItem(i, index + 1);
             })
+            //TODO : FIX CONTAINER HEIGHT
             container.innerHTML += `<div class="item-container" style="top:calc(${taskHeight} * ${e['position'][1]}); left:calc(${taskWidth} * ${e['position'][0]}); height:calc(${taskHeight} * ${e['height']});">
     <h1>
         ${e['children'].length}
@@ -160,8 +157,8 @@ function populateCalendar() {
 function addItem(e, i=null) {
     let pos = convertEpochToUnitPosition(e);
     if (pos === null) { return ""; }
-    console.log(pos);
-    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(${pos[2]} * ${taskHeight} - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:crimson;">
+    // console.log(pos);
+    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(calc(${pos[2]} * ${taskHeight}) - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:${colour_themes[e['colour']]};">
     <h3 id="title">${e['title']}</h3>
 </div>`
 
@@ -171,13 +168,54 @@ function addItem(e, i=null) {
 function fetchLibrary() {
     sendPostRequest(`${BACKEND_ADDRESS}/fetch_library/0/1813657600`, login_info(), (r) => {
         let response = parseResponse(r);
-
-        console.log(response);
-
         library = JSON.parse(response);
+
+        gatherChildren();
 
         populateCalendar();
     })
+}
+
+function gatherChildren() {
+    let hashmap = {};
+
+    library.forEach((e, index) => {
+        let start = fetchTaskStart(e);
+
+        if (start in hashmap) {
+            hashmap[start].push(e);
+        } else {
+            hashmap[start] = [e];
+        }
+    })
+
+    library = [];
+    for (k in hashmap) {
+        let v = hashmap[k];
+
+        if (v.length > 1) {
+            let tallest = 0;
+            let pos = 0;
+            v.forEach((e) => {
+                pos = convertEpochToUnitPosition(e);
+
+                if (pos[2] > tallest) {
+                    tallest = pos[2];
+                }
+            })
+
+            library.push({
+                "type":"container",
+                "children":v,
+                "position":pos,
+                "height":tallest,
+            });
+        } else {
+            library.push(v[0]);
+        }
+    }
+
+    console.log(library);
 }
 
 fetchLibrary();
@@ -186,11 +224,20 @@ fetchLibrary();
 function fetchDateRange() {
     // var start = getEpochDate();
     dates = [];
+    dateRange['current'] = fetchDayIndex();
     dateRange['start'] = roundToWeekStart(getEpochDate(false) + dateRange['offset']) * 86400;
     for(i = 0; i < dateRange['length']; i++) {
         dates.push(dateRange['start'] + (i * 86400));
     }
+
+    let headers = document.querySelectorAll("#main #header-container .header h4:last-of-type");
+    dates.forEach((e, index) => {
+        headers[index].innerHTML = new Date(e * 1000).getDate();
+        headers[index].parentElement.parentElement.ariaLabel = index == dateRange['current'] ? 'highlighted' : '';
+    })
 }
+
+fetchDateRange();
 
 function fetchDayIndex(d=null) {
     // current day of the week
@@ -205,30 +252,37 @@ function convertEpochToUnitPosition(e) {
 
     // takes epoch unix and changes position data
     // [x, y, h]
-    // TODO : COMPLETE HEIGHT CALCULATIONS
     let height = 1;
-    let start = 0;
-    switch (Object.keys(e['time_species'])[0]) {
-        case "Start":
-            start = e['time_species']['Start'];
-            break;
-        case "Range":
-            start = e['time_species']['Range'][0];
-            height = (e['time_species']['Range'][1] - e['time_species']['Range'][0]) / 3600;
-            break;
-        case "AllDay":
-            return null;
-        case "DayRange":
-            return null;
-        default:
-            // console.log(Object.keys(e['time_species']));
-            break;
+    let start = fetchTaskStart(e);
+    if (["AllDay", "DayRange"].includes([Object.keys(e['time_species'])[0]])) {
+        // ignore if AllDay or DayRange
+        return null;
+    }
+    if (Object.keys(e['time_species'])[0] == "Range") {
+        height = (e['time_species']['Range'][1] - e['time_species']['Range'][0]) / 3600;
     }
     return [
         fetchDayIndex(new Date(start * 1000)),
         Math.floor(start % 86400) / 3600,
         height
     ];
+}
+
+function fetchTaskStart(e) {
+    // console.log(e);
+    let r = e['time_species'][Object.keys(e['time_species'])[0]];
+    if (Array.isArray(r)) {
+        return r[0];
+    }
+    return r;
+}
+
+function fetchTaskEnd() {
+    let r = e['time_species'][Object.keys(e['time_species'])[0]];
+    if (Array.isArray(r)) {
+        return r[1];
+    }
+    return null;
 }
 
 function fetchCurrentTime(date=null) {
@@ -260,7 +314,7 @@ function toggleTaskCreation(s) {
     }
     creationContainer.ariaLabel = 'open';
 
-    creationContainer.style.top = `calc(var(--task-height) * ${fetchCurrentTime()})`;
+    creationContainer.style.top = `calc(${document.querySelector("#main #header-container").clientHeight}px + var(--task-height) * ${fetchCurrentTime()})`;
     creationContainer.style.left = `calc(5ch + calc(var(--task-width) * ${fetchDayIndex()}))`;
 
     creationContainer.scrollIntoView({
@@ -273,8 +327,9 @@ function toggleTaskCreation(s) {
     document.querySelector("#create").ariaLabel = 'closed';
 }
 
-function toggleColourPicker(e) {
-    e.parentElement.ariaLabel = e.parentElement.ariaLabel == "open" ? "closed" : "open";
+function toggleColourPicker() {
+    let d = document.querySelector("#task-creation #colour-picker");
+    d.ariaLabel = d.ariaLabel == "open" ? "closed" : "open";
 }
 
 function toggleEndContainer(b) {
@@ -287,6 +342,25 @@ document.querySelector("#sidebar #user-data > div h4:first-of-type").innerHTML =
 // #endregion
 
 // #region task creation
+// #region colour
+function initializeColours() {
+    let d = document.querySelector("#colour-picker > div");
+    d.innerHTML = "";
+    colour_themes.forEach((c, index) => {
+        d.innerHTML += `<hr onclick="selectColourTheme(${index})" style="background:${c}">`;
+    })
+}
+
+initializeColours();
+
+function selectColourTheme(i) {
+    creationContainer.dataset.colour_theme = i;
+    creationContainer.style.background = colour_themes[i];
+
+    toggleColourPicker();
+}
+// #endregion
+
 function verifyValidity() {
     let t = document.querySelector("#task-creation #title").value;
     let b = document.querySelector("#task-creation #create");
@@ -369,7 +443,7 @@ function addTask(e) {
     // swap if the task ends before it starts
     //             <r_species>/<r_time_species>/<start>/<end>/<r_occurance_species>/<repeating_day>/<title>/<description>/<colour>"
     let params = `${r_species}/${r_time_species}/${start}/${end}/${r_occurance_species}/${repeating_day}/${encodeURIComponent(title)}/${encodeURIComponent(description)}/${colour}`;
-    console.log(params);
+    // console.log(params);
     sendPostRequest(`${BACKEND_ADDRESS}/add_task/${params}`, login_info(), (r) => {
         parseResponse(r);
         fetchLibrary();

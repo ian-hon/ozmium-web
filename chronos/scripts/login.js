@@ -44,7 +44,7 @@ async function confirm() {
     }), (r) => {
         var response = JSON.parse(r);
 
-        console.log(response);
+        // console.log(response);
 
         if (response.type == "success") {
             setLocalStorage("chronos_username", username);

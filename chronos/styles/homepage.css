@@ -206,23 +206,12 @@ body {
 
 /* horizontal headers */
 #main thead th:last-of-type {
-    /* min-width:var(--task-width);
-    max-width:var(--task-width); */
-
-    /* width:calc(var(--task-width) * 7); */
-    /* display:inline-flex; */
-
     padding:0;
-    /* border-style:solid; */
 
     z-index: 100;
 
     position:sticky;
     top:0;
-
-    /* display:flex;
-    justify-content: space-evenly;
-    align-items: start; */
 }
 
 /* time + events container */
@@ -235,7 +224,6 @@ body {
     background:var(--tertiary);
     border-radius:var(--border-radius);
 
-    /* width: fit-content; */
     width:calc(var(--task-width) - 3ch) !important;
 
     margin:0 1.5ch;
@@ -244,9 +232,15 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
 
-    /* align-content: center; */
-    /* text-align: center; */
+#main #header-container .header[aria-label='highlighted'] {
+    background:var(--primary);
+}
+
+#main #header-container .header[aria-label='highlighted'] h4:last-of-type {
+    font-size:3em;
+    font-weight: bolder;
 }
 
 /* day + date text in header */
@@ -257,6 +251,13 @@ body {
 /* date text in header */
 #main #header-container .header h4:last-child {
     font-size: 2.4em;
+}
+
+#main #header-container .header > div:first-of-type {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #main table h4 {
@@ -327,6 +328,34 @@ body {
     color:#fff4; 
 
     margin-top:calc(var(--task-height) - 2px);
+}
+/* #endregion */
+
+/* #region time-pointer */
+#time-pointer {
+    position:absolute;
+
+    display:flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+
+    top:0;
+    left:0;
+
+    width:100%;
+}
+
+#time-pointer h4 {
+    color:var(--primary);
+}
+
+#time-pointer hr {
+    border-collapse: none;
+    border-style:solid;
+    border-color:var(--primary);
+
+    flex:1;
 }
 /* #endregion */
 

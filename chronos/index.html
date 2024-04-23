@@ -87,6 +87,12 @@
                             <div><h4>12pm</h4></div>
                         </td>
                         <td id="content">
+                            <div id="time-pointer">
+                                <h4>
+                                    15:24
+                                </h4>
+                                <hr>
+                            </div>
                             <div id="gridline">
                                 <hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr><hr>
                             </div>
@@ -152,18 +158,18 @@
                                     </div>
                                     <div>
                                         <div id="colour-picker" aria-label="closed">
-                                            <img src="/assets/colour_wheel.png" onclick="toggleColourPicker(this)">
+                                            <img src="/assets/colour_wheel.png" onclick="toggleColourPicker()">
                                             <div>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
-                                                <hr>
+                                                <hr onclick="selectColourTheme(0)">
+                                                <hr onclick="selectColourTheme(1)">
+                                                <hr onclick="selectColourTheme(2)">
+                                                <hr onclick="selectColourTheme(3)">
+                                                <hr onclick="selectColourTheme(4)">
+                                                <hr onclick="selectColourTheme(5)">
+                                                <hr onclick="selectColourTheme(6)">
+                                                <hr onclick="selectColourTheme(7)">
+                                                <hr onclick="selectColourTheme(8)">
+                                                <hr onclick="selectColourTheme(9)">
                                             </div>
                                         </div>
                                         <h4 id="create" onclick="addTask(this)" aria-label="disabled">
