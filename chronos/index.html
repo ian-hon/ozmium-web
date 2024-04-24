@@ -61,6 +61,9 @@
                     </thead>
                     <tbody>
                         <td>
+                            <div id="time-pointer-text">
+                                <h4>huh</h4>
+                            </div>
                             <div><h4>1am</h4></div>
                             <div><h4>2am</h4></div>
                             <div><h4>3am</h4></div>
@@ -88,9 +91,6 @@
                         </td>
                         <td id="content">
                             <div id="time-pointer">
-                                <h4>
-                                    15:24
-                                </h4>
                                 <hr>
                             </div>
                             <div id="gridline">
@@ -159,18 +159,7 @@
                                     <div>
                                         <div id="colour-picker" aria-label="closed">
                                             <img src="/assets/colour_wheel.png" onclick="toggleColourPicker()">
-                                            <div>
-                                                <hr onclick="selectColourTheme(0)">
-                                                <hr onclick="selectColourTheme(1)">
-                                                <hr onclick="selectColourTheme(2)">
-                                                <hr onclick="selectColourTheme(3)">
-                                                <hr onclick="selectColourTheme(4)">
-                                                <hr onclick="selectColourTheme(5)">
-                                                <hr onclick="selectColourTheme(6)">
-                                                <hr onclick="selectColourTheme(7)">
-                                                <hr onclick="selectColourTheme(8)">
-                                                <hr onclick="selectColourTheme(9)">
-                                            </div>
+                                            <div></div>
                                         </div>
                                         <h4 id="create" onclick="addTask(this)" aria-label="disabled">
                                             create
@@ -179,7 +168,15 @@
                                 </div>
                             </div>
                             <div id="field">
-                                <div class="item" style="background:royalblue;">
+                                <!-- <div class="item" style="top:calc(10 * var(--task-height)); height:calc(calc(2 * var(--task-height)) - 4ch); left:calc(var(--task-width) * 0); background:crimson;">
+                                    <div>
+                                        <img id="completion" src="/assets/uncompleted.png">
+                                        <h3 id="title">lorem ipsum dolor sit amet elit</h3>
+                                    </div>
+                                    <h4 id="description">description</h4>
+                                    <h5 id="time">12:00-14:00</h5>
+                                </div> -->
+                                <!-- <div class="item" style="background:royalblue;">
                                         <h3 id="title">do this bla bla bla bla bla bla</h3>
                                         <h4 id="time">12:00</h4>
                                 </div>
@@ -203,7 +200,7 @@
                                             <h4 id="time">1:30-2:30</h4>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </td>
                     </tbody>

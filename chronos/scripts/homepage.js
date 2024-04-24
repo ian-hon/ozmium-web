@@ -24,6 +24,10 @@ var taskWidth = window.getComputedStyle(container).getPropertyValue('--task-widt
 
 var creationContainer = document.querySelector("#task-creation");
 
+var timePointerText = document.querySelector("#time-pointer-text");
+var timePointer = document.querySelector("#content #time-pointer");
+var verticalHeaderOffset = 0; // height of vertical headers
+
 // #region colour themees
 var colour_themes = [
     "crimson",
@@ -131,17 +135,16 @@ function cleanTimeInput(e, minute=false) {
 function populateCalendar() {
     container.innerHTML = '';
     library.forEach((e) => {
-        console.log(e['type']);
         if (e["type"] == "container") {
             let batch = '';
             e['children'].forEach((i, index) => {
                 batch += addItem(i, index + 1);
             })
-            //TODO : FIX CONTAINER HEIGHT
-            container.innerHTML += `<div class="item-container" style="top:calc(${taskHeight} * ${e['position'][1]}); left:calc(${taskWidth} * ${e['position'][0]}); height:calc(${taskHeight} * ${e['height']});">
+            container.innerHTML += `<div class="item-container" style="top:calc(${taskHeight} * ${e['position'][1]}); left:calc(${taskWidth} * ${e['position'][0]}); height:calc(calc(${taskHeight} * ${e['height']}) - 4ch);">
     <h1>
         ${e['children'].length}
     </h1>
+    <img src='/assets/right_chevron.png'>
     <div id="user-click" onclick="toggleItemContainer(this)">
     </div>
     <div id="children">
@@ -158,28 +161,44 @@ function addItem(e, i=null) {
     let pos = convertEpochToUnitPosition(e);
     if (pos === null) { return ""; }
     // console.log(pos);
-    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(calc(${pos[2]} * ${taskHeight}) - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:${colour_themes[e['colour']]};">
-    <h3 id="title">${e['title']}</h3>
+//     return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(calc(${pos[2]} * ${taskHeight}) - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:${colour_themes[e['colour']]};">
+//     <h3 id="title">${e['title']}</h3>
+// </div>`
+
+
+    return `<div class="item" style="top:calc(${pos[1]} * ${taskHeight}); height:calc(calc(${pos[2]} * ${taskHeight}) - 4ch); left:${(i === null ? `calc(var(--task-width) * ${pos[0]})` : `calc(calc(var(--task-width) * ${i}) - 1ch)`)}; background:${colour_themes[e['colour']]};" ${e['species'] == 'Event' ? '' : `dataset-completed="${e['species']['Task']}"`}>
+    <div>
+        <img id="completion" src="/assets/uncompleted.png">
+        <h3 id="title">${e['title']}</h3>
+    </div>
+    <h4 id="description">${e['description']}</h4>
+    <h5 id="time"></h5>
 </div>`
 
     // <h4 id="time">${e['time'][0]}-${e['time'][1]}</h4>
 }
 
 function fetchLibrary() {
+    // return;
     sendPostRequest(`${BACKEND_ADDRESS}/fetch_library/0/1813657600`, login_info(), (r) => {
         let response = parseResponse(r);
         library = JSON.parse(response);
 
+        console.log(response);
+
         gatherChildren();
 
         populateCalendar();
+
+        // calculate verticalHeaderOffset
+        verticalHeaderOffset = document.querySelector("#header-container").clientHeight + 'px';
     })
 }
 
 function gatherChildren() {
     let hashmap = {};
 
-    library.forEach((e, index) => {
+    library.forEach((e) => {
         let start = fetchTaskStart(e);
 
         if (start in hashmap) {
@@ -214,8 +233,6 @@ function gatherChildren() {
             library.push(v[0]);
         }
     }
-
-    console.log(library);
 }
 
 fetchLibrary();
@@ -269,7 +286,6 @@ function convertEpochToUnitPosition(e) {
 }
 
 function fetchTaskStart(e) {
-    // console.log(e);
     let r = e['time_species'][Object.keys(e['time_species'])[0]];
     if (Array.isArray(r)) {
         return r[0];
@@ -277,7 +293,7 @@ function fetchTaskStart(e) {
     return r;
 }
 
-function fetchTaskEnd() {
+function fetchTaskEnd(e) {
     let r = e['time_species'][Object.keys(e['time_species'])[0]];
     if (Array.isArray(r)) {
         return r[1];
@@ -293,6 +309,14 @@ function fetchCurrentTime(date=null) {
 
     let d = date ? date : new Date();
     return d.getHours() + (d.getMinutes() / 60);
+}
+
+function setTimePointer() {
+    let d = new Date();
+    let t = `calc(${fetchCurrentTime()} * var(--task-height))`;
+    timePointerText.innerHTML = `<h4>${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}</h4>`;
+    timePointerText.style.top = t;
+    timePointer.style.top = `calc(${verticalHeaderOffset} + ${t})`;
 }
 // #endregion
 
@@ -404,16 +428,8 @@ function addTask(e) {
     var end = (temp[0].value * 3600) + (temp[1].value * 60);
 
     let all_day_checked = document.querySelector("#time #all-day input").checked;
-    // TODO: FIX MISTAKE HERE
-    // this check needs to be after the date epochs are added to start and end
-    // let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
 
     if (r_occurance_species != "Repeating") {
-        // let offset = roundToWeekStart(getEpochDate(false)) * 86400;
-        // let offset = getEpochDate(false) * 86400;
-        // end += offset;
-        // start += offset;
-
         if (!all_day_checked) {
             // add date epochs to start and end
             let date_epoch = document.querySelector("#task-creation #time #start input[type='date']").valueAsNumber / 1000;
@@ -430,7 +446,6 @@ function addTask(e) {
         // convoluted but thats for a future refactor to worry about 😊
     }
 
-    // console.log(start, end);
     let r_time_species = all_day_checked ? (start == end ? 'AllDay' : 'DayRange') : (start == end ? 'Start' : 'Range');
 
     if (r_occurance_species == "Repeating") {
@@ -441,12 +456,14 @@ function addTask(e) {
 
     [end, start] = end > start ? [end, start] : [start, end];
     // swap if the task ends before it starts
-    //             <r_species>/<r_time_species>/<start>/<end>/<r_occurance_species>/<repeating_day>/<title>/<description>/<colour>"
     let params = `${r_species}/${r_time_species}/${start}/${end}/${r_occurance_species}/${repeating_day}/${encodeURIComponent(title)}/${encodeURIComponent(description)}/${colour}`;
-    // console.log(params);
     sendPostRequest(`${BACKEND_ADDRESS}/add_task/${params}`, login_info(), (r) => {
         parseResponse(r);
         fetchLibrary();
     })
 }
 // #endregion
+
+var timerHandler = setInterval(() => {
+    setTimePointer();
+}, 250);

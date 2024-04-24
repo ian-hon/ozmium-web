@@ -335,20 +335,41 @@ body {
 #time-pointer {
     position:absolute;
 
-    display:flex;
+    /* display:flex;
     justify-content: start;
     align-items: center;
-    flex-direction: row;
+    flex-direction: row; */
 
-    top:0;
-    left:0;
+    /* top:0; */
+    /* left:; */
 
-    width:100%;
+    width:calc(7 * var(--task-width));
+    /* width:100%; */
+
+    transform:translateY(-50%);
 }
 
-#time-pointer h4 {
-    color:var(--primary);
+/* #region time pointer text */
+#time-pointer-text {
+    position:absolute;
+    height:fit-content !important;
+    overflow:hidden;
+
+    transform:translateY(-50%);
+
+    width:100% !important;
+
+    z-index: 60;
 }
+
+#time-pointer-text h4 {
+    font-size:1em !important;
+
+    background:black !important;
+
+    transform:none !important;
+}
+/* #endregion */
 
 #time-pointer hr {
     border-collapse: none;
@@ -388,18 +409,80 @@ body {
     filter:drop-shadow(0 0 10px #0009);
 }
 
+/* #region item */
+.item {
+    display:flex;
+    justify-content: start;
+    align-items: start;
+
+    flex-direction: column;
+
+    /* overflow:hidden; */
+}
+
+.item img#completion {
+    height:2ch;
+    margin-right:1ch;
+
+    content:url("/assets/uncompleted.png");
+}
+
+
+.item #completion {
+    /* display:none; */
+}
+
+/* TODO : FIX THIS */
+.item[data-completed] {
+    display:none;
+}
+
+.item[data-completed='false'] #completion {
+    /* display:block !important; */
+}
+
+.item[data-completed='true'] #completion {
+    /* display:block !important; */
+    content:url("/assets/completed.png") !important;
+}
+
+.item > div {
+    display:flex;
+    justify-content: start;
+    align-items: center;
+
+    width:100%;
+
+    overflow:hidden;
+}
+
 .item #title {
-    font-size: 1.8em;
+    font-size: 1.2em;
+
+    flex: 1;
+
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.item #description {
+    font-style:italic;
+    font-size:0.9em;
 }
 
 .item #time {
     font-style:italic;
     color:#fffb;
+
+    font-size:0.9em;
 }
+/* #endregion */
 
 /* #region item container */
 .item-container {
     background:var(--primary);
+
+    /* position:relative; */
 
     display:flex;
     justify-content: center;
@@ -408,6 +491,8 @@ body {
     /* fixes drop shadow being cut off when displaying above other elements */
     -webkit-transform:translateZ(0);
     transform:translateZ(0);
+
+    z-index: 200;
 
     /* top:auto; */
 
@@ -428,15 +513,37 @@ body {
 
 /* number of grouped items */
 .item-container h1 {
+    font-size:3em;
+
     text-align: center;
+    margin-left:0.5ch;
+}
+
+.item-container img {
+    left:calc(100% + 1em);
+
+    position:absolute;
+    height:2em;
+
+    opacity: 0;
+
+    transition-duration:0.3s;
+}
+
+.item-container[aria-label='open'] img {
+    left:calc(100% - 3em);
+
+    transform:rotateY(180deg);
+}
+
+.item-container:hover img {
+    opacity: 1;
 }
 
 .item-container #children {
     opacity: 0;
 
     overflow:auto;
-
-    /* background:red; */
 }
 
 .item-container .item {
@@ -444,6 +551,10 @@ body {
     transition-duration:0.3s;
 
     top:0 !important;
+
+    /* fixes drop shadow being cut off when displaying above other elements */
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
 
     /* margin-left:-1ch; */
 }
@@ -454,10 +565,6 @@ body {
 
 .item-container[aria-label='open'] #children .item {
     filter:drop-shadow(0 0 10px #0009);
-
-    /* fixes drop shadow being cut off when displaying above other elements */
-    -webkit-transform:translateZ(0);
-    transform:translateZ(0);
 
     cursor:pointer;
 }
