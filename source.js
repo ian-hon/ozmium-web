@@ -1,4 +1,4 @@
-const BACKEND_ADDRESS = 'http://127.0.0.1:8000';
+const BACKEND_ADDRESS = 'http://www.ozmium.xyz';
 
 async function sendGetRequest(url, func) {
     var http = new XMLHttpRequest();
@@ -26,6 +26,17 @@ async function sendPostRequest(url, body, func) {
     http.setRequestHeader("Content-Type", "text/plain");
     // using text/plain overcomes needing to send a OPTION request as a preflight request (preflight request sent automatically to check if actual request is safe to send)
     http.send(body)
+}
+
+function parseResponse(r) {
+    let result = JSON.parse(r);
+    if (result['type'] != "success") {
+        // console.log(result);
+        window.location.href = "./login.html";
+        // or some kind of proper error handling
+    }
+
+    return decodeURIComponent(result['data']);
 }
 
 
