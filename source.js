@@ -1,4 +1,5 @@
-const BACKEND_ADDRESS = 'http://www.ozmium.xyz';
+// const BACKEND_ADDRESS = 'http://www.ozmium.xyz';
+const BACKEND_ADDRESS = 'http://127.0.0.1:8000';
 
 async function sendGetRequest(url, func) {
     var http = new XMLHttpRequest();
