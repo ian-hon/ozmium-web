@@ -11,3 +11,7 @@ function login_info() {
         "password":password
     });
 }
+
+function formatUserCode(code) {
+    return `#${code.slice(0, 4)}-${code.slice(4, 8)}`;
+}
