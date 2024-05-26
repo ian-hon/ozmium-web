@@ -17,7 +17,7 @@ var collection = [
     [1709169300, "Biology"],
     [1709684100, "Sains Komputer"],
 
-    [1716804000, "SPM Results"]
+    [1716775200, "SPM Results"]
 ];
 
 var p = document.getElementById("timetable");
