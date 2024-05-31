@@ -1,8 +1,11 @@
 // const BACKEND_ADDRESS = 'http://www.ozmium.xyz';
 // const BACKEND_ADDRESS = 'https://3.106.177.190:8000';
 
-// const BACKEND_ADDRESS = 'http://127.0.0.1:8000';
-const BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
+const BACKEND_ADDRESS = 'http://127.0.0.1:8000';
+// const BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
+
+const SOTERIUS = 'http://127.0.0.1:8100';
+// const SOTERIUS = 'https://ozmium.xyz/soterius';
 // uri rewriting in place
 
 async function sendGetRequest(url, func) {
@@ -36,8 +39,7 @@ async function sendPostRequest(url, body, func) {
 function parseResponse(r) {
     let result = JSON.parse(r);
     if (result['type'] != "success") {
-        // console.log(result);
-        window.location.href = "./login.html";
+        window.location.href = `/soterius/login.html?redirect=${encodeURIComponent(window.location)}`;
         // or some kind of proper error handling
     }
 

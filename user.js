@@ -1,8 +1,9 @@
-var username = fetchLocalStorage("aurum_username");
-var password = fetchLocalStorage("aurum_password");
+var username = fetchLocalStorage("username");
+var password = fetchLocalStorage("password");
 
 if ((username === null) || (password === null)) {
-    window.location.href = "./login.html";
+    // window.location.href = "/soterius/login.html";
+    window.location.href = `/soterius/login.html?redirect=${window.location}`;
 }
 
 function login_info() {
