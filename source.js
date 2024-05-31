@@ -5,7 +5,7 @@
 const BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
 
 // const SOTERIUS = 'http://127.0.0.1:8100';
-const SOTERIUS = 'https://ozmium.xyz/soterius';
+const SOTERIUS = 'https://ozmium.xyz/soterius_backend';
 // uri rewriting in place
 
 async function sendGetRequest(url, func) {
