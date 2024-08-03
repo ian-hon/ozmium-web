@@ -5,6 +5,7 @@ const AURUM_BACKEND_ADDRESS = 'http://127.0.0.1:8000';
 // const BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
 
 const CHRONOS_BACKEND_ADDRESS = 'http://127.0.0.1:8001';
+const ATHENA_BACKEND_ADDRESS = 'http://127.0.0.1:8002';
 
 const SOTERIUS = 'http://127.0.0.1:8100';
 // const SOTERIUS = 'https://ozmium.xyz/soterius_backend';
