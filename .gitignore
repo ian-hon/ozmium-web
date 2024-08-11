@@ -4,4 +4,8 @@ chronos/
 mantissa/
 aeolus/
 aurum/
+esp32_test/
+learn-morse/
+soterius/
+icarus/
 .DS_Store
