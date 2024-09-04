@@ -4,10 +4,14 @@
 // const AURUM_BACKEND_ADDRESS = 'http://127.0.0.1:8000';
 const AURUM_BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
 
-// const CHRONOS_BACKEND_ADDRESS = 'http://127.0.0.1:8001';
-// const ATHENA_BACKEND_ADDRESS = 'http://127.0.0.1:8002';
-const CHRONOS_BACKEND_ADDRESS = 'http://ozmium.xyz/chronos_backend';
-const ATHENA_BACKEND_ADDRESS = 'http://ozmium.xyz/athena_backend';
+const CHRONOS_BACKEND_ADDRESS = 'http://127.0.0.1:8001';
+const ATHENA_BACKEND_ADDRESS = 'http://127.0.0.1:8002';
+// mantissa is 8003
+// athena is 8004
+const BOUNTY_BACKEND_ADDRESS = 'http://127.0.0.1:8005';
+// const CHRONOS_BACKEND_ADDRESS = 'http://ozmium.xyz/chronos_backend';
+// const ATHENA_BACKEND_ADDRESS = 'http://ozmium.xyz/athena_backend';
+// const BOUNTY_BACKEND_ADDRESS = 'http://ozmium.xyz/bounty_backend';
 
 // const SOTERIUS = 'http://127.0.0.1:8100';
 const SOTERIUS = 'https://ozmium.xyz/soterius_backend';
