@@ -4,12 +4,19 @@
 // const AURUM_BACKEND_ADDRESS = 'http://127.0.0.1:8000';
 const AURUM_BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
 
+
+const BOUNTY_BACKEND_ADDRESS = 'http://127.0.0.1:8005';
 // const CHRONOS_BACKEND_ADDRESS = 'http://127.0.0.1:8001';
 // const ATHENA_BACKEND_ADDRESS = 'http://127.0.0.1:8002';
-const BOUNTY_BACKEND_ADDRESS = 'http://127.0.0.1:8005';
+const PHEME_BACKEND_ADDRESS = 'http://127.0.0.1:8006';
+const DEMETER_BACKEND_ADDRESS = 'http://127.0.0.1:8007';
+
+// const BOUNTY_BACKEND_ADDRESS = 'http://ozmium.xyz/bounty_backend';
 const CHRONOS_BACKEND_ADDRESS = 'http://ozmium.xyz/chronos_backend';
 const ATHENA_BACKEND_ADDRESS = 'http://ozmium.xyz/athena_backend';
-// const BOUNTY_BACKEND_ADDRESS = 'http://ozmium.xyz/bounty_backend';
+// const PHEME_BACKEND_ADDRESS = 'http://ozmium.xyz/pheme_backend';
+// const DEMETER_BACKEND_ADDRESS = 'http://ozmium.xyz/demeter_backend';
+
 
 // const SOTERIUS = 'http://127.0.0.1:8100';
 const SOTERIUS = 'https://ozmium.xyz/soterius_backend';
@@ -53,7 +60,9 @@ async function sendPostRequest(url, body, func) {
 function parseResponse(r) {
     let result = JSON.parse(r);
     if (result['type'] != "success") {
-        window.location.href = `/soterius/login.html?redirect=${encodeURIComponent(window.location)}`;
+        console.log('something wrong happened');
+        console.log(r);
+        // window.location.href = `/soterius/login.html?redirect=${encodeURIComponent(window.location)}`;
         // or some kind of proper error handling
     }
 
