@@ -1,21 +1,19 @@
-// const BACKEND_ADDRESS = 'http://www.ozmium.xyz';
-// const BACKEND_ADDRESS = 'https://3.106.177.190:8000';
-
 // const AURUM_BACKEND_ADDRESS = 'http://127.0.0.1:8000';
-const AURUM_BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
-
-
-const BOUNTY_BACKEND_ADDRESS = 'http://127.0.0.1:8005';
 // const CHRONOS_BACKEND_ADDRESS = 'http://127.0.0.1:8001';
 // const ATHENA_BACKEND_ADDRESS = 'http://127.0.0.1:8002';
+const BOUNTY_BACKEND_ADDRESS = 'http://127.0.0.1:8005';
 const PHEME_BACKEND_ADDRESS = 'http://127.0.0.1:8006';
 const DEMETER_BACKEND_ADDRESS = 'http://127.0.0.1:8007';
+const APUGDC_BACKEND_ADDRESS = 'http://127.0.0.1:8008';
+const OZMIUM_BACKEND_ADDRESS = 'https://127.0.0.1:8101';
 
-// const BOUNTY_BACKEND_ADDRESS = 'http://ozmium.xyz/bounty_backend';
+const AURUM_BACKEND_ADDRESS = 'https://ozmium.xyz/backend';
 const CHRONOS_BACKEND_ADDRESS = 'http://ozmium.xyz/chronos_backend';
 const ATHENA_BACKEND_ADDRESS = 'http://ozmium.xyz/athena_backend';
+// const BOUNTY_BACKEND_ADDRESS = 'http://ozmium.xyz/bounty_backend';
 // const PHEME_BACKEND_ADDRESS = 'http://ozmium.xyz/pheme_backend';
 // const DEMETER_BACKEND_ADDRESS = 'http://ozmium.xyz/demeter_backend';
+// const OZMIUM_BACKEND_ADDRESS = 'https://ozmium.xyz/ozmium_backend';
 
 
 // const SOTERIUS = 'http://127.0.0.1:8100';
