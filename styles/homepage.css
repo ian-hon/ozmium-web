@@ -70,6 +70,7 @@ a {
 
 #projects {
     margin: 15vh 50px;
+    margin-bottom:5em;
 
     & > h1 {
         margin: 5vh 0;
@@ -148,5 +149,28 @@ a {
 
     h1 {
         color:var(--primary);
+    }
+}
+
+#sns {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width:60%;
+
+    margin:auto;
+    margin-bottom:10em;
+
+    img {
+        height: 6em;
+        width: 6em;
+        border-radius:1000px;
+
+        transition-duration:0.3s;
+
+        &:hover {
+            transform:scale(1.1);
+        }
     }
 }
