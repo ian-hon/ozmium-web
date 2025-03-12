@@ -19,10 +19,20 @@ var collection = [
 
     // [1716775200, "SPM Results"]
 
-    [1733796000, "DTIN final exam"],
-    [1733968800, "Math final exam"],
-    [1734400800, "CA final exam"]
+    // [1733796000, "DTIN final exam"],
+    // [1733968800, "Math final exam"],
+    // [1734400800, "CA final exam"]
+
+    [1742443140, "ISCC P1"],
+    [1742443140, "ISCC P2"],
+    [1741147140, "DBM P1"],
+    [1743911940, "DBM P2"],
+    [1744516620, "OPS P1"],
+    [1745121420, "OPS P2"],
+    [1744171140, "PWP P1"]
 ];
+
+collection = collection.sort((a, b) => a[0] - b[0]);
 
 var p = document.getElementById("timetable");
 collection.forEach((e) => {
