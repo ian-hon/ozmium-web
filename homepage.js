@@ -13,6 +13,8 @@ var tags = [
     'html/css',
     'firestore',
     'vercel',
+    'expo eas',
+    'version control'
 ]
 
 var selectedTags = [];
@@ -27,7 +29,7 @@ function updateContainers() {
     let unselected = tags.filter(x => !selectedTags.includes(x));
     unselected.forEach((e) => {
         tagContainerNew += `<div class="tag" onclick="select('${e}')">
-            <h2>${e.toUpperCase()}</h2>
+            <h2>${e.toLowerCase()}</h2>
             <div>
                 <img src="./assets/cross.png">
             </div>
@@ -36,7 +38,7 @@ function updateContainers() {
 
     selectedTags.forEach((e) => {
         selectedTagContainerNew += `<div class="tag" selected onclick="deselect('${e}')">
-            <h2>${e.toUpperCase()}</h2>
+            <h2>${e.toLowerCase()}</h2>
             <div>
                 <img src="./assets/cross.png">
             </div>
