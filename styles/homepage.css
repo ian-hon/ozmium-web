@@ -176,6 +176,12 @@ a {
     }
 
     & #container {
+        display: grid;
+
+        grid-template-columns: auto auto;
+
+        gap: 2em;
+
         margin-top: 2em;
     }
 }
@@ -395,7 +401,7 @@ a {
         & #tags {
             & .project-tag {
                 margin: 0;
-                margin-right: 0ch;
+                margin-right: 1ch;
                 font-size: 0.8rem;
             }
         }

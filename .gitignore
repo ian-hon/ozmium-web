@@ -1,18 +1,21 @@
 data/
 
-chronos/
-mantissa/
+/chronos/
+/mantissa/
 aeolus/
-aurum/
+/aurum/
 esp32_test/
-learn-morse/
+/learn-morse/
 soterius/
 icarus/
 hercules/
 assignment-bounty/
-athena/
+/athena/
 demeter/
 pheme/
 memorize-flags/
 rock-beats-paper/
 .DS_Store
+
+assets/projects/new/helper/venv/
+assets/projects/new/helper/input/
