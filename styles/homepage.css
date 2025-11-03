@@ -9,7 +9,7 @@
     --project-tag-border: #444;
     --project-tag-background: #444;
 
-    --blur-amount: 10px;
+    --blur-amount: 20px;
 }
 
 html,
@@ -123,15 +123,34 @@ a {
     flex-direction: column;
 
     /* mobile */
-    width: 40%;
+    width: 60%;
     margin: auto;
 
-    &>h1 {
-        margin-bottom: 1em;
+    &>h3 {
+        font-size: 0.9rem;
+        font-style: italic;
+
+        opacity: 0.5;
+
+        text-align: center;
+
+        margin-top: 1em;
+        margin-bottom: 2em;
     }
 
     & #query {
-        /* background: blue; */
+        margin-bottom: 1.5em;
+
+        width: 100%;
+
+        &>h3 {
+            font-size: 0.95rem;
+            font-style: italic;
+
+            opacity: 0.6;
+
+            margin-bottom: 0.2em;
+        }
 
         &>input {
             border: none;
@@ -145,7 +164,7 @@ a {
             width: calc(100% - 4ch);
 
             padding: 0.5em 2ch;
-            margin-bottom: 1em;
+            margin-bottom: 1.5em;
 
             border-radius: var(--border-radius);
 
@@ -274,27 +293,29 @@ a {
 }
 
 .project {
+    display: block;
+
     overflow: hidden;
     position: relative;
 
-    height: 25em;
+    height: 28em;
     width: 30em;
 
     border-radius: var(--border-radius);
+
+    background: black;
 
     border-style: solid;
     border-width: 1.5px;
     border-color: var(--tag-border);
 
     & #background {
+        width: auto;
         height: 100%;
-        width: 100%;
 
         background-repeat: repeat-y;
-
+        background-position: top center;
         background-size: contain;
-
-        object-fit: cover;
     }
 
     /* & #background {
@@ -345,7 +366,7 @@ a {
         bottom: 0;
         left: 0;
 
-        background: #151515aa;
+        background: #151515bb;
 
         backdrop-filter: blur(var(--blur-amount));
         -webkit-backdrop-filter: blur(var(--blur-amount));

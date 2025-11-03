@@ -16,7 +16,7 @@ var projects = [
             'new_file.gif'
         ],
         description: 'open-source version control. aka, git remade in rust',
-        tags: ['rust', 'low-level', 'version control']
+        tags: ['rust', 'version control']
     },
     {
         title: "hastebin",
@@ -25,41 +25,62 @@ var projects = [
             ["github", "https://github.com/ian-hon/hastebin"],
             ["website", "https://hastebin.ianhon.com"],
         ],
-        media: [],
+        media: [
+            "hastebin4.gif",
+            "hastebin2.gif",
+            "hastebin3.gif",
+            "hastebin0.png"
+        ],
         description: "clutter-less multi-file pastebin with syntax highlighting. over 3.8k global pastes",
-        tags: ["react", "next.js", "vercel", "postgresql", "axum", "web"]
+        tags: ["react", "next.js", "vercel", "postgresql", "axum"]
     },
     {
         title: "yetAnotherRoguelike",
-        year: "2023",
-        links: [],
-        media: [],
+        year: "2022",
+        links: [
+            ["github", "https://github.com/ian-hon/YetAnotherRoguelike"]
+        ],
+        media: [
+            "0.gif"
+        ],
         description: "2D infinite sandbox roguelike with procedural generation using Cantor’s pairing and Perlin noise. Features custom light blending, UI framework, and in-house chemistry system.",
-        tags: ["c#", "xna", "monogame", "game dev", "procedural generation"]
+        tags: ["c#", "monogame/xna", "procedural generation"]
     },
     {
         title: "leetcode",
         year: "2024-2025",
-        links: [],
-        media: [],
+        links: [
+            ["leetcode", "https://leetcode.com/u/ajian_nedo/"]
+        ],
+        media: [
+            "compilation.png"
+        ],
         description: "200+ problems, 100+ streak, all rust.",
         tags: ["rust", "competitive programming", "dsa"]
     },
-    {
-        title: "voxelux",
-        year: "2024",
-        links: [],
-        media: [],
-        description: "3d open-world sandbox using dynamic mesh generation + greedy meshing and world chunking",
-        tags: ["rust", "bevy", "game dev", "3d"]
-    },
+    // {
+    //     title: "voxelux",
+    //     year: "2024",
+    //     links: [],
+    //     media: [],
+    //     description: "3d open-world sandbox using dynamic mesh generation + greedy meshing and world chunking",
+    //     tags: ["rust", "bevy", "3d"]
+    // },
     {
         title: "hermes",
         year: "2024",
-        links: [],
-        media: [],
+        links: [
+            ["website", "https://hermes.ianhon.com"],
+            ["github", "https://github.com/ian-hon/hermes"]
+        ],
+        media: [
+            "hermes1.png",
+            "hermes2.gif",
+            "hermes3.png",
+            "hermes4.png",
+        ],
         description: "homebrew irc using websockets; aka discord in 90s aesthetic",
-        tags: ["react", "next.js", "vercel", "postgresql", "axum", "irc", "websockets"]
+        tags: ["react", "next.js", "vercel", "sqlite", "axum", "irc", "websockets"]
     },
     {
         title: "neuralCM",
@@ -74,51 +95,76 @@ var projects = [
             'cell_mitosis.gif'
         ],
         description: "neural cellular automata. imitates cell division and cell death using neural networks.",
-        tags: ["c#", "xna", "monogame", "ai", "simulation"]
+        tags: ["c#", "monogame/xna", "ai", "simulation"]
     },
     {
         title: "aurum",
-        year: "2025",
-        links: [],
-        media: [],
+        year: "2023 (discontinued)",
+        links: [
+            ["github", "https://github.com/ian-hon/aurum"]
+        ],
+        media: [
+            "aurum.png"
+        ],
         description: "e-wallet application built in rust.",
-        tags: ["rust", "fintech", "wallet"]
+        tags: ["rust", "fintech", "vanillajs"]
     },
     {
         title: "mantissa",
-        year: "2025",
-        links: [],
-        media: [],
+        year: "2023 (discontinued)",
+        links: [
+            ["github", "https://github.com/ian-hon/mantissa"]
+        ],
+        media: [
+            "mantissa.png"
+        ],
         description: "simulated stock exchange and bourse. simulates over thousands of stocks, and several millions of users",
-        tags: ["rust", "simulation", "finance"]
+        tags: ["rust", "simulation", "finance", "vanillajs"]
     },
     {
         title: "chronos",
-        year: "2025",
-        links: [],
-        media: [],
+        year: "2023 (discontinued)",
+        links: [
+            ["github", "https://github.com/ian-hon/chronos"]
+        ],
+        media: [
+            "chronos.png"
+        ],
         description: "clutterless calendar application",
-        tags: ["rust", "productivity", "vanilla js"]
+        tags: ["rust", "productivity", "vanillajs"]
     },
+    // {
+    //     title: "soterius",
+    //     year: "2025",
+    //     links: [],
+    //     media: [],
+    //     description: "user registration system, used by other apps in my ecosystem",
+    //     tags: ["rust", "auth", "backend"]
+    // },
     {
-        title: "soterius",
-        year: "2025",
-        links: [],
-        media: [],
-        description: "user registration system, used by other apps in my ecosystem",
-        tags: ["rust", "auth", "backend"]
-    },
-    {
-        title: "asteroid & MonoSweeper",
+        title: "asteroid",
         year: "2023",
         links: [
             ["itch", "https://asianerd.itch.io/asteroid"],
+        ],
+        media: [
+            "0.gif"
+        ],
+        description: "clone of the original 90s game, built in monogame/xna",
+        tags: ["c#", "monogame/xna"]
+    },
+    {
+        title: "monosweeper",
+        year: "2021",
+        links: [
             ["github", "https://github.com/ian-hon/MonoSweeper"],
             ["itch", "https://asianerd.itch.io/monosweeper"],
         ],
-        media: [],
-        description: "Clones of classic 90s arcade games.",
-        tags: ["game dev", "c#", "retro", "xna", "monogame"]
+        media: [
+            "0.gif"
+        ],
+        description: "built this because the minesweeper website kept showing ads",
+        tags: ["c#", "monogame/xna"]
     },
     {
         title: "sarif optics",
@@ -144,7 +190,7 @@ var projects = [
         ],
         description: "scrapes apu's timetable and appends to google calendar",
         tags: [
-            "python", "automation", "google"
+            "python", "automation"
         ]
     },
     {
@@ -155,7 +201,10 @@ var projects = [
             ["website", 'https://apugdc.vercel.app'],
         ],
         media: [
-
+            "landing.png",
+            "landing_2.png",
+            "events.png",
+            "showcase.png"
         ],
         description: "apu game development club official website. current & past events, leaderboards and showcase system",
         tags: ['react', 'expressjs', 'vercel', 'next.js']
@@ -172,83 +221,66 @@ var projects = [
             "2.png",
             "3.png",
         ],
-        description: "",
-        tags: []
+        description: "discord bot with ai chatbot, server health monitoring, minecraft live player list and o-chem diagram generation using pillow",
+        tags: [
+            "python", "py-cord", "ai", "chemistry", "image"
+        ]
     },
     {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
+        title: "learn-morse",
+        year: "2024",
+        links: [
+            ["website", "https://ianhon.com/learn-morse"],
+            ["github", "https://github.com/ian-hon/learn-morse"]
+        ],
+        media: [
+            "0.gif",
+            "morse.png"
+        ],
+        description: "learn morse code through practice",
+        tags: ["vanillajs"]
     },
     {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
+        title: "advent-of-code",
+        year: "2020-present",
+        links: [
+            ["github", "https://github.com/ian-hon/advent-of-code"]
+        ],
+        media: [
+            "0.png"
+        ],
+        description: "annual programming challenge every december. completed in rust",
+        tags: ["rust"]
     },
     {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
+        title: "SuiRankup",
+        year: "2025",
+        links: [
+            ["github", "https://github.com/wz-Tan/devmatch2_Ch1llGuys"],
+            ["website", "https://devmatch2-ch1ll-guys-prod-2.vercel.app/"]
+        ],
+        media: [
+            "1.png",
+            "0.png",
+            "2.png",
+        ],
+        description: "on-chain marketplace for dynamic nfts. features auctions and upgradable nfts (group effort)",
+        tags: ["web3", "react", "vercel", "sui"]
     },
     {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
+        title: "axum-diesel talk",
+        year: "2025",
+        links: [
+            ["github", "https://github.com/ian-hon/axum-diesel-example"]
+        ],
+        media: [
+            "0.png"
+        ],
+        description: "invited by Rust Malaysia to give a talk about axum, the rust web framework, with diesel integration (group effort)",
+        tags: [
+            "rust", "axum", "talk", "diesel"
+        ]
     },
-    {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
-    },
-    {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
-    },
-    {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
-    },
-    {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
-    },
-    {
-        title: "",
-        year: "",
-        links: [],
-        media: [],
-        description: "",
-        tags: []
-    },
-
-
 ];
 
 var tags = Array.from(new Set(projects.flatMap(e => e.tags)));
@@ -328,7 +360,7 @@ function select(e) {
 function updateProjectContainers() {
     let projectContainerNew = '';
     projects.filter(p => (searchQuery.length == 0) || (
-        p.title.includes(searchQuery) || p.description.includes(searchQuery) || (
+        p.title.includes(searchQuery) || p.description.includes(searchQuery) || p.year.includes(searchQuery) || (
             p.tags.filter(t => t.includes(searchQuery)).length != 0
         )
     )).filter(p => (selectedTags.length == 0) || (p.tags.filter(t => selectedTags.includes(t)).length == selectedTags.length)).forEach((e) => {
