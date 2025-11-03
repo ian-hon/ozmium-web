@@ -441,3 +441,48 @@ a {
         }
     }
 }
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 10em;
+
+    margin-bottom: 10em;
+
+    & h3 {
+        font-style: italic;
+        font-size: 1.3rem;
+
+        opacity: 0.3;
+
+        &:has(a):first-of-type {
+            opacity: 1;
+
+            margin-bottom: 2ch;
+
+            & a {
+                color: var(--primary);
+
+                font-style: italic;
+                font-size: 1.6rem;
+
+                text-underline-offset: 0.15em;
+            }
+        }
+
+        & a {
+            color: white;
+            text-underline-offset: 0.15em;
+        }
+    }
+
+    & h4 {
+        font-style: italic;
+        font-size: 1.3rem;
+
+        opacity: 1;
+    }
+}
