@@ -6,9 +6,9 @@ var projects = [
     {
         title: 'relic',
         year: '2025',
-        links: {
-            'github': 'https://github.com/ian-hon/relic'
-        },
+        links: [
+            ['github', 'https://github.com/ian-hon/relic']
+        ],
         media: [
             'staging_new.gif',
             'adding.gif',
@@ -21,101 +21,249 @@ var projects = [
     {
         title: "hastebin",
         year: "2024",
-        links: {
-            github: "https://github.com/ian-hon/hastebin",
-            website: "https://hastebin.ianhon.com"
-        },
+        links: [
+            ["github", "https://github.com/ian-hon/hastebin"],
+            ["website", "https://hastebin.ianhon.com"],
+        ],
         media: [],
-        description: "No-clutter multi-file pastebin with syntax highlighting. Over 2,500 pastes globally. Supports permanent storage and multiple files.",
+        description: "clutter-less multi-file pastebin with syntax highlighting. over 3.8k global pastes",
         tags: ["react", "next.js", "vercel", "postgresql", "axum", "web"]
     },
     {
-        title: "YetAnotherRoguelike",
+        title: "yetAnotherRoguelike",
         year: "2023",
-        links: {},
+        links: [],
         media: [],
         description: "2D infinite sandbox roguelike with procedural generation using Cantor’s pairing and Perlin noise. Features custom light blending, UI framework, and in-house chemistry system.",
         tags: ["c#", "xna", "monogame", "game dev", "procedural generation"]
     },
     {
-        title: "Leetcode",
-        year: "2025",
-        links: {},
+        title: "leetcode",
+        year: "2024-2025",
+        links: [],
         media: [],
-        description: "Completed 200+ Leetcode problems over a 100-day streak, all solved using Rust.",
+        description: "200+ problems, 100+ streak, all rust.",
         tags: ["rust", "competitive programming", "dsa"]
     },
     {
-        title: "Voxelux",
+        title: "voxelux",
         year: "2024",
-        links: {},
+        links: [],
         media: [],
-        description: "3D open-world sandbox RPG using dynamic mesh generation with greedy meshing, UV mapping, and chunk-based world segmentation.",
+        description: "3d open-world sandbox using dynamic mesh generation + greedy meshing and world chunking",
         tags: ["rust", "bevy", "game dev", "3d"]
     },
     {
-        title: "Hermes",
+        title: "hermes",
         year: "2024",
-        links: {},
+        links: [],
         media: [],
-        description: "Homebrew IRC system with WebSocket support, mirroring Discord in a retro 1980s hacker terminal aesthetic.",
+        description: "homebrew irc using websockets; aka discord in 90s aesthetic",
         tags: ["react", "next.js", "vercel", "postgresql", "axum", "irc", "websockets"]
     },
     {
-        title: "NeuralCM",
+        title: "neuralCM",
         year: "2023",
-        links: {},
-        media: [],
-        description: "Neural cellular automata capable of imitating biological processes like cell division and death using neural networks.",
+        links: [
+            ["github", 'https://github.com/ian-hon/NeuralCM']
+        ],
+        media: [
+            'worms.gif',
+            'slime_mold.gif',
+            'pheromones.gif',
+            'cell_mitosis.gif'
+        ],
+        description: "neural cellular automata. imitates cell division and cell death using neural networks.",
         tags: ["c#", "xna", "monogame", "ai", "simulation"]
     },
     {
-        title: "Aurum",
+        title: "aurum",
         year: "2025",
-        links: {},
+        links: [],
         media: [],
-        description: "Functional e-wallet application built in Rust.",
+        description: "e-wallet application built in rust.",
         tags: ["rust", "fintech", "wallet"]
     },
     {
-        title: "Mantissa",
+        title: "mantissa",
         year: "2025",
-        links: {},
+        links: [],
         media: [],
-        description: "Simulated stock exchange network and bourse.",
+        description: "simulated stock exchange and bourse. simulates over thousands of stocks, and several millions of users",
         tags: ["rust", "simulation", "finance"]
     },
     {
-        title: "Chronos",
+        title: "chronos",
         year: "2025",
-        links: {},
+        links: [],
         media: [],
-        description: "Clutterless calendar application.",
-        tags: ["rust", "productivity"]
+        description: "clutterless calendar application",
+        tags: ["rust", "productivity", "vanilla js"]
     },
     {
-        title: "Soterius",
+        title: "soterius",
         year: "2025",
-        links: {},
+        links: [],
         media: [],
-        description: "User registration system used by various apps.",
+        description: "user registration system, used by other apps in my ecosystem",
         tags: ["rust", "auth", "backend"]
     },
     {
-        title: "Asteroid & MonoSweeper",
+        title: "asteroid & MonoSweeper",
         year: "2023",
-        links: {},
+        links: [
+            ["itch", "https://asianerd.itch.io/asteroid"],
+            ["github", "https://github.com/ian-hon/MonoSweeper"],
+            ["itch", "https://asianerd.itch.io/monosweeper"],
+        ],
         media: [],
         description: "Clones of classic 90s arcade games.",
         tags: ["game dev", "c#", "retro", "xna", "monogame"]
-    }
+    },
+    {
+        title: "sarif optics",
+        year: "2025",
+        links: [],
+        media: [
+            '0.gif',
+            '1.png'
+        ],
+        description: "simple threejs test",
+        tags: ["threejs", "3d", "react", 'vite']
+    },
+    {
+        title: "apspace-to-calendar",
+        year: "2024",
+        links: [
+            ["github", "https://github.com/ian-hon/apspace-to-calendar"]
+        ],
+        media: [
+            '0.png',
+            'multi_intake.png',
+            'terminal_view.png'
+        ],
+        description: "scrapes apu's timetable and appends to google calendar",
+        tags: [
+            "python", "automation", "google"
+        ]
+    },
+    {
+        title: "apugdc",
+        year: "2024",
+        links: [
+            ["github", 'https://github.com/ian-hon/apugdc'],
+            ["website", 'https://apugdc.vercel.app'],
+        ],
+        media: [
+
+        ],
+        description: "apu game development club official website. current & past events, leaderboards and showcase system",
+        tags: ['react', 'expressjs', 'vercel', 'next.js']
+    },
+    {
+        title: "discord bots",
+        year: "2021",
+        links: [
+            ["github", "https://github.com/ian-hon/discord-bots"]
+        ],
+        media: [
+            "0.png",
+            "1.png",
+            "2.png",
+            "3.png",
+        ],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+    {
+        title: "",
+        year: "",
+        links: [],
+        media: [],
+        description: "",
+        tags: []
+    },
+
+
 ];
-var tags = []
 
 var tags = Array.from(new Set(projects.flatMap(e => e.tags)));
 var tagPairs = {};
 tags.forEach((t) => { tagPairs[t] = Array.from(new Set(projects.map(e => e.tags).filter(e => e.includes(t)).flatMap(e => e).filter(e => e !== t))); });
 var selectedTags = [];
+
+var searchQuery = '';
+document.querySelector("#query input").addEventListener('keyup', () => {
+    searchQuery = document.querySelector("#query input").value;
+
+    console.log(searchQuery);
+
+    updateContainers();
+})
 
 function updateContainers() {
     updateTagContainers();
@@ -178,37 +326,41 @@ function select(e) {
 
 // #region projects
 function updateProjectContainers() {
-    projectContainerNew = '';
-    projects.filter(p => (selectedTags.length == 0) || (p.tags.filter(t => selectedTags.includes(t)).length == selectedTags.length)).forEach((e) => {
-        // projects.forEach((e) => {
+    let projectContainerNew = '';
+    projects.filter(p => (searchQuery.length == 0) || (
+        p.title.includes(searchQuery) || p.description.includes(searchQuery) || (
+            p.tags.filter(t => t.includes(searchQuery)).length != 0
+        )
+    )).filter(p => (selectedTags.length == 0) || (p.tags.filter(t => selectedTags.includes(t)).length == selectedTags.length)).forEach((e) => {
         let linkString = '';
-        Object.keys(e.links).forEach((l) => {
-            linkString += `<a href="${e.links[l]}"><img src="./assets/links/${l}.png" /></a>`;
-        })
+        e.links.forEach(l => {
+            console.log(l);
+            linkString += `<a href="${l[1]}" target="_blank"><img src="./assets/links/${l[0]}.png" /></a>`;
+        });
 
         let tagString = '';
         e.tags.forEach((t) => {
             tagString += `<div class="project-tag">${t}</div>`
-        })
+        });
 
         projectContainerNew += `<div class="project">
-        <img src="./assets/projects/${e.title}/${e.media[0]}">
-        <div id="details">
-            <div id="header">
-                <div id="title">
-                    <h2>${e.title}</h2>
-                    <h4>${e.year}</h4>
+            <div id="background" style="background-image: url(\'./assets/projects/${e.title}/${e.media[0]}\')"></div>
+            <div id="details">
+                <div id="header">
+                    <div id="title">
+                        <h2>${e.title}</h2>
+                        <h4>${e.year}</h4>
+                    </div>
+                    <div id="links">
+                        ${linkString}
+                    </div>
                 </div>
-                <div id="links">
-                    ${linkString}
+                <h3 id="description">${e.description}</h3>
+                <div id="tags">
+                    ${tagString}
                 </div>
             </div>
-            <h3 id="description">${e.description}</h3>
-            <div id="tags">
-                ${tagString}
-            </div>
-        </div>
-    </div>`
+        </div>`;
     });
 
     projectContainer.innerHTML = projectContainerNew;
