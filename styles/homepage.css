@@ -78,6 +78,34 @@ a {
     /* mobile */
     margin: 30vh 20vw 15vh 20vw;
     /* margin: 30vh 100px 15vh 100px; */
+
+    & #tldr {
+        margin-left: 1.5ch;
+        margin-top: 0.3em;
+
+        &>div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            margin-bottom: -0.1em;
+
+            & img {
+                height: 2rem;
+
+                opacity: 0.5;
+            }
+
+            & h3 {
+                font-size: 1.3rem;
+
+                margin-left: 0.5ch;
+
+                font-style: italic;
+                opacity: 0.5;
+            }
+        }
+    }
 }
 
 #sns {
@@ -103,15 +131,6 @@ a {
         &:hover {
             transform: scale(1.1);
         }
-    }
-}
-
-#footer {
-    display: flex;
-    justify-content: center;
-
-    h1 {
-        color: var(--primary);
     }
 }
 
