@@ -43,8 +43,9 @@ var projects = [
         media: [
             "0.gif"
         ],
-        description: "2D infinite sandbox roguelike with procedural generation using Cantor’s pairing and Perlin noise. Features custom light blending, UI framework, and in-house chemistry system.",
-        tags: ["c#", "monogame/xna", "procedural generation"]
+        // description: "2D infinite sandbox roguelike with procedural generation using Cantor's pairing and Perlin noise. Features custom light blending, UI framework, and in-house chemistry system.",
+        description: "2d procedurally generated sandbox (cantor pairing + perlin noise). custom light engine + in-house chemistry system",
+        tags: ["c#", "monogame/xna", "procedural generation", "chem"]
     },
     {
         title: "leetcode",
@@ -223,7 +224,7 @@ var projects = [
         ],
         description: "discord bot with ai chatbot, server health monitoring, minecraft live player list and o-chem diagram generation using pillow",
         tags: [
-            "python", "py-cord", "ai", "chemistry", "image"
+            "python", "py-cord", "ai", "chem", "image"
         ]
     },
     {
@@ -297,9 +298,14 @@ document.querySelector("#query input").addEventListener('keyup', () => {
     updateContainers();
 })
 
+var filterOpen = false;
+const filterContainer = document.querySelector("#query #filter");
+const filterToggle = document.querySelector("#query #filter-toggle");
+
 function updateContainers() {
     updateTagContainers();
     updateProjectContainers();
+    updateFilterContainer();
 }
 
 // #region tagging
@@ -399,5 +405,20 @@ function updateProjectContainers() {
 }
 // #endregion
 
+// #region filter section
+function toggleFilterContainer() {
+    filterOpen = !filterOpen;
+
+    selectedTags = [];
+    updateContainers();
+}
+
+function updateFilterContainer() {
+    filterContainer.setAttribute('data-open', filterOpen);
+    filterToggle.querySelector("h3").innerHTML = `${filterOpen ? 'close' : 'open'} filters`;
+
+    console.log(filterOpen);
+}
+// #endregion
 
 updateContainers();

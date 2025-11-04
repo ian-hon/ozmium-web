@@ -66,9 +66,14 @@
         <h3>no, i dont use ai.<br>majority of my projects predate ai tools</h3>
         <div id="query">
             <input placeholder="search" />
-            <h3>click to filter:</h3>
-            <div id="tags"></div>
-            <div id="tags"></div>
+            <div id="filter-toggle" onclick="toggleFilterContainer()">
+                <h3>open filters</h3>
+                <img src="./assets/down_chevron.png">
+            </div>
+            <div id="filter">
+                <div id="tags"></div>
+                <div id="tags"></div>
+            </div>
         </div>
         <div id="container"></div>
         <div id="footer">
