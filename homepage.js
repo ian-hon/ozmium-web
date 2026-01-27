@@ -4,6 +4,34 @@ const projectContainer = document.querySelector("#projects #container");
 
 var projects = [
     {
+        title: "axum-diesel talk",
+        year: "2025",
+        links: [
+            ["github", "https://github.com/ian-hon/axum-diesel-example"]
+        ],
+        media: [
+            "0.png"
+        ],
+        description: "invited by Rust Malaysia to give a talk about axum, the rust web framework, with diesel integration",
+        tags: [
+            "rust", "axum", "talk", "diesel"
+        ]
+    },
+    {
+        title: "blockchain101 talk",
+        year: "2025",
+        links: [
+            ["github", "https://github.com/ian-hon/solidity-by-example"]
+        ],
+        media: [
+            "0.jpg"
+        ],
+        description: "speaker for Solidity by Example (2025), teaching event-goers about Solidity, and publishing our first smart contract together",
+        tags: [
+            "solidity", "blockchain", "talk"
+        ]
+    },
+    {
         title: 'relic',
         year: '2025',
         links: [
@@ -15,7 +43,7 @@ var projects = [
             'pending.gif',
             'new_file.gif'
         ],
-        description: 'open-source version control. aka, git remade in rust',
+        description: 'open-source version control. aka, git remade in rust. using CAS + DAG with sha256 implementation',
         tags: ['rust', 'version control']
     },
     {
@@ -31,7 +59,7 @@ var projects = [
             "hastebin3.gif",
             "hastebin0.png"
         ],
-        description: "clutter-less multi-file pastebin with syntax highlighting. over 3.8k global pastes",
+        description: "first search result on google. clutter-less multi-file pastebin with linting. over 10k global pastes & hundreds of daily users",
         tags: ["react", "next.js", "vercel", "postgresql", "axum"]
     },
     {
@@ -69,9 +97,9 @@ var projects = [
     // },
     {
         title: "hermes",
-        year: "2024",
+        year: "2024 (discontinued)",
         links: [
-            ["website", "https://hermes.ianhon.com"],
+            // ["website", "https://hermes.ianhon.com"],
             ["github", "https://github.com/ian-hon/hermes"]
         ],
         media: [
@@ -267,20 +295,6 @@ var projects = [
         ],
         description: "on-chain marketplace for dynamic nfts. features auctions and upgradable nfts (group effort)",
         tags: ["web3", "react", "vercel", "sui"]
-    },
-    {
-        title: "axum-diesel talk",
-        year: "2025",
-        links: [
-            ["github", "https://github.com/ian-hon/axum-diesel-example"]
-        ],
-        media: [
-            "0.png"
-        ],
-        description: "invited by Rust Malaysia to give a talk about axum, the rust web framework, with diesel integration (group effort)",
-        tags: [
-            "rust", "axum", "talk", "diesel"
-        ]
     },
 ];
 
