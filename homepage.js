@@ -260,7 +260,7 @@ var projects = [
         year: "2024",
         links: [
             ["website", "https://ianhon.com/learn-morse"],
-            ["github", "https://github.com/ian-hon/learn-morse"]
+            ["github", "https://github.com/ian-hon/learn-morse.html"]
         ],
         media: [
             "0.gif",
