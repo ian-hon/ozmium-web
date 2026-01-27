@@ -1,0 +1,242 @@
+:root {
+    --font-size: 3rem;
+}
+
+#parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100vh;
+    width: 100%;
+
+    background: black;
+}
+
+#scroller-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    margin-bottom: 2em;
+
+    #word-container {
+        white-space: pre;
+    }
+
+    hr {
+        font-size: var(--font-size);
+
+        margin: 0;
+        padding: 0;
+
+        height: 5px;
+        width: 1ch;
+
+        border: none;
+        border-collapse: collapse;
+
+        background: white;
+
+        border-radius: 1000px;
+    }
+}
+
+#input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    #button {
+        height: 20ch;
+        width: 20ch;
+
+        border-radius: var(--border-radius);
+
+        background: var(--primary);
+
+        cursor: pointer;
+
+        touch-action: manipulation;
+
+        &.pressed {
+            opacity: 0.5;
+        }
+    }
+
+    #input-display {
+        height: 1em;
+
+        padding: 0.2em;
+        margin: 0;
+
+        h2 {
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    #tooltip {
+        margin-top: 0.5em;
+        font-size: 1em;
+        opacity: 0.5;
+        font-style: italic;
+    }
+
+    #credits {
+        font-size: 1em;
+        opacity: 0.5;
+        font-style: italic;
+    }
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+
+    height: 100vh;
+
+    #hints {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        flex-direction: row;
+
+        transition-duration: 0.3s;
+
+        table {
+            background: var(--secondary);
+
+            padding: 1ch 2ch;
+            margin-left: 2ch;
+
+            border-radius: var(--border-radius);
+
+            td:last-child {
+                padding-left: 3ch;
+            }
+
+            h4 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* made by han_yuji_ */
+
+        &[aria-label="closed"] {
+            transform: translateX(calc(-100% + 1ch + 3.5em));
+
+            img {
+                transform: rotateZ(180deg);
+            }
+        }
+
+        img {
+            display: block;
+
+            margin-left: 1ch;
+            padding: 1em;
+
+            height: 1.5em;
+
+            background: var(--secondary);
+
+            border-radius: 1000px;
+
+            cursor: pointer;
+
+            transition-duration: 0.3s;
+        }
+    }
+}
+
+@media (max-aspect-ratio:1) {
+
+    /* mobile */
+    #scroller-container {
+        margin-bottom: 2em;
+
+        h2 {
+            font-size: 5rem;
+        }
+
+        hr {
+            font-size: 5rem;
+
+            height: 10px;
+            width: 1ch;
+
+            border-radius: 1000px;
+        }
+    }
+
+    #input-container {
+        #button {
+            height: 50ch;
+            width: 50ch;
+        }
+
+        #input-display {
+            height: 1em;
+
+            font-size: 5rem;
+
+            padding: 0.2em;
+        }
+
+        #tooltip {
+            display: none;
+        }
+
+        #credits {
+            font-size: 1.5rem;
+        }
+    }
+
+    #overlay {
+        pointer-events: none;
+
+        #hints {
+            table {
+                font-size: 3rem;
+
+                padding: 1ch 2ch;
+                margin-left: 2ch;
+
+                td:last-child {
+                    padding-left: 3ch;
+                }
+
+                h4 {
+                    font-size: 3rem;
+                }
+            }
+
+            &[aria-label="closed"] {
+                transform: translateX(calc(-100% + 1ch + 8em));
+            }
+
+            img {
+                margin-left: 3ch;
+                padding: 2em;
+
+                height: 3em;
+
+                pointer-events: all;
+            }
+        }
+    }
+}
