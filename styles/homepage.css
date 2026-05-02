@@ -105,6 +105,8 @@ a {
                 font-style: italic;
                 opacity: 0.5;
 
+                min-width: fit-content;
+
                 &:first-of-type {
                     margin-left: 0.8ch;
                 }
