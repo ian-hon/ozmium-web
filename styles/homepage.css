@@ -590,7 +590,7 @@ a {
         }
 
         & #tldr {
-            margin-left: 1.5ch;
+            margin-left: 0.5ch;
             margin-top: 0.3em;
 
             &>div {
@@ -600,7 +600,8 @@ a {
                     height: 3rem;
                 }
 
-                & h3 {
+                & h3,
+                & a {
                     font-size: 2rem;
 
                     margin-left: 0.5ch;
