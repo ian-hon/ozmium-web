@@ -41,6 +41,191 @@ a {
     color: var(--primary);
 }
 
+#project-view {
+    position: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+
+    width: 100vw;
+    height: 100vh;
+
+    top: 0;
+    left: 0;
+
+    transition-duration: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &[aria-label='open'] {
+        background: #000d;
+        backdrop-filter: blur(10px);
+        opacity: 1;
+
+        pointer-events: all;
+    }
+
+    & #exit-button {
+        width: 3ch;
+        height: 3ch;
+        padding: 1ch;
+
+        position: absolute;
+
+        top: 5ch;
+        right: 5ch;
+
+        cursor: pointer;
+        transition-duration: 0.3s;
+
+        z-index: 200;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    & #content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+
+        max-width: 80vw;
+        max-height: 80vh;
+    }
+
+    & #carousel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+
+        & #carousel-track {
+            width: 60vw;
+
+            & #carousel-inner {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+
+                /* background: blue; */
+
+                & img {
+                    box-sizing: border-box;
+
+                    flex-shrink: 0;
+
+                    width: 60vw;
+                    max-height: 60vh;
+
+                    margin-right: 3ch;
+
+                    object-fit: contain;
+                    border-radius: var(--border-radius);
+                    border: 2px solid var(--tag-border);
+
+                    transition-duration: 0.3s;
+                }
+            }
+        }
+
+        & #prev-button,
+        & #next-button {
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+            transition-duration: 0.3s;
+            opacity: 0.7;
+
+            z-index: 110;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    & #description {
+        text-align: center;
+        width: 60vw;
+
+        & #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            min-width: 100%;
+
+            &>div:first-of-type {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+
+                & h2 {
+                    font-size: 2rem;
+                }
+
+                & h3 {
+                    opacity: 0.5;
+                    font-style: italic;
+                    font-size: 1.5rem;
+                }
+            }
+
+            & #project-links {
+                display: flex;
+                flex-direction: row;
+                gap: 1ch;
+
+                & a {
+                    & img {
+                        display: block;
+
+                        height: 3em;
+                        width: 3em;
+
+                        margin-left: 1ch;
+
+                        border-radius: 1000px;
+
+                        border-style: solid;
+                        border-width: 1.5px;
+                        border-color: var(--tag-border);
+
+                        transition-duration: 0.3s;
+
+                        &:hover {
+                            transform: translateY(-0.2em);
+                        }
+                    }
+                }
+            }
+        }
+
+        & #project-writeup {
+            margin-top: 1em;
+            margin-bottom: 4em;
+
+            font-family: 'IBM Plex Mono' !important;
+            font-size: 1.5rem;
+            color: #ddd;
+
+            text-align: justify;
+
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+    }
+}
+
+
 #scroll-button {
     position: fixed;
 
@@ -77,10 +262,16 @@ a {
 #introduction {
     /* mobile */
     margin: 30vh 20vw 15vh 20vw;
+
+    /* background: blue; */
     /* margin: 30vh 100px 15vh 100px; */
 
     & #tldr {
+        /* background: red; */
+        /* overflow: hidden; */
+
         margin-left: 1.5ch;
+        /* margin-left: 0.5ch !important; */
         margin-top: 0.5em;
 
         &>div {
@@ -397,6 +588,8 @@ a {
     border-width: 1.5px;
     border-color: var(--tag-border);
 
+    cursor: pointer;
+
     & #background {
         width: auto;
         height: 100%;
@@ -620,6 +813,95 @@ a {
             width: 7em;
 
             margin: 0 3ch;
+        }
+    }
+
+    #project-view {
+        & #exit-button {
+            width: 6ch;
+            height: 6ch;
+
+            top: 3ch;
+            right: 3ch;
+        }
+
+        & #content {
+            gap: 2rem;
+
+            max-width: 95vw;
+            max-height: 90vh;
+        }
+
+        & #carousel {
+            width: 90vw;
+
+            margin-top: 5em;
+
+            & #carousel-track {
+                width: 90vw;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+
+                & #carousel-inner {
+                    & img {
+                        width: 90vw;
+                        max-height: 60vh;
+
+                        margin-right: 2ch;
+
+                        scroll-snap-align: center;
+
+                        filter: brightness(1) !important;
+                    }
+                }
+            }
+
+            & #prev-button,
+            & #next-button {
+                display: none;
+            }
+        }
+
+        & #description {
+            width: 85vw;
+
+            & #header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+
+                &>div:first-of-type {
+                    & h2 {
+                        font-size: 3.5rem;
+                    }
+
+                    & h3 {
+                        font-size: 2.5rem;
+                    }
+                }
+
+                & #project-links {
+                    gap: 2ch;
+
+                    & a {
+                        & img {
+                            height: 5em;
+                            width: 5em;
+
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+
+            & #project-writeup {
+                margin-top: 1.5em;
+                margin-bottom: 5em;
+
+                font-size: 2.2rem;
+            }
         }
     }
 
