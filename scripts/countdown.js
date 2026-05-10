@@ -31,10 +31,19 @@ var collection = [
     // [1745121420, "OPS P2"],
     // [1744171140, "PWP P1"]
 
-    [1746498600, "PWP Exam"],
-    [1746671400, "DBM Exam"],
-    [1747119600, "OPS Exam"],
-    [1747276200, "ISCC Exam"]
+    /*
+CSF Section 1 25 -- 31 May (Week 10) 
+NWT Practical 27th May
+CSF Section 2 8 -- 14 Jun (Week 12)
+CSF Presentation 15-- 28 Jun (Week 13 & 14)
+IAI 20 Jun
+    */
+
+    [1779638400, "CSF Section 1"],
+    [1779811200, "NWT Practical"],
+    [1780848000, "CSF Section 2"],
+    [1781452800, "CSF Presentation"],
+    [1781884800, "IAI"]
 ];
 
 collection = collection.sort((a, b) => a[0] - b[0]);
